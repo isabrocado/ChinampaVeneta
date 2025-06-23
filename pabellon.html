@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chinampa Veneta</title>
+
+  <!-- Google Fonts Hanken Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  html, body {
+  min-height: 100vh;
+  overflow-y: auto;
+  font-family: 'Hanken Grotesk', sans-serif;
+  background: #ffffff;
+  color: #FF4026;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+  .site-header {
+    position: fixed; /* ← fijamos todo el header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
+    z-index: 1000;
+    height: 44px;
+  }
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+    .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      display: flex;               /* convertir en flex */
+  justify-content: center;     /* centrar horizontalmente */
+  align-items: center;         /* centrar verticalmente */
+  text-align: center;   
+
+    }
+    .site-header nav ul li a.active {
+      font-weight: 800;
+    }
+    .site-header nav ul li a:hover {
+      font-weight: 800;
+    }
+    .sub-menu {
+    position: fixed; /* ← fijamos el submenú */
+    top: 44px; /* debajo del header */
+    left: 0;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #FF4026;
+    background: #ffffff;
+    padding: 10px 0;
+    z-index: 999;
+  }
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+ 
+  
+    .sub-menu p {
+      margin-left: auto;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+main.contacto {
+  flex: 1;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: visible;
+  position: relative;
+}
+
+.slider-simple {
+   height: calc(100vh - 44px);
+  overflow: hidden;
+  position: relative;
+}
+
+.slides-simple {
+  display: flex;
+  transition: transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-simple {
+  min-width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.slide-simple img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+    .prev-btn-simple,
+    .next-btn-simple {
+      position: absolute;
+      top: 55%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #FF4026;
+      font-size: 2rem;
+      font-weight: 400;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1;
+      user-select: none;
+      opacity: 50%;
+    }
+    .prev-btn-simple:hover,
+    .next-btn-simple:hover,
+    .prev-btn-simple:active,
+    .next-btn-simple:active {
+      opacity: 100%;
+    }
+    .prev-btn-simple {
+      left: 16px;
+    }
+    .next-btn-simple {
+      right: 16px;
+    }
+    body.menu-open .prev-btn-simple,
+    body.menu-open .next-btn-simple {
+      display: none;
+    }
+    .dots-container-simple {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+    .dot-simple {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid #FF4026;
+      background: transparent;
+      cursor: pointer;
+    }
+    .dot-simple.active {
+      background: #FF4026;
+    }
+  
+   .site-footer {
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  height: 44px;
+  font-weight: 400;
+  
+}
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+    .site-footer div:last-child {
+      border-right: none;
+    }
+    .site-footer a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .site-footer a:hover {
+      font-weight: 800;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+
+      .site-header nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 85px);
+        background: #ffffff;
+        border-top: 1px solid #FF4026;
+        z-index: 20;
+      }
+      .site-header nav ul.show {
+        display: flex;
+      }
+      .site-header nav ul li {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #FF4026;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .site-header nav ul li a {
+        width: 100%;
+        height: 100%;
+        padding: 25px;
+        font-size: 1.2rem;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .dots-container-simple {
+        z-index: 0;
+      }
+      
+    
+    .contenedor-texto-creditos {
+        display: grid
+;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        font-size: 0.83rem;
+        line-height: 1.3;
+        margin: 4dvb 10px;
+        padding: 0 10px;
+        font-weight: 400;
+    }
+}
+    @media (max-width: 900px) {
+      .site-footer {
+        font-size: 0.7rem;
+      }
+      
+    }
+    @media (max-width: 768px) {
+      .site-header .logo img {
+        height: 22px;
+      }
+    }
+    @media (max-width: 480px) {
+      .site-header .logo img {
+        height: 20px;
+      }
+      .sub-menu a {
+        padding: 0 15px;
+      }
+      .sub-menu p {
+        padding: 0 10px;
+      }
+ 
+    }
+
+
+
+.contenedor-texto-creditos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+   font-size: 0.83rem;
+  line-height: 1.3;
+  margin: 4dvb 10px;
+    padding: 0 10px;
+      font-weight: 400;
+
+
+}
+
+
+.texto-izquierda {
+  flex: 2;
+  min-width: 300px;
+  color: #FF4026;
+    margin-bottom: 11vh;
+
+ 
+}
+
+@media (max-width: 1024px) {
+  .contenedor-texto-creditos {
+    grid-template-columns: 1fr;
+  }
+  .texto-izquierda {
+    flex: 2;
+    min-width: 300px;
+    color: #FF4026;
+    margin-bottom: 1vh;
+}
+}
+
+@media (max-width: 768px) {
+
+
+.creditos-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  justify-items: start;
+  align-items: start;
+}
+
+.creditos-grid p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+}
+.creditos-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  justify-items: start;
+  align-items: start;
+}
+
+.creditos-grid p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.texto-izquierda.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.logos-bienal {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-start;
+  align-self: end;
+  margin-bottom: 40px; /* margen abajo */
+}
+
+.logos-bienal img {
+  width: 250px;
+  height: auto;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html">
+        <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
+      </a>
+    </div>
+    <nav>
+      <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+      <ul>
+        <li><a href="pabellon.html" class="active">El pabellón</a></li>
+        <li><a href="equipo.html">Equipo</a></li>
+        <li><a href="libro.html">Libro</a></li>
+        <li><a href="archivo.html">Archivo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="patrocinadores.html">Patrocinadores</a></li>
+        <li><a href="prensa.html">Prensa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="sub-menu">
+    <a href="#" id="pabellon-link">El pabellón</a>
+    <p>Fotografo</p>
+  </div>
+
+  <main class="contacto">
+
+
+    <div class="slider-simple" id="slider-simple">
+      <button class="prev-btn-simple" aria-label="Anterior">⭠</button>
+      <button class="next-btn-simple" aria-label="Siguiente">⭢</button>
+      <div class="slides-simple">
+     
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651184/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-06_jrjngq.jpg" alt="Foto 2 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453485/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8995_mbd4t0.jpg" alt="Foto 3 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453579/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9012_npiec1.jpg" alt="Foto 4 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651139/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8811_e2yl3u.jpg" alt="Foto 5 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750292998/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-02_wwucbt.jpg" alt="Foto 6 de Chinampa Veneta" />
+        </div>
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
+        </div>
+      </div>
+      <div class="dots-container-simple">
+        <div class="dot-simple active" data-index="0"></div>
+        <div class="dot-simple" data-index="1"></div>
+        <div class="dot-simple" data-index="2"></div>
+        <div class="dot-simple" data-index="3"></div>
+        <div class="dot-simple" data-index="4"></div>
+        <div class="dot-simple" data-index="5"></div>
+      </div>
+    </div>
+    
+<div class="contenedor-texto-creditos">
+  <div class="texto-izquierda scroll-appear">
+   Las chinampas son un sistema agrícola ancestral de Mesoamérica con más de cuatro mil años de historia. Se ubican en lagos de poca profundidad y se construyen
+        en forma de bloques rectangulares, formados por capas de sedimentos, lodo y vegetación. En ellas se cultivan flores, hortalizas y otros alimentos. Sus hermosas disposiciones geométricas, además de conformar canales, multiplican las 
+        riberas del lago, creando nichos ecológicos para la alimentación, reproducción y refugio de diversas especies, detonando así una explosión de biodiversidad. Este sistema captura carbono, purifica el agua y produce alimentos y oxígeno. Cada uno de sus elementos es igualmente importante y genera relaciones simbióticas que promueven la vida. En un mundo vulnerable ante el cambio climático
+        y al borde del colapso ecológico, las chinampas nos enseñan un camino hacia el futuro. Es aquí donde surge Chinampa Veneta, compuesta por varias puestas en escena vivas, que durante los seis meses de La Biennale, estarán en constante transformación y crecimiento. <br><br>
+
+        En este espacio se exhibe una de estas puestas en escena: un sistema de chinampas que representa distintos momentos en su proceso de vida. La función comienza con la regeneración de una chinampa a partir del chapín, un pequeño cubo de lodo rico en nutrientes que resguarda una semilla en su interior. Las demás chinampas se disponen de forma paralela, evocando las riberas de los canales de Xochimilco
+        y permitiendo que la audiencia fluya a través del espacio, como el agua entre los canales. Al centro se encuentra la protagonista: una chinampa viva, distinta a sus precursoras en México en la que conviven la milpa —sistema tradicional de policultivo ancestral— con la vite maritata —sistema agroforestal ancestral practicado en el Véneto y otras partes de Italia, en el que la vid crece entrelazada con los árboles—.<br><br>
+
+        Otra puesta en escena flota simbólicamente en la Laguna de Venecia como una analogía al Teatro del Mondo de Aldo Rossi, quien concebía el teatro como una bisagra
+        entre la arquitectura y lo imaginario, capaz de tender puentes entre mundos. En esta ocasión, ese teatro se transforma en la Chinampa del Mondo y se presenta de manera orgullosamente ancestral, natural y orgánica, frente al entorno construido de la ciudad de Venecia.<br><br>
+
+        Conjuntamente, estas puestas en escena buscan crear puentes entre culturas y tiempos, entre Xochimilco y Venecia, abriendo un diálogo entre las últimas trincheras de cosecha, sus historias compartidas y sus fragilidades.<br><br>
+
+        Este proyecto ha sido desarrollado por un colectivo de personas dedicadas al diseño, la arquitectura, el paisaje, la agricultura, el cine y la animación, con el apoyo
+        de un universo aún más amplio de voces de la academia, las chinampas, y la cocina, entre muchas otras, que a través de sus textos y conversaciones, nos han guiado a lo largo de este viaje. Agradecemos profundamente a todas y todos por compartir su tiempo y conocimiento, desde Xochimilco hasta Venecia.
+  </div>
+
+  <div class="creditos-grid">
+    <div>
+        <p><strong>Instituto Nacional de Bellas Artes y Literatura (INBAL)</strong><br /><i>Comité organizador</i></p>
+        <p>Alejandra de la Paz Nájera<br /><i>Directora General</i></p>
+        <p>Dolores Martínez Orralde<br /><i>Subdirectora General de Patrimonio Artístico Inmueble</i></p>
+        <p>José María Bilbao Rodríguez<br /><i>Comisario</i></p>
+        <p><strong>Corrección de estilo y traducción</strong><br />
+        Aida Cantú Artigas, Santiago Marín de Buen</p>
+        <p><strong>Producción audiovisual</strong><br />
+        Toto Martínez, Álvaro de la Lama, Juan Manuel Arias</p>
+        <p><strong>Sistema de iluminación</strong><br />
+        Signl: Omar Reul</p>
+        <p><strong>Fotografías</strong><br />
+        Uta Gleiser, Yvonne Venegas, Matteo Losurdo, Ricardo de la Concha</p>
+    
+        <p><strong>We Exhibit</strong><br />Davide De Carlo, Cristina Brena, Laura Valentino, Tommaso Sartori, Giulia Albarello, Diletta Tubini, Davide Giacometti & Giovanni Dantomio<br /><i>Logística, montaje y producción</i></p></div>
+     <div class="logos-bienal">
+  <img src="SC-INBAL logos.svg" alt="Logo INBAL" />
+</div> <!-- y así los que quieras -->
+
+</div>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div>Pabellón de México</div>
+    <div>2025</div>
+    <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
+  </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const photographerNames = [
+      'Foto por Matteo Losurdo',
+      'Foto por Ricardo de la Concha',
+      'Foto por Matteo Losurdo',
+      'Foto por Matteo Losurdo',
+      'Foto por Matteo Losurdo',
+      'Foto por Ricardo de la Concha'
+    ];
+
+    const slider = document.getElementById('slider-simple');
+    const slidesContainer = document.querySelector('.slides-simple');
+    const slides = document.querySelectorAll('.slide-simple');
+    const nextBtn = document.querySelector('.next-btn-simple');
+    const prevBtn = document.querySelector('.prev-btn-simple');
+    const dots = document.querySelectorAll('.dot-simple');
+    const dateParagraph = document.querySelector('.sub-menu p');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let autoplayInterval = null;
+    let autoplayDisabled = false;
+
+    function updateSlider() {
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      const dotIndex = currentIndex % dots.length;
+      dots[dotIndex].classList.add('active');
+      if (!isPageBottom()) {
+        dateParagraph.textContent = photographerNames[dotIndex] || '';
+      }
+    }
+
+    function isPageBottom() {
+      return (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 60);
+    }
+
+    function startAutoplay() {
+      if (autoplayInterval || autoplayDisabled) return;
+      autoplayInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      }, 5000);
+    }
+
+    function stopAutoplay() {
+      if (!autoplayInterval) return;
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+      autoplayDisabled = true;
+    }
+
+    // Iniciar autoplay una sola vez al cargar
+    startAutoplay();
+
+    // Navegación por clic
+    nextBtn.addEventListener('click', () => {
+      stopAutoplay();
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+    });
+    prevBtn.addEventListener('click', () => {
+      stopAutoplay();
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    });
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        stopAutoplay();
+        currentIndex = parseInt(dot.dataset.index, 10);
+        updateSlider();
+      });
+    });
+
+    // Pausar autoplay al pasar cursor sobre las flechas
+    [nextBtn, prevBtn].forEach(btn => {
+      btn.addEventListener('mouseenter', stopAutoplay);
+    });
+
+    // Scroll y resize
+    window.addEventListener('scroll', () => {
+      if (isPageBottom()) {
+        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
+      } else {
+        updateSlider();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (isPageBottom()) {
+        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
+      } else {
+        updateSlider();
+      }
+    });
+
+    // Inicialización visual
+    updateSlider();
+
+    // Menú responsive
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('.site-header nav ul');
+    menuToggle.addEventListener('click', () => {
+      navUl.classList.toggle('show');
+      document.body.classList.toggle('menu-open');
+    });
+  });
+</script>
+
+
+
+
+
+</body>
+</html>
