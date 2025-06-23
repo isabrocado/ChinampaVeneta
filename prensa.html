@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chinampa Veneta</title>
+<link rel="icon" href="favicon.png" type="image/png" />
+
+  <!-- Google Fonts Hanken Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
+  <!-- Google Fonts Zita -->
+  <link href="https://fonts.googleapis.com/css2?family=Zita:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      font-family: 'Hanken Grotesk', sans-serif;
+      background: #ffffff;
+      color: #FF4026;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+
+    .site-header {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      z-index: 1;
+      height: 44px;
+    }
+
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+ .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+    }
+
+    .site-header nav ul li a.active,
+    .site-header nav ul li a:hover {
+      font-weight: 800;
+    }
+
+    .sub-menu {
+      display: flex;
+      border-bottom: 1px solid #FF4026;
+      background: #ffffff;
+      padding: 10px 0;
+      height: 40px;
+    }
+
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+
+    .sub-menu a.active,
+    .sub-menu a:hover {
+      font-weight: 400;
+    }
+
+    .contenido-archivo {
+      flex: 1;
+      overflow-y: auto;
+      background: #ffffff;
+      padding: 0;
+    }
+
+    table {
+      width: 100vw;
+      margin-left: calc((100% - 100vw) / 2 * -1);
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid #FF4026;
+      font: size 0.83rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+      width: 100vw;
+      margin-left: calc((100% - 100vw) / 2 * -1);
+      padding: 0 16px;
+    }
+
+    .galeria-item {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      user-select: none;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 250px; /* imágenes más grandes */
+      object-fit: cover;
+      display: block;
+    }
+
+    .galeria-item .descripcion {
+      margin-top: 8px;
+      font-size: 0.83rem;
+      color: #FF4026;
+      font-family: 'Hanken Grotesk', sans-serif;
+      text-align: left;
+      width: 100%;
+    }
+
+    .site-footer {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      z-index: 1;
+      height: 43px;
+    }
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+
+    .site-footer div:last-child {
+      border-right: none;
+    }
+
+       .site-footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+}
+   .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+  .contenido-archivo a {
+  font-weight: 400;
+  color: #FF4026;
+  text-decoration: none;
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+ .contenido-archivo a:hover {
+      text-decoration: underline;
+    }
+  .site-footer a:hover {
+  font-weight: 800;}
+    @media (max-width: 600px) {
+      .site-header nav ul li a {
+        padding: 12px 20px;
+      }
+      .sub-menu a {
+        padding: 0 20px;
+      }
+      th, td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+      }
+      .galeria {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 0 8px;
+      }
+      .galeria-item img {
+        height: 180px;
+      }
+      .galeria-item .descripcion {
+        font-size: 0.75rem;
+      }
+    }
+    @media (max-width: 1024px) {
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 85px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 20;
+  }
+
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    font-size: 24px;
+    padding: 0 16px;
+    cursor: pointer;
+    color: #FF4026;
+    align-items: center;
+  }
+}
+
+@media (max-width: 900px) {
+    .site-header nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 87px);
+        background: #ffffff;
+        border-top: 1px solid #FF4026;
+        z-index: 1000;
+      }
+      
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li:first-child {
+    border-top: none;
+  }
+
+  .site-header nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* 👇 Aquí la regla que necesitas */
+  .site-footer {
+    font-size: 0.7rem;
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
+}
+
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 22px;
+  }
+}
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+  <div class="logo">
+      <a href="index.html">
+        <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
+      </a>
+    </div>
+    
+    <nav>
+      <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+
+      <ul>
+        <li><a href="pabellon.html">El pabellón</a></li>
+ <li><a href="equipo.html">Equipo</a></li>
+        <li><a href="libro.html">Libro</a></li>
+        <li><a href="archivo.html" >Archivo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="patrocinadores.html">Patrocinadores</a></li>
+        <li><a href="prensa.html"class="active">Prensa</a></li>
+
+
+               
+
+      </ul>
+    </nav>
+  </header>
+
+  <div class="sub-menu">
+    <a href="#" id="btn-lista" class="active">Prensa</a>  </div>
+
+  <div class="contenido-archivo">
+    <div id="lista-view">
+      <table>
+        <tbody>
+          <tr><td><a href="https://obras.expansion.mx/arquitectura/2025/01/03/agenda-arquitectura-2025" target="_blank" rel="noopener noreferrer">La agenda arquitectónica 2025: los eventos y concursos más importantes del mundo</a></td><td>Obras por EXPANSIÓN</td><td>México</td></tr>
+          <tr><td><a href="https://hojaderutadigital.mx/arquitectura-regenerativa-chinampa-veneta-en-la-bienal-de-venecia/" target="_blank" rel="noopener noreferrer">Arquitectura Regenerativa: Chinampa Veneta En La Bienal De Venecia
+</a></td><td>Hoja de Ruta</td><td>México</td></tr>
+<td><a href="https://centrourbano.com/revista/arquitectura-2/proyecto-mexico-bienal-venecia/" target="_blank" rel="noopener noreferrer">Este es el proyecto que representará a México en la Bienal de Venecia</td><td>Centro Urbano</td><td>México</td></tr>
+          <tr><td><a href="https://inmobiliare.com/chinampa-veneta-inbal/" target="_blank" rel="noopener noreferrer">Chinampa Veneta, proyecto ganador de México para la Bienal de Venecia</a></td><td>INMOBILIARE</td><td>México</td></tr>
+          <tr><td><a href="https://www.cronica.com.mx/cultura/2025/04/21/chinampa-veneta-es-el-proyecto-elegido-para-representar-a-mexico-en-la-19-exposicion-internacional-de-arquitectura-la-biennale-di-venezia/" target="_blank" rel="noopener noreferrer">“Chinampa Veneta” es el proyecto elegido para representar a México en la 19ª Exposición Internacional de Arquitectura – La Biennale di Venezia</a></td><td>La Crónica</td><td>México</td></tr>
+          <tr><td><a href="https://www.travesiasdigital.com/noticias/arquitectos-mexicanos-construiran-una-chinampa-en-venecia/" target="_blank" rel="noopener noreferrer">Arquitectos mexicanos construirán una chinampa…en Venecia</a></td><td>Travesías</td><td>México</td></tr>
+          <tr><td><a href="https://www.travesiasdigital.com/noticias/arquitectos-mexicanos-construiran-una-chinampa-en-venecia/" target="_blank" rel="noopener noreferrer">At the Biennale in Venice, a Fantasy Island Imported from Mexico</a></td><td>The New York Times</td><td>Estados Unidos</td></tr>
+          <tr><td><a href="https://coolhuntermx.com/arquitectura-bienales-de-arquitectura-2025-pensar-el-futuro-entre-venecia-y-versalles-04-2025/" target="_blank" rel="noopener noreferrer">Bienales de Arquitectura 2025: Pensar el futuro entre Venecia y Versalles</a></td><td>Coolhunter</td><td>México</td></tr>
+          <tr><td><a href="https://www-archdaily-com.translate.goog/1029783/the-mexican-pavilion-at-the-venice-architecture-biennale-explores-the-ecological-potential-of-ancestral-agricultural-systems?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc" target="_blank" rel="noopener noreferrer">El Pabellón de México en la Bienal de Arquitectura de Venecia explora el potencial ecológico de los sistemas agrícolas ancestrales</a></td><td>ARCHDAILY</td><td>Internacional</td></tr>
+          <tr><td><a href="https://www.admagazine.com/articulos/la-bienal-de-venecia-recibe-a-mexico-una-propuesta-que-une-pasado-y-futuro" target="_blank" rel="noopener noreferrer">La Bienal de Venecia recibe a México con una propuesta que une pasado y futuro</a></td><td>AD MEXICO</td><td>México</td></tr>
+          <tr><td><a href="https://xximagazine.com/c/mexico-pavilion-revives-mesoamerican-wisdom-at-venice-architecture-biennale-2025" target="_blank" rel="noopener noreferrer">Mexico Pavilion Revives Mesoamerican Wisdom at Venice Architecture Biennale 2025</a></td><td>XXI</td><td>Turquía</td></tr>
+          <tr><td><a href="https://worldarchitecture.org/architecture-news/fhmfz/mexico-pavilion-will-focus-on-regenerative-architecture-at-the-2025-venice-architecture-biennale.html" target="_blank" rel="noopener noreferrer">Mexico Pavilion Will Focus On Regenerative Architecture At The 2025 Venice Architecture Biennale</a></td><td>Worls Architecture Community</td><td>Turquía</td></tr>
+          <tr><td><a href="https://www.stirworld.com/see-features-imagined-communities-national-pavilions-at-the-venice-architecture-biennale-2025" target="_blank" rel="noopener noreferrer">Imagined Communities: National Pavilions at the Venice Architecture Biennale 2025</a></td><td>Stir World</td><td>India</td></tr>
+          <tr><td><a href="https://www.google.com/url?q=https://inba.gob.mx/prensa/22118/saberes-ancestrales-para-un-futuro-regenerativo-la-propuesta-de-arquitectura-mexicana-para-la-bienal-de-venecia-2025&sa=D&source=editors&ust=1749600021879412&usg=AOvVaw2uHbOQP7N7Cv67SIe-gYO_" target="_blank" rel="noopener noreferrer">Saberes ancestrales para un futuro regenerativo: la propuesta de arquitectura mexicana para la Bienal de Venecia 2025</a></td><td>INBAL</td><td>México</td></tr>
+          <tr><td><a href="https://www.e-flux.com/announcements/669631/regenerative-architecture-chinampa-veneta/" target="_blank" rel="noopener noreferrer">Regenerative architecture: Chinampa Veneta</a></td><td>e-flux Architecture</td><td>Internacional</td></tr>
+          <tr><td><a href="https://heraldodemexico.com.mx/edicion-impresa/2025/5/8/chinampa-veneta-de-xochimilco-para-el-mundo-697327.html#google_vignette" target="_blank" rel="noopener noreferrer">Chinampa Veneta, de Xochimilco para el mundo</a></td><td>El Heraldo de México</td><td>México</td></tr>
+          <tr><td><a href="https://www.gridmag.com.mx/index.php/2025/05/12/chinampa-veneta-en-la-bienal-de-venecia-2005/?fbclid=PAZXh0bgNhZW0CMTEAAafus41QwIoJPwzzoQ_j_HHsRLrfkv8NtKkHqRBRjs_3Mxlsdk8wwCJ1IJ4bpQ_aem_JqQxYDxr0g8PNWA_ACtWbQ" target="_blank" rel="noopener noreferrer">Chinampa Veneta | En la Bienal de Venecia 2025</a></td><td>Grid Magazine</td><td>México</td></tr>
+          <tr><td><a href="https://arquine.com/obra/chinampa-veneta-pabellon-de-mexico-en-la-bienal-de-venecia/" target="_blank" rel="noopener noreferrer">Chinampa Veneta: Pabellón de México en la Bienal de Venecia</a></td><td>Arquine</td><td>México</td></tr>
+          <tr><td><a href="https://www.archdaily.mx/mx/1030141/latinoamerica-en-la-bienal-de-venecia-2025-territorio-memoria-y-nuevas-inteligencias" target="_blank" rel="noopener noreferrer">Latinoamérica en la Bienal de Venecia 2025: territorio, memoria y saberes ancestrales para construir el presente</a></td><td>ARCHDAILY</td><td>Internacional</td></tr>
+          <tr><td><a href="https://www.dezeen.com/2025/05/30/soil-pavilions-venice-architecture-biennale/" target="_blank" rel="noopener noreferrer">Five pavilions championing soil at the Venice Architecture Biennale</a></td><td>Dezeen</td><td>Internacional</td></tr>
+          <tr><td><a href="https://www.metalocus.es/es/noticias/arquitectura-regenerativa-chinampa-veneta-en-el-pabellon-de-mexico-para-la-biennale-di" target="_blank" rel="noopener noreferrer">Arquitectura regenerativa. "Chinampa Veneta" en el Pabellón de México para la Biennale di Venezia</a></td><td>METALOCUS ES</td><td>España</td></tr>
+          <tr><td><a href="https://foodandpleasure.com/chinampa-veneta-mexico-bienal-venecia/" target="_blank" rel="noopener noreferrer">Chinampas en Italia: así llega México a la Exposición Internacional de Arquitectura de la Bienal de Venecia</a></td><td>Food & Pleasure</td><td>México</td></tr>
+          <tr><td><a href="https://www.dondeir.com/cultura/chinampa-veneta-mexico-regenera-espacios-en-la-bienal-de-venecia/2025/05/" target="_blank" rel="noopener noreferrer">Chinampa Veneta: México regenera espacios en la Bienal de Venecia</a></td><td>Donde Ir</td><td>México</td></tr>
+          <tr><td><a href="https://www.quien.com/estilo-de-vida/2025/04/28/mexico-en-italia-xochimilco-y-venecia-se-dan-la-mano-con-chinampa-veneta" target="_blank" rel="noopener noreferrer">México en Italia: Xochimilco y Venecia se dan la mano con 'Chinampa Veneta'</a></td><td>Quién</td><td>México</td></tr>
+          <tr><td><a href="https://www.sopitas.com/mientras-tanto/xochimilco-venecia-chinampa-viajo-miles-kilometros/" target="_blank" rel="noopener noreferrer">De Xochimilco a Venecia: La chinampa que viajó miles de kilómetros para contar un secreto ancestral</a></td><td>Sopitas.com</td><td>México</td></tr>
+          <tr><td><a href="https://www.revistacentral.com.mx/ponte-al-dia/chinampa-veneta-bienal-venecia-2025" target="_blank" rel="noopener noreferrer">Chinampa Veneta: la tradición de Xochimilco en el corazón de Venecia</a></td><td>Revista Central</td><td>México</td></tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div>Pabellón de México</div>
+    <div>2025</div>
+    <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btnLista = document.getElementById('btn-lista');
+      const btnGaleria = document.getElementById('btn-galeria');
+      const viewLista = document.getElementById('lista-view');
+      const viewGaleria = document.getElementById('galeria-view');
+
+      btnLista.addEventListener('click', function(e) {
+        e.preventDefault();
+        viewLista.style.display = 'block';
+        viewGaleria.style.display = 'none';
+        btnLista.classList.add('active');
+        btnGaleria.classList.remove('active');
+      });
+
+      btnGaleria.addEventListener('click', function(e) {
+        e.preventDefault();
+        viewGaleria.style.display = 'block';
+        viewLista.style.display = 'none';
+        btnGaleria.classList.add('active');
+        btnLista.classList.remove('active');
+      });
+    });
+    const menuToggle = document.querySelector('.menu-toggle');
+  const navUl = document.querySelector('.site-header nav ul');
+
+  menuToggle.addEventListener('click', () => {
+    navUl.classList.toggle('show');
+
+    // Cambia ícono ☰ a ✕
+    if (navUl.classList.contains('show')) {
+      menuToggle.textContent = '✕';
+    } else {
+      menuToggle.textContent = '☰';
+    }
+    
+  });
+  
+  </script>
+</body>
+</html>
