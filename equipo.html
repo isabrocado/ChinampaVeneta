@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chinampa Veneta</title>
+<link rel="icon" href="favicon.png" type="image/png" />
+
+  <!-- Google Fonts Hanken Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: auto;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.9rem;
+      color: #FF4026;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .site-header {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      background: #ffffff;
+      z-index: 1;
+            height: 44px;
+
+    }
+
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+    .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+    }
+
+    .site-header nav ul li a.active {
+      font-weight: 800;
+    }
+
+    .site-header nav ul li a:hover {
+  font-weight: 800;
+}
+
+.sub-menu a:hover {
+  font-weight: 800;
+}
+
+    .sub-menu {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #FF4026;
+      background: #ffffff;
+      flex-wrap: nowrap;
+      padding: 0 16px;
+    }
+
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .sub-menu a.active {
+      font-weight: 800;
+    }
+
+    .equipo {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+
+    .equipo img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      max-height: 70vh;
+    }
+.equipo-texto {
+  padding: 10px 24px;
+  color: #FF4026;
+  font-size: 0.83rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+    .equipo.split {
+      flex-direction: row-reverse;
+    }
+
+    .equipo.split img {
+      width: 65%;
+      max-height: none;
+    }
+
+  .equipo.split .equipo-texto {
+  width: 35%;
+  padding-right: 24px;
+}
+
+    .site-footer {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      background: #ffffff;
+      z-index: 1;
+    }
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+
+    .site-footer div:last-child {
+      border-right: none;
+    }
+
+           .site-footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+}
+  .site-footer a:hover {
+  font-weight: 800;}
+    /* Estilos para el bloque de contacto dentro de cada estudio */
+    .datos-contacto {
+      margin-top: auto; /* empuja hacia abajo */
+      font-size: 0.83rem;
+    }
+
+    .datos-contacto p {
+      margin: 4px 0;
+    }
+
+    .datos-contacto a {
+      color: #FF4026;
+      text-decoration: none;
+    }
+
+    .datos-contacto a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+       @media (max-width: 1024px) {
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 85px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 20;
+  }
+    .equipo img {
+      margin-top: 39px;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+     height: 55%;
+
+    }
+
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    font-size: 24px;
+    padding: 0 16px;
+    cursor: pointer;
+    color: #FF4026;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+   .datos-contacto {
+    margin-top: 20px;
+    font-size: 0.83rem;
+}
+   
+     .equipo.split {
+    flex-direction: column !important; /* una columna */
+  }
+  .equipo.split img {
+    width: 100% !important;
+    max-height: 45vh; /* para limitar altura y permitir scroll en texto */
+    object-fit: cover;
+  }
+ .equipo.split .equipo-texto {
+  width: 100% !important;
+  padding-right: 10px !important;
+}
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 87px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 15;
+  }
+  
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li:first-child {
+    border-top: none;
+  }
+
+  .site-header nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* 👇 Aquí la regla que necesitas */
+  .site-footer {
+    font-size: 0.7rem;
+  }
+    .sub-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+  }
+  .sub-menu a {
+    width: 100%;
+    padding: 12px 16px;
+    border-bottom: 1px solid #FF4026;
+  }
+  .sub-menu a:last-child {
+    border-bottom: none;
+  }
+  
+}
+}
+/* —————— HAMBURGER PARA SUB-MENÚ (MÓVIL) —————— */
+.sub-menu-toggle {
+  display: none;
+    width: 100%;                 /* ancho completo */
+  background: #ffffff;
+  border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+border-right: none;
+border-left: none;
+  padding: 7px 0;             /* espacio vertical como sub-menú */
+  font-size: 24px;
+  color: #FF4026;
+  cursor: pointer;
+  position: fixed;
+  top: 43px;   /* justo debajo del header fijo */
+}
+
+@media (max-width: 900px) {
+
+  
+  /* ocultar por defecto el sub-menú */
+  .sub-menu {
+    display: none;
+    position: fixed;
+    top: 85px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+        border-top: 1px solid #FF4026;
+
+    border-bottom: 1px solid #FF4026;
+    flex-direction: column;
+  }
+
+  /* mostrar el toggle */
+  .sub-menu-toggle {
+    display: block;
+  }
+
+  /* cuando el sub-menú tenga la clase “open”, lo mostramos */
+  .sub-menu.open {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 22px;
+  }
+      .equipo-texto {
+      padding: 10px 10px;
+      color: #FF4026;
+      font-size: 0.84rem;
+      font-weight: 400;
+      line-height: 1.4;
+      overflow-y: auto;
+      padding-right: 20px;
+   
+    }
+  }
+
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+ <div class="logo">
+      <a href="index.html">
+        <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
+      </a>
+    </div>
+    <nav>
+            <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+
+      <ul>
+        <li><a href="pabellon.html">El pabellón</a></li>
+          <li><a href="equipo.html" class="active">Equipo</a></li>
+        <li><a href="libro.html">Libro</a></li>
+        <li><a href="archivo.html">Archivo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="patrocinadores.html">Patrocinadores</a></li>
+                <li><a href="prensa.html">Prensa</a></li>
+
+      </ul>
+    </nav>
+  </header>
+<button class="sub-menu-toggle" aria-label="Mostrar sub-menú">+</button>
+<div class="sub-menu">
+    <a href="#" data-opcion="ignacio">Estudio Ignacio Urquiza y Ana Paula de Alba</a>
+    <a href="#" data-opcion="mariaMarin">Estudio María Marín de Buen</a>
+        <a href="#" data-opcion="ilwt">ILWT</a>
+    <a href="#" data-opcion="locus">Locus</a>
+    <a href="#" data-opcion="lucioNatalia">Lucio Usobiaga Hegewisch & Nathalia Muguet</a>
+    <a href="#" data-opcion="pedroJuana">Pedro&amp;Juana</a>
+  </div>
+
+  <div id="contenedor-equipo" class="equipo">
+    <img id="equipo-img" src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290653/_R9A2651_amlspa.jpg" alt="Equipo Chinampa Veneta" />
+    <div id="equipo-texto" class="equipo-texto">
+      <div>
+        <p>
+          <strong>Estudio Ignacio Urquiza y Ana Paula de Alba, Estudio María Marín de Buen, Locus,
+          Lucio Usobiaga Hegewisch & Nathalia Muguet, Pedro&amp;Juana</strong>
+        </p>
+        <p>
+          Aldo Urban, Ana Paula de Alba, Ana Paula Ruiz Galindo, Andrea Mejía, Diego Manzano,
+          Emilio M. Frausto, Federico de Antuñano, Ignacio Urquiza Seoane, Isabel Brocado,
+          Jachen Schleich, Javiera Elicer, Lucero Chaires, Lucio Usobiaga Hegewisch, María Marín
+          de Buen, Martina Duque, Mecky Reuss, Michela Lostia di Santa Sofia, Miguel Ángel Vega Ruiz,
+          Nathalia Muguet, Paulina García Ortíz, Rodrigo Huesca, Sana Frini, Santiago Sitten,
+          Shantal Gabriela Haddad Gómez, Xavier Delgado González, Yavanna Latapí
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="site-footer">
+    <div>Pabellón de México</div>
+    <div>2025</div>
+    <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
+  </footer>
+
+  <script>
+    const contenidoPorOpcion = {
+      ignacio: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290749/_R9A2477-2_ifooew.jpg',
+        alt: 'Estudio Ignacio Urquiza y Ana Paula de Alba',
+        texto: `
+          <div>
+            <p>Ignacio Urquiza Seoane<br>
+            Ana Paula de Alba<br><br>
+            Ana Paula e Ignacio, cofundaron y dirigen Estudio IUAPdA. Estudio que busca generar diseño y arquitectura congruentes con el momento (económico, político, social y ambiental) que habitamos, para ello trabajan con tres elementos principales: el objeto (lo que se diseña), el usuario (para quién se diseña) y el contexto (dónde se inserta lo que se diseña); otorgándole el mismo valor o nivel de importancia.<br><br>
+            Estos elementos – con muchos y distintos sinónimos – han sido utilizados y estado presentes siempre en la arquitectura y el diseño. Pero la decisión y selección de la palabra particular permite dar un rumbo propio.<br><br>
+            Para Ana Paula e Ignacio, el objeto, el usuario y el contexto son las tres palabras que guían su práctica. En realidad, es en el choque que existe entre estos tres elementos de tan distinta naturaleza en donde su diseño y arquitectura se generan.<br><br>
+            Comparten la necesidad de diseñar y construir a través de una economía de medios, es decir, utilizando lo que está siempre al alcance.</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/ignaciourquiza.mx" target="_blank" rel="noopener noreferrer">@ignaciourquiza.mx</a></p>
+            <p><strong>Web</strong><br>
+            <a href="https://www.ignaciourquiza.mx" target="_blank" rel="noopener noreferrer">www.ignaciourquiza.mx</a></p>
+          </div>
+        `
+      },
+      mariaMarin: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290808/_R9A2287_bxbaap.jpg',
+        alt: 'Estudio María Marín de Buen',
+        texto: `
+          <div>
+            <p>María Marín de Buen<br><br>
+            Estudio María Marín de Buen se especializa en el diseño de libros, impresos, sitios web, señalización y gráfica expositiva para el medio cultural y arquitectónico. <br><br>
+            María es diseñadora gráfica por la Universidad Iberoamericana de la Ciudad de México y maestra en diseño gráfico por The Basel School of Design y The University of Illinois de Chicago.  <br><br>
+            Inició su actividad profesional en el Museo del Palacio de Bellas Artes de la Ciudad de México. Amplió su práctica internacionalmente trabajando en el despacho CoDe Communication and Design en Zurich y Nueva York. <br><br>
+            Entre sus logros más destacados se encuentran: la beca Jóvenes Creadores del FONCA (2017 y 2019); la nominación de su tesis de maestría al premio Designpreis Halle en Alemania (2017); y un recorrido por su trabajo editorial en la exposición Diseño en femenino en el Museo Franz Mayer (Ciudad en México, 2023) y en la Casa de México en España (Madrid, 2024).</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/mariamarindebuen/" target="_blank" rel="noopener noreferrer">@mariamarindebuen</a></p>
+            <p><strong>Web</strong><br>
+            <a href="https://mariamarindebuen.com" target="_blank" rel="noopener noreferrer">www.mariamarindebuen.com</a></p>
+          </div>
+        `
+      },
+           ilwt: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290900/A5F7423D-0235-4161-97C6-F127180898CE_kios5b.jpg',
+        alt: 'ILWT',
+        texto: `
+          <div>
+            <p>Miguel Ángel Vega Ruiz<br><br>
+            Despacho de diseño de iluminación arquitectónica fundado en 2016 por el arquitecto Miguel Vega en la Ciudad de México. ILWT opera como un plug-in para distintos despachos de arquitectura, desarrollando atmósferas lumínicas que responden a las diversas expectativas de arquitectos y clientes.<br><br>
+
+Con un enfoque colaborativo, ILWT actúa como un complemento estético y funcional en la conceptualización y desarrollo de proyectos arquitectónicos. Su trabajo se basa en el uso de la luz como un elemento fundamental del diseño, generando atmósferas confortables en términos de estética, funcionalidad y eficiencia energética.<br><br>
+
+Desde 2016, ILWT ha desarrollado una amplia variedad de proyectos, que incluyen departamentos, restaurantes, oficinas, corporativos, museos, desarrollos inmobiliarios, proyectos urbanos de gran escala y planes maestros para arquitectos, diseñadores e instituciones gubernamentales. Como despacho especializado en diseño de iluminación arquitectónica, su labor consiste en enfatizar el uso de la luz como herramienta para crear distintas atmósferas y ofrecer nuevas formas de apreciar el espacio.</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/in_light_we_trust/" target="_blank" rel="noopener noreferrer">@in_light_we_trust</a></p>
+            <p><strong>Web</strong><br>
+            <a href="http://www.ilwt.com.mx" target="_blank" rel="noopener noreferrer">www.ilwt.com.mx</a></p>
+          </div>
+        `
+      },
+      locus: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291079/_R9A2330_yyjeyy.jpg',
+        alt: 'Locus',
+        texto: `
+          <div>
+            Sana Frini<br>
+            Jachen Schleich<br><br>
+            <p>Locus es una oficina multinacional y transdisciplinaria con sede en la Ciudad de México, fundada por Sana Frini y Jachen Schleich en 2020.<br><br>
+            Locus entiende el espacio como un lugar que surge de un constante “entre” donde form(s) follow(s) function(s) behavior(s) and belonging(s).<br><br>
+            Recientemente, Locus ha liderado diversos proyectos regenerativos, como la construcción del primer edificio público de bajo impacto ambiental en México, el primer restaurante cero residuos de América Latina y la primera prisión climática readaptativa en la región.<br><br>
+            Locus también fue seleccionado como curador de la BAP!25 (Versalles, 2025), como concursante del pabellón del Eco (Ciudad de México, 2023) y como expositor de diversas líneas de mobiliario reciclado y reacondicionado en la semana del diseño de la Ciudad de México (2023).</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/locus______/" target="_blank" rel="noopener noreferrer">@locus______</a></p>
+            <p><strong>Web</strong><br>
+            <a href="https://locilocus.com" target="_blank" rel="noopener noreferrer">www.locilocus.com</a></p>
+          </div>
+        `
+      },
+      lucioNatalia: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291102/_R9A2576_nb9fbo.jpg',
+        alt: 'Lucio Usobiaga Hegewisch & Nathalia Muguet',
+        texto: `
+          <div>
+            Lucio Usobiaga Hegewisch<br>
+            Nathalia Muguet<br><br>
+            <p>Nathalia Muguet y Lucio Usobiaga trabajan juntos para regenerar espacios a través de prácticas agroforestales. Su trabajo se centra en desarrollar un modelo de agroforestería medicinal en las chinampas de Xochimilco.<br><br>
+            Nathalia Muguet estudió etnobotánica y agricultura. Su trabajo abarca Brasil, India, África y América del Sur y Central. Actualmente es alumna de Ernst Götsch y también es cofundadora de Sitio Semente, uno de los centros más destacados de Agricultura Sintrópica.<br><br>
+            Lucio Usobiaga, estudió filosofía. Durante más de 15 años ha trabajado como agricultor y defensor de la preservación y promoción de las chinampas. Fundó Arca Tierra e Iniciativa Agroecológica Xochimilco, dos organizaciones dedicadas a promover un sistema alimentario más ecológico y equitativo. La misión de su vida es ayudar a traer reconocimiento y valor al trabajo de los campesinos.</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br>
+            <a href="https://www.instagram.com/arca.tierra/" target="_blank" rel="noopener noreferrer">@arca.tierra</a><br>
+            <a href="https://www.instagram.com/luciousobiaga/" target="_blank" rel="noopener noreferrer">@luciousobiaga</a><br>
+                        <a href="https://www.instagram.com/natmuguet/" target="_blank" rel="noopener noreferrer">@natmuguet</a>
+            </p>
+            <p><strong>Web</strong><br><a href="https://www.arcatierra.com" target="_blank" rel="noopener noreferrer">www.arcatierra.com</a><br><a href="https://www.sitiosemente.com" target="_blank" rel="noopener noreferrer">www.sitiosemente.com</a></p>
+          </div>
+        `
+      },
+      pedroJuana: {
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291486/_R9A2532b_qqlrj8.jpg',
+        alt: 'Pedro&Juana',
+        texto: `
+          <div>
+            <p>Ana Paula Ruiz Galindo<br> Mecky Reuss <br><br>
+
+
+Pedro&Juana no se trata de Juana&Pedro. Se trata de colaboración, de trabajar en varias cosas con diferentes personas. Se trata de escapar de las atribuciones y de combinar profesiones. Las situaciones que surgen de estas aproximaciones pueden darse en forma de una plaza pública interior doméstica, una mesa que se convierte en banca y vuelve a ser mesa, mejores conversaciones al cocinar un lechón y enseñarle a hablar a rocas volcánicas.<br><br>
+
+Pedro&Juana es un estudio de la Ciudad de México que trabaja en una variedad de proyectos a través de diversas profesiones creativas, con obra expuesta en el MoMa PS1 de Nueva York (2019), el MCA de Chicago (2016), el Hammer Museum de Los Ángeles (2016), el Museo del Chopo en la Ciudad de México (2024) y la Bienal de Arquitectura de Chicago (2015). Han realizado y continúan desarrollando proyectos arquitectónicos en México, Italia y Estados Unidos, además de haber impartido clases y conferencias en diversas universidades de Estados Unidos y México.</p>
+          </div>
+          <div class="datos-contacto">
+            <p><strong>Instagram</strong><br> <a href="https://www.instagram.com/pedroyjuana/" target="_blank" rel="noopener noreferrer">@pedroyjuana</a></p>
+            <p><strong>Web</strong><br><a href="https://pedroyjuana.com/?fbclid=PAZXh0bgNhZW0CMTEAAadIvoMbOLkZExuk8JV83sCnjaE4jwwutHAhzkvU0XYzxQt4pdswTNkjR6HOqw_aem_CX5MacnRdnb1EZZRHtYQYQ" target="_blank" rel="noopener noreferrer">www.pedroyjuana.com</a></p>
+          </div>
+        `
+      }
+    };
+
+    function actualizarContenido(opcion) {
+      const datos = contenidoPorOpcion[opcion];
+      if (!datos) return;
+
+      const contenedor = document.getElementById('contenedor-equipo');
+      contenedor.classList.add('split');
+
+      const imgElem = document.getElementById('equipo-img');
+      imgElem.src = datos.img;
+      imgElem.alt = datos.alt;
+
+      // Resetear cualquier object-position anterior
+      imgElem.style.objectPosition = '';
+
+      // Si es la imagen de Ignacio o la de Lucio, ajustar object-position
+      if (datos.img === 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290749/_R9A2477-2_ifooew.jpg' || datos.img === 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291102/_R9A2576_nb9fbo.jpg'|| datos.img === 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291486/_R9A2532b_qqlrj8.jpg'|| datos.img === 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290808/_R9A2287_bxbaap.jpg'|| datos.img === 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291079/_R9A2330_yyjeyy.jpg') {
+        imgElem.style.objectPosition = 'top center';
+      }
+
+      const textoElem = document.getElementById('equipo-texto');
+      textoElem.innerHTML = datos.texto;
+    }
+
+    document.querySelectorAll('.sub-menu a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.sub-menu a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+        const opcion = this.getAttribute('data-opcion');
+        actualizarContenido(opcion);
+      });
+    });
+
+      const menuToggle = document.querySelector('.menu-toggle');
+  const navUl = document.querySelector('.site-header nav ul');
+
+  menuToggle.addEventListener('click', () => {
+    navUl.classList.toggle('show');
+
+    // Cambia ícono ☰ a ✕
+    if (navUl.classList.contains('show')) {
+      menuToggle.textContent = '✕';
+    } else {
+      menuToggle.textContent = '☰';
+    }
+    
+  });
+const subMenuToggle = document.querySelector('.sub-menu-toggle');
+  const subMenu = document.querySelector('.sub-menu');
+
+  subMenuToggle.addEventListener('click', () => {
+    const isOpen = subMenu.classList.toggle('open');
+    subMenuToggle.textContent = isOpen ? '×' : '+';
+  });
+
+  document.querySelectorAll('.sub-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      subMenu.classList.remove('open');
+      subMenuToggle.textContent = '+';
+    });
+  });
+
+
+  </script>
+
+</body>
+</html>
