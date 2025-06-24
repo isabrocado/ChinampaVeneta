@@ -657,7 +657,7 @@ body.menu-open .next-btn {
     updateSlidePosition(false);
     startAutoSlide();
 
-    // ——— Menú móvil con altura dinámica ———
+    // ——— Menú móvil con altura dinámica que llega hasta el footer fijo ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
@@ -669,13 +669,16 @@ body.menu-open .next-btn {
     }
 
     function ajustarAlturaItems() {
-      const vh         = getViewportHeight();
-      const usedH      = header.offsetHeight
-                       + (footer ? footer.offsetHeight : 0)
-                       + (subMenu ? subMenu.offsetHeight : 0);
-      const availableH = vh - usedH;
-      const items      = Array.from(navUl.querySelectorAll('li'));
-      const itemH      = Math.floor(availableH / items.length);
+      const vh        = getViewportHeight();
+      const headerH   = header.offsetHeight;
+      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+
+      // No restamos footer si está fixed para que el menú ocupe todo hasta el final visible
+      // Footer flotará encima sin dejar espacio visible
+      const availableH = vh - headerH - subMenuH;
+
+      const items  = Array.from(navUl.querySelectorAll('li'));
+      const itemH  = Math.floor(availableH / items.length);
 
       items.forEach(li => {
         li.style.height     = itemH + 'px';
@@ -709,7 +712,6 @@ body.menu-open .next-btn {
 
     menuToggle.addEventListener('click', toggleMenu);
 
-    // Recalibrar altura en cambios de pantalla
     ['resize', 'scroll', 'orientationchange'].forEach(evt => {
       window.addEventListener(evt, () => {
         if (navUl.classList.contains('show')) ajustarAlturaItems();
@@ -720,6 +722,8 @@ body.menu-open .next-btn {
 
 
 
+
+
+
 </body>
 </html>
-
