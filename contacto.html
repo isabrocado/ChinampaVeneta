@@ -36,8 +36,16 @@
     background: #ffffff;
     z-index: 1;
     height: 44px;
+     position: fixed;
   }
 
+  .site-header {
+ 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
   .site-header .logo {
     font-weight: 800;
     white-space: nowrap;
@@ -172,6 +180,10 @@
   /* Tablet up to small laptop: nav móvil igual que en Archivo */
   @media (max-width: 1024px) {
     .site-header nav ul {
+            position: fixed;
+
+    }
+    .site-header nav ul {
       display: none;
       flex-direction: column;
       position: fixed;
@@ -228,8 +240,14 @@
       font-size: 0.7rem;
       z-index: 1000;
     }
+   
   }
 
+
+   .sub-menu {
+    margin-top: 43px;
+
+    }
   @media (max-width: 768px) {
     .site-header .logo img {
       height: 22px;
