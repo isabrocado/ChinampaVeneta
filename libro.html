@@ -556,53 +556,159 @@ body.menu-open .next-btn {
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
 
- <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slider ———
+    const slidesContainer = document.querySelector('.slides');
+    const slides          = document.querySelectorAll('.slide');
+    const prevBtn         = document.querySelector('.prev-btn');
+    const nextBtn         = document.querySelector('.next-btn');
+    const dotsContainer   = document.querySelector('.dots-container');
+    const sliderContainer = document.querySelector('.slider-container');
+
+    let currentIndex      = 1;
+    let isAnimating       = false;
+    let autoSlideInterval = null;
+    const autoSlideDelay  = 4000;
+
+    function updateSlidePosition(withTransition = true) {
+      const slideWidth = slides[0].clientWidth;
+      slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
+      slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
+    }
+
+    function createDots() {
+      for (let i = 0; i < slides.length - 2; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          if (isAnimating) return;
+          currentIndex = i + 1;
+          updateSlidePosition();
+          updateDots();
+          resetAutoSlide();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+      document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
+    }
+
+    function nextSlide() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex++;
+      updateSlidePosition();
+      setTimeout(() => {
+        if (currentIndex >= slides.length - 1) {
+          currentIndex = 1;
+          updateSlidePosition(false);
+        }
+        updateDots();
+        isAnimating = false;
+      }, 400);
+    }
+
+    function prevSlide() {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex--;
+      updateSlidePosition();
+      setTimeout(() => {
+        if (currentIndex <= 0) {
+          currentIndex = slides.length - 2;
+          updateSlidePosition(false);
+        }
+        updateDots();
+        isAnimating = false;
+      }, 400);
+    }
+
+    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+
+    function startAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    [prevBtn, nextBtn, sliderContainer].forEach(el => {
+      el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+      el.addEventListener('mouseleave', () => startAutoSlide());
+    });
+
+    window.addEventListener('resize', () => updateSlidePosition(false));
+
+    createDots();
+    updateSlidePosition(false);
+    startAutoSlide();
+
+
+    // ——— Menú móvil que reparte altura ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
+    const subMenu    = document.querySelector('.sub-menu');
     const footer     = document.querySelector('.site-footer');
 
-    // Abre/cierra menú y ajusta tamaño de cada ítem
-    function toggleMenu() {
-      navUl.classList.toggle('show');
-      document.body.classList.toggle('menu-open');
-      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-      if (navUl.classList.contains('show')) ajustarAlturaItems();
-      else resetAlturaItems();
-    }
-
-    // Calcula y asigna altura a cada <li> en mobile
     function ajustarAlturaItems() {
-      const ventanaH = window.innerHeight;
-      const usedH    = header.offsetHeight + footer.offsetHeight;
-      const availableH = ventanaH - usedH;
-      const items = navUl.querySelectorAll('li');
-      const itemH  = Math.floor(availableH / items.length);
+      const vh         = window.innerHeight;
+      const usedH      = header.offsetHeight
+                       + footer.offsetHeight
+                       + (subMenu ? subMenu.offsetHeight : 0);
+      const availableH = vh - usedH;
+      const items      = Array.from(navUl.querySelectorAll('li'));
+      const itemH      = Math.floor(availableH / items.length);
 
       items.forEach(li => {
-        li.style.height    = itemH + 'px';
-        li.style.lineHeight = itemH + 'px';    // centra el texto verticalmente
+        li.style.height     = itemH + 'px';
+        li.style.lineHeight = itemH + 'px';
       });
     }
 
-    // Elimina los estilos inline cuando se cierra el menú
     function resetAlturaItems() {
       navUl.querySelectorAll('li').forEach(li => {
-        li.style.height    = '';
+        li.style.height     = '';
         li.style.lineHeight = '';
       });
     }
 
-    // Reajusta si giras o cambias tamaño con menú abierto
+    function toggleMenu() {
+      navUl.classList.toggle('show');
+      document.body.classList.toggle('menu-open');
+      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
+
+      if (navUl.classList.contains('show')) {
+        ajustarAlturaItems();
+      } else {
+        resetAlturaItems();
+      }
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    // Recalibrar altura al cambiar tamaño, hacer scroll o rotar pantalla
     window.addEventListener('resize', () => {
       if (navUl.classList.contains('show')) ajustarAlturaItems();
     });
-
-    // Listener de click
-    menuToggle.addEventListener('click', toggleMenu);
+    window.addEventListener('scroll', () => {
+      if (navUl.classList.contains('show')) ajustarAlturaItems();
+    });
+    window.addEventListener('orientationchange', () => {
+      if (navUl.classList.contains('show')) ajustarAlturaItems();
+    });
   });
 </script>
+
 
 </body>
 </html>
