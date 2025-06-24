@@ -306,35 +306,37 @@
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
 
- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Slideshow automático
-    const slides = document.querySelectorAll('.slide');
-    let currentIndex = 0;
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM cargado ✅'); // 1) Debug
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+      // ——— Slideshow automático ———
+      const slides = document.querySelectorAll('.slide');
+      let currentIndex = 0;
+      function showSlide(index) {
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      }
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+      }
+      setInterval(nextSlide, 3000);
+
+      // ——— Menú hamburguesa ———
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navUl      = document.querySelector('.site-header nav ul');
+
+      if (!menuToggle || !navUl) {
+        console.error('🤖 No encontró .menu-toggle o nav ul'); // 2) Debug
+        return;
+      }
+
+      menuToggle.addEventListener('click', () => {
+        navUl.classList.toggle('show');
+        menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
       });
-    }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      showSlide(currentIndex);
-    }
-
-    setInterval(nextSlide, 3000);
-
-    // Menú hamburguesa
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navUl = document.querySelector('.site-header nav ul');
-
-    menuToggle.addEventListener('click', () => {
-      navUl.classList.toggle('show');
-      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
