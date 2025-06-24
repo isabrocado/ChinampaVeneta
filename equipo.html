@@ -1,190 +1,227 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chinampa Veneta</title>
+<link rel="icon" href="favicon.png" type="image/png" />
 
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
-  <!-- Google Fonts Zita -->
-  <link href="https://fonts.googleapis.com/css2?family=Zita:wght@400;600;800&display=swap" rel="stylesheet" />
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  html, body {
-    height: 100vh;
-    font-family: 'Hanken Grotesk', sans-serif;
-    background: #ffffff;
-    color: #FF4026;
-    display: flex;
-    flex-direction: column;
-    font-size: 0.9rem;
-    overflow: hidden;
-  }
+    html, body {
+      height: 100vh;
+      overflow: auto;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.9rem;
+      color: #FF4026;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .site-header {
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    z-index: 1;
-    height: 44px;
-  }
+    .site-header {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      background: #ffffff;
+      z-index: 1;
+            height: 44px;
 
-  .site-header .logo {
-    font-weight: 800;
-    white-space: nowrap;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-  }
-  .site-header .logo img {
-    height: 30px;
-    display: block;
-  }
+    }
+
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+    .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
 
   .site-header nav {
-    display: flex;
-    align-items: stretch;
-  }
+  display: flex;
+  align-items: stretch;
 
-  .site-header nav ul {
-    display: flex;
-    list-style: none;
-    height: 100%;
-  }
+  /* ← AÑADE ESTO: */
+  flex: 1;
+  justify-content: flex-end;
+}
 
-  .site-header nav ul li {
-    border-left: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-  }
+.site-header nav ul {
+  display: flex;
+  list-style: none;
+  height: 100%;
 
-  .site-header nav ul li a {
-    display: block;
-    padding: 12px 40px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-  }
+  /* ← AÑADE ESTO: */
+  justify-content: flex-end;
+}
 
-  .site-header nav ul li a.active,
-  .site-header nav ul li a:hover {
-    font-weight: 800;
-  }
 
-  .sub-menu {
-    display: flex;
-    border-bottom: 1px solid #FF4026;
-    background: #ffffff;
-    padding: 10px 0;
-    height: 40px;
-  }
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
 
-  .sub-menu a {
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 0.9rem;
-    padding: 0 40px;
-    white-space: nowrap;
-  }
-
-  .contenido-archivo {
-    flex: 1;
-    overflow-y: auto;
-    background: #ffffff;
-    padding: 0;
-  }
-  .contenido-archivo a {
-    font-weight: 400;
-    color: #FF4026;
-    text-decoration: none;
-    padding-top: 10px;
-    flex-shrink: 0;
-  }
-  .contenido-archivo a:hover {
-    text-decoration: underline;
-  }
-
-  table {
-    width: 100vw;
-    margin-left: calc((100% - 100vw) / 2 * -1);
-    border-collapse: collapse;
-  }
-  th, td {
-    text-align: left;
-    padding: 12px 16px;
-    border-bottom: 1px solid #FF4026;
-    font-size: 0.83rem;
-  }
-  tr:last-child td {
-    border-bottom: none;
-  }
-
-  .site-footer {
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    background: #ffffff;
-    z-index: 1;
-    height: 43px;
-  }
-  .site-footer div {
-    flex: 1;
-    text-align: center;
-    padding: 12px 0;
-    border-right: 1px solid #FF4026;
-    font-weight: 400;
-  }
-  .site-footer div:last-child {
-    border-right: none;
-  }
-  .site-footer a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 400;
-  }
-  .site-footer a:hover {
-    font-weight: 800;
-  }
-
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 24px;
-    padding: 0 16px;
-    cursor: pointer;
-    color: #FF4026;
-    align-items: center;
-  }
-
-  /* Small screens */
-  @media (max-width: 600px) {
     .site-header nav ul li a {
-      padding: 12px 20px;
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
     }
-    .sub-menu a {
-      padding: 0 20px;
-    }
-    th, td {
-      padding: 10px 8px;
-      font-size: 0.85rem;
-    }
-  }
 
-  /* Tablet up to small laptop */
-  @media (max-width: 1024px) {
-    .site-header nav ul {
+    .site-header nav ul li a.active {
+      font-weight: 800;
+    }
+
+    .site-header nav ul li a:hover {
+  font-weight: 800;
+}
+
+.sub-menu a:hover {
+  font-weight: 800;
+}
+
+    .sub-menu {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #FF4026;
+      background: #ffffff;
+      flex-wrap: nowrap;
+      padding: 0 16px;
+    }
+
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .sub-menu a.active {
+      font-weight: 800;
+    }
+
+    .equipo {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+
+    .equipo img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      max-height: 70vh;
+    }
+.equipo-texto {
+  padding: 10px 24px;
+  color: #FF4026;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+    .equipo.split {
+      flex-direction: row-reverse;
+    }
+
+    .equipo.split img {
+      width: 65%;
+      max-height: none;
+    }
+
+  .equipo.split .equipo-texto {
+  width: 35%;
+  padding-right: 24px;
+}
+
+    .site-footer {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      background: #ffffff;
+      z-index: 1;
+    }
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+
+    .site-footer div:last-child {
+      border-right: none;
+    }
+
+           .site-footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+}
+  .site-footer a:hover {
+  font-weight: 800;}
+    /* Estilos para el bloque de contacto dentro de cada estudio */
+    .datos-contacto {
+      margin-top: auto; /* empuja hacia abajo */
+      font-size: 0.83rem;
+    }
+
+    .datos-contacto p {
+      margin: 4px 0;
+    }
+
+    .datos-contacto a {
+      color: #FF4026;
+      text-decoration: none;
+    }
+
+    .datos-contacto a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+   @media (max-width: 1024px) {
+
+   .site-header nav ul {
       display: none;
       flex-direction: column;
       position: fixed;
@@ -196,142 +233,305 @@
       border-top: 1px solid #FF4026;
       z-index: 20;
     }
-    .site-header nav ul.show {
-      display: flex;
-    }
-    .site-header nav ul li {
-      flex: 1;      /* ahora cada botón ocupa igual espacio */
-      border: none;
-      border-bottom: 1px solid #FF4026;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .site-header nav ul li a {
+    .equipo img {
+      margin-top: 39px;
       width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #FF4026;
-      font-weight: 400;
-      font-size: 1.2rem;
+      object-fit: cover;
+      display: block;
+     height: 55%;
+
     }
-    .menu-toggle {
-      display: flex;
-    }
+
+  .site-header nav ul.show {
+    display: flex;
   }
 
-  /* Footer fijo y espacio en contenido */
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: none;
+    border: none;
+    font-size: 24px;
+    padding: 0 16px;
+    cursor: pointer;
+    color: #FF4026;
+    align-items: center;
+  }
+
   @media (max-width: 900px) {
-    .contenido-archivo {
-      padding-bottom: 55px;
+        .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid #FF4026;
+        border-bottom: 1px solid #FF4026;
+        display: flex
+;
+        justify-content: space-between;
+        align-items: stretch;
+        background: #ffffff;
+        z-index: 1000;
+        height: 44px;
     }
+   .datos-contacto {
+    margin-top: 20px;
+    font-size: 0.83rem;
+}
+   
+     .equipo.split {
+    flex-direction: column !important; /* una columna */
+  }
+  .equipo.split img {
+    width: 100% !important;
+    max-height: 45vh; /* para limitar altura y permitir scroll en texto */
+    object-fit: cover;
+    margin-top: 85px;
+  }
+ .equipo.split .equipo-texto {
+  width: 100% !important;
+  padding-right: 10px !important;
+}
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 87px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 15;
+  }
+  
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li:first-child {
+    border-top: none;
+  }
+
+  .site-header nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* 👇 Aquí la regla que necesitas */
+  .site-footer {
+    font-size: 0.7rem;
+  }
+    .sub-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+  }
+  .sub-menu a {
+    width: 100%;
+    padding: 12px 16px;
+    border-bottom: 1px solid #FF4026;
+  }
+  .sub-menu a:last-child {
+    border-bottom: none;
+  }
     .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 0.7rem;
-      z-index: 1000;
+    font-size: 0.7rem;
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
+}
+}
+/* —————— HAMBURGER PARA SUB-MENÚ (MÓVIL) —————— */
+.sub-menu-toggle {
+  display: none;
+    width: 100%;                 /* ancho completo */
+  background: #ffffff;
+  border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+border-right: none;
+border-left: none;
+  padding: 7px 0;             /* espacio vertical como sub-menú */
+  font-size: 24px;
+  color: #FF4026;
+  cursor: pointer;
+  position: fixed;
+  top: 43px;   /* justo debajo del header fijo */
+}
+
+@media (max-width: 900px) {
+
+  .site-header nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 87px);
+        background: #ffffff;
+        border-top: 1px solid #FF4026;
+        z-index: 1000;
+      }
+      
+  /* ocultar por defecto el sub-menú */
+  .sub-menu {
+    display: none;
+    position: fixed;
+    top: 85px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+        border-top: 1px solid #FF4026;
+
+    border-bottom: 1px solid #FF4026;
+    flex-direction: column;
+  }
+
+  /* mostrar el toggle */
+  .sub-menu-toggle {
+    display: block;
+  }
+
+  /* cuando el sub-menú tenga la clase “open”, lo mostramos */
+  .sub-menu.open {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 22px;
+  }
+      .equipo-texto {
+      padding: 10px 10px;
+      color: #FF4026;
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.4;
+      overflow-y: auto;
+      padding-right: 20px;
+   
     }
   }
 
-  @media (max-width: 768px) {
-    .site-header .logo img {
-      height: 22px;
-    }
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
   }
-  @media (max-width: 480px) {
-    .site-header .logo img {
-      height: 20px;
-    }
-  }
-</style>
+}
 
-
+  </style>
 </head>
 
 <body>
 
   <header class="site-header">
-  <div class="logo">
+ <div class="logo">
       <a href="index.html">
         <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
       </a>
     </div>
-    
     <nav>
-      <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+            <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
 
       <ul>
         <li><a href="pabellon.html">El pabellón</a></li>
- <li><a href="equipo.html">Equipo</a></li>
+          <li><a href="equipo.html" class="active">Equipo</a></li>
         <li><a href="libro.html">Libro</a></li>
-        <li><a href="archivo.html" class="active">Archivo</a></li>
+        <li><a href="archivo.html">Archivo</a></li>
         <li><a href="contacto.html">Contacto</a></li>
         <li><a href="patrocinadores.html">Patrocinadores</a></li>
                 <li><a href="prensa.html">Prensa</a></li>
 
-
-               
-
       </ul>
     </nav>
   </header>
-
-  <div class="sub-menu">
-    <a href="#" id="btn-lista" class="active">Archivo</a> 
+<button class="sub-menu-toggle" aria-label="Mostrar sub-menú">+</button>
+<div class="sub-menu">
+    <a href="#" data-opcion="ignacio">Estudio Ignacio Urquiza y Ana Paula de Alba</a>
+    <a href="#" data-opcion="mariaMarin">Estudio María Marín de Buen</a>
+        <a href="#" data-opcion="ilwt">ILWT</a>
+    <a href="#" data-opcion="locus">Locus</a>
+    <a href="#" data-opcion="lucioNatalia">Lucio Usobiaga Hegewisch & Nathalia Muguet</a>
+    <a href="#" data-opcion="pedroJuana">Pedro&amp;Juana</a>
   </div>
 
-  <div class="contenido-archivo">
-    <div id="lista-view">
-      <table>
-        <tbody>
-          <tr><td><a href="https://www.instagram.com/p/DDzwdoQu2_4/?igsh=eGNtMTl0MDkzMjZn" target="_blank" rel="noopener noreferrer">Las milpas son un sistema agrícola tradicional</a></td><td>@opuntia.mx</td><td>2024</td></tr>
-          <tr><td><a href="https://www.sciencedirect.com/science/article/abs/pii/S0264275112001412" target="_blank" rel="noopener noreferrer">Enhancing the Potential Value of Environmental Services in Urban Wetlands: An Agro‑ecosystem Approach</a></td><td>Aguilar, A., Zambrano, L., Valiente, E.L., Ramos‑Bueno, A.</td><td>2013</td></tr>
-          <tr><td><a href="https://arquine.com/product/la-imagen-del-agua-en-la-ciudad/" target="_blank" rel="noopener noreferrer">La imagen del agua en la ciudad</a></td><td>Castro Reguera Mancera, L.</td><td>2022</td></tr>
-          <tr><td><a href="https://institucional.us.es/araucaria/otras_res/2010_3/resegna_0310_1.htm" target="_blank" rel="noopener noreferrer">Hacia una teoría urbana fundamentada. Acerca de: Aldo Rossi</a></td><td>Dra. Cecilia Raffa</td><td>2010</td></tr>
-          <tr><td><a href="https://utilitariomexicano.com.mx/products/100100142750?srsltid=AfmBOoo4NvALiGkDUEMh51U3KctuRWHecFqZ0EzTh-xtXNC_K9LTZSaT" target="_blank" rel="noopener noreferrer">Revista Artes de México, 20ª ed. Ciudad de México</a></td><td>Consejo Nacional para la Cultura y las Artes</td><td>1993</td></tr>
-          <tr><td><a href="https://onebottlethreequestions.buzzsprout.com/2398916/episodes/16375235-5-2022-vino-di-sante-contrada-contro-with-andrea-polidoro" target="_blank" rel="noopener noreferrer">“Vino di Sante, Contrada Contro with Andrea Polidoro.”, episodio #5</a></td><td>One Bottle Three Questions – A Wine Podcast</td><td>2025</td></tr>
-          <tr><td><a href="https://www.youtube.com/watch?v=xVWkk7BObbE" target="_blank" rel="noopener noreferrer">Chinampa | De la Tierra, el Corazón</a></td><td>Canal Catorce</td><td>2021</td></tr>
-          <tr><td><a href="https://puenteeditores.com/portfolio_page/jardines-paisaje-y-genio-natural/" target="_blank" rel="noopener noreferrer">Jardines, paisaje y genio natural</a></td><td>Clément, G.</td><td>2023</td></tr>
-          <tr><td><a href="https://mediateca.inah.gob.mx/repositorio/islandora/object/codice%3A851#page/1/mode/2up" target="_blank" rel="noopener noreferrer">Códice Badiano</a></td><td>De la Cruz, M., Badiano, J.</td><td>1553</td></tr>
-          <tr><td><a href="https://bambualportugal.pt/en/produto/agricultura-sintropica-segundo-ernst-gotsch-2/?srsltid=AfmBOopGPPBHuxbxUGcEE1R-h4B0chUYcXmbQqmdhz7kfS6MwwM_MTJY" target="_blank" rel="noopener noreferrer">Agricultura Sintropica Segundo Ernst Götsch</a></td><td>Dos Santos Rebello, J.F., Ghringhello Sakamoto, D.</td><td>2022</td></tr>
-          <tr><td><a href="https://www.anagrama-ed.es/libro/argumentos/la-violencia-y-lo-sagrado/9788433900708/A_70" target="_blank" rel="noopener noreferrer">La violencia y lo sagrado</a></td><td>Girard, R.</td><td>2006</td></tr>
-          <tr><td><a href="https://scapegoatshadows.com/wp-content/uploads/2021/10/eb0ce-rene-girard-with-pierpaolo-antonello-joao-cezar-de-castro-rocha-evolution-and-conversion-dialogues-on-the-origins-of-culture.pdf" target="_blank" rel="noopener noreferrer">Evolution and Conversion: Dialogues on the Origin of Culture</a></td><td>Girard, R., Antonello, P., de Castro Rocha, J.C.</td><td>2010</td></tr>
-          <tr><td><a href="https://publicaciones.xoc.uam.mx/Recurso.php" target="_blank" rel="noopener noreferrer">Las Chinampas de Xochimilco al despuntar el siglo XXI: Inicio de su catalogación</a></td><td>González Pozo, A.</td><td>2010</td></tr>
-          <tr><td><a href="https://casadelibrosabiertos.uam.mx/gpd-las-chinampas-patrimonio-mundial-de-la-ciudad-de-mexico-9786072832367.html" target="_blank" rel="noopener noreferrer"> Las Chinampas: Patrimonio Mundial de la Ciudad de México</a></td><td>González Pozo, A.</td><td>2016</td></tr>
-          <tr><td><a href="https://casadelibrosabiertos.uam.mx/gpd-las-chinampas-patrimonio-mundial-de-la-ciudad-de-mexico-9786072832367.html" target="_blank" rel="noopener noreferrer"> Las Chinampas: Patrimonio Mundial de la Ciudad de México. 2a ed.</a></td><td>González Pozo, A.</td><td>2024</td></tr>
-         <tr><td><a href="https://revistas.pucp.edu.pe/index.php/arete/article/view/5358/5357" target="_blank" rel="noopener noreferrer">Mundo de la vida y naturaleza. Bases de una fenomenología de la interculturalidad</a></td><td>Held, K.</td><td>1998</td></tr>
-          <tr><td><a href="https://drmarcjeanbernard.weebly.com/uploads/3/7/5/0/37501827/husserl-edmund-la-crisis-de-las-ciencias-europeas-y-la-fenomenologia-transcendental__1_.pdf" target="_blank" rel="noopener noreferrer">La crisis de las ciencias europeas y la fenomenología trascendental</a></td><td>Husserl, E.</td><td>1999</td></tr>
-          <tr><td><a href="https://tenochtitlan.thomaskole.nl/es.html" target="_blank" rel="noopener noreferrer">Retrato de Tenochtitlan: Reconstrucción 3D de la capital mexica</a></td><td>Kole, T.</td><td>2023</td></tr>
-         <tr><td><a href="https://link.springer.com/article/10.1007/s10746-009-9122-4" target="_blank" rel="noopener noreferrer">The Role of Umwelt in Husserl's Aufbau and Abbau of the Natur/Geist Distinction</a></td><td>Konopka, A.</td><td>2009</td></tr>
-          <tr><td><a href="https://www.rct.uk/collection/710362/iconografica-rappresentatione-della-inclita-cittagrave-di-venezia" target="_blank" rel="noopener noreferrer">Iconografica rappresentatione della inclita città di Venezia consacrata al reggio serenissimo dominio veneto</a></td><td>Ugh, L., Baroni, G</td><td>1729</td></tr>
-          <tr><td><a href="https://www.researchgate.net/publication/276269756_Plantas_acuaticas_mexicanas" target="_blank" rel="noopener noreferrer">Plantas acuáticas mexicanas, una contribución a la Flora de México</a></td><td>Lot, A., Medina Lemos, R., Chiang, F.</td><td>2013</td></tr>
-          <tr><td><a href="https://cepe-taxco.bibliotecas.unam.mx:84/cgi-bin/koha/opac-detail.pl?biblionumber=3443" target="_blank" rel="noopener noreferrer">Iconografía y estudio de plantas acuáticas</a></td><td>Lot, A., Novelo, A.</td><td>2024</td></tr>
-         <tr><td><a href="https://editorialgg.com.mx/pertenecemos-a-gaia.html" target="_blank" rel="noopener noreferrer"> Pertenecemos a Gaia</a></td><td>Lovelock, J.</td><td>2024</td></tr>
-         <tr><td><a href="https://editorialgg.com.mx/media/catalog/product/9/7/9788425229480_inside.pdf" target="_blank" rel="noopener noreferrer">Urbanismo ecológico en América Latina</a></td><td>Mastafavi, M., et al.</td><td>2019</td></tr>
-         <tr><td><a href="https://www.coljal.mx/wp-content/uploads/2021/06/3.-Mexico-en-el-Centenario-de-su-Independencia-parte-uno.pdf" target="_blank" rel="noopener noreferrer">México en el Centenario de su Independencia</a></td><td>Espino Barros, E. (ed.)</td><td>1910</td></tr>
-         <tr><td><a href="https://www.youtube.com/watch?v=86gyW0vUmVs" target="_blank" rel="noopener noreferrer">Chinampas of Mexico: Most Productive Agriculture EVER?</a></td><td>Millison, A.</td><td>2022</td></tr>
-         <tr><td><a href="https://architectuul.com/digest/teatro-del-mondo-an-odyssey" target="_blank" rel="noopener noreferrer">Teatro del Mondo: An Odyssey</a></td><td>Mladen, J.</td><td>2020</td></tr>
-         <tr><td><a href="https://editorialgg.com.mx/animales-arquitectos-juhani-pallasmaa-libro.html" target="_blank" rel="noopener noreferrer">Animales arquitectos</a></td><td>Pallasmaa, J.</td><td>2020</td></tr>
-         <tr><td><a href="https://difusion.inah.gob.mx/publicaciones/libros/5403.html" target="_blank" rel="noopener noreferrer">Xochimilco de la A a la Z</a></td><td>Peralta Flores, A.</td><td>2024</td></tr>
-         <tr><td><a href="https://arquine.com/product/revista-arquine-no-103-jardines/" target="_blank" rel="noopener noreferrer">Revista Internacional de Arquitectura y Diseño. 103a ed.</a></td><td>Arquine</td><td>2023</td></tr>
-         <tr><td><a href="https://cepe-cu.bibliotecas.unam.mx:83/cgi-bin/koha/opac-detail.pl?biblionumber=4116" target="_blank" rel="noopener noreferrer">La agricultura chinampera: compilación histórica</a></td><td>Arquine</td><td>1993</td></tr>
-         <tr><td><a href="https://www.academia.edu/122542351/Los_jardines_nahuas_prehispánicos_de_Andrea_Rodríguez_Figueroa#loswp-work-container" target="_blank" rel="noopener noreferrer">Los jardines nahuas prehispánicos: Una introducción desde la perspectiva de la arquitectura del paisaje</a></td><td>Rodríguez Figueroa, A.B.</td><td>2021</td></tr>
-         <tr><td><a href="https://www.jstor.org/stable/26937762?seq=1" target="_blank" rel="noopener noreferrer">Dissonant Views of Socioecological Problems: Local Perspectives and Conservation Policies in Xochimilco, Mexico</a></td><td>Rubio, M., Figueroa, F., Zambrano, L.</td><td>2020</td></tr>
-         <tr><td><a href="https://mitpress.mit.edu/9780262700542/venice-and-the-renaissance/" target="_blank" rel="noopener noreferrer">Venice and the Renaissance</a></td><td>Tafuri, M.</td><td>1989</td></tr>
-         <tr><td><a href="https://www.u-topicas.com/libro/en-las-ruinas-del-bosque_19581" target="_blank" rel="noopener noreferrer">En las ruinas del bosque</a></td><td>Tavares, P.</td><td>2022</td></tr>
-         <tr><td><a href="https://www.thestudioattheedgeoftheworld.com/uploads/4/7/4/0/47403357/08vazquezprecedenceearthanthropocene.pdf" target="_blank" rel="noopener noreferrer">“Precedence, Earth and the Anthropocene: Decolonizing Design.” Design Philosophy Papers</a></td><td>Vázquez, R.</td><td>2017</td></tr>
-         <tr><td><a href="https://www.thestudioattheedgeoftheworld.com/uploads/4/7/4/0/47403357/08vazquezprecedenceearthanthropocene.pdf" target="_blank" rel="noopener noreferrer">Adapting Wetland Restoration Practices in Urban Areas: Perspectives from Xochimilco in Mexico City</a></td><td>Zambrano, L., Rivas, M.I., Uriel-Sumano, C., et al.</td><td>2020</td></tr>
-         <tr><td><a href="https://www.libros.unam.mx/xochimilco-en-el-siglo-xxi-9786073042949-libro.html" target="_blank" rel="noopener noreferrer">Xochimilco en el siglo XXI</a></td><td>Zambrano, L., Rojas, R</td><td>2021</td></tr>
-         <tr><td><a href="https://www.fondodeculturaeconomica.com/Ficha/9786071665829/F" target="_blank" rel="noopener noreferrer">El hombre y lo divino</a></td><td>Zambrano, M.</td><td>2002</td></tr>
-        </tbody>
-      </table>
+  <div id="contenedor-equipo" class="equipo">
+    <img id="equipo-img" src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750290653/_R9A2651_amlspa.jpg" alt="Equipo Chinampa Veneta" />
+    <div id="equipo-texto" class="equipo-texto">
+      <div>
+        <p>
+          <strong>Estudio Ignacio Urquiza y Ana Paula de Alba, Estudio María Marín de Buen, Locus,
+          Lucio Usobiaga Hegewisch & Nathalia Muguet, Pedro&amp;Juana</strong>
+        </p>
+        <p>
+          Aldo Urban, Ana Paula de Alba, Ana Paula Ruiz Galindo, Andrea Mejía, Diego Manzano,
+          Emilio M. Frausto, Federico de Antuñano, Ignacio Urquiza Seoane, Isabel Brocado,
+          Jachen Schleich, Javiera Elicer, Lucero Chaires, Lucio Usobiaga Hegewisch, María Marín
+          de Buen, Martina Duque, Mecky Reuss, Michela Lostia di Santa Sofia, Miguel Ángel Vega Ruiz,
+          Nathalia Muguet, Paulina García Ortíz, Rodrigo Huesca, Sana Frini, Santiago Sitten,
+          Shantal Gabriela Haddad Gómez, Xavier Delgado González, Yavanna Latapí
+        </p>
+      </div>
     </div>
   </div>
+
 
   <footer class="site-footer">
     <div>Pabellón de México</div>
@@ -341,93 +541,99 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // ——— Contenido por opción (igual que antes) ———
-    const contenidoPorOpcion = { /* … tu objeto contenidoPorOpcion … */ };
+    // ——— Contenido por opción ———
+    const contenidoPorOpcion = { /* tu objeto contenidoPorOpcion aquí */ };
 
     function actualizarContenido(opcion) {
-      /* … tu función actualizarContenido … */
+      const datos = contenidoPorOpcion[opcion];
+      if (!datos) return;
+      const cont = document.getElementById('contenedor-equipo');
+      cont.classList.add('split');
+      const img = document.getElementById('equipo-img');
+      img.src = datos.img; img.alt = datos.alt; img.style.objectPosition = '';
+      // Ajuste de object-position para ciertos estudios
+      if (['ignacio','lucioNatalia','pedroJuana','mariaMarin','locus'].includes(opcion)) {
+        img.style.objectPosition = 'top center';
+      }
+      document.getElementById('equipo-texto').innerHTML = datos.texto;
     }
 
-    document.querySelectorAll('.sub-menu a').forEach(link => {
-      link.addEventListener('click', function(e) {
+    // ——— Eventos sub-menú ———
+    document.querySelectorAll('.sub-menu a').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelectorAll('.sub-menu a').forEach(a => a.classList.remove('active'));
-        this.classList.add('active');
-        actualizarContenido(this.getAttribute('data-opcion'));
+        document.querySelectorAll('.sub-menu a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+        actualizarContenido(a.dataset.opcion);
+        // cerrar sub-menú móvil
+        subMenu.classList.remove('open');
+        subMenuToggle.textContent = '+';
       });
     });
 
-    // ——— Menú móvil + ajuste dinámico de altura ———
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navUl      = document.querySelector('.site-header nav ul');
-    const header     = document.querySelector('.site-header');
-    const subMenu    = document.querySelector('.sub-menu');
+    // ——— Selectores del header y menús ———
+    const menuToggle    = document.querySelector('.menu-toggle');
+    const navUl         = document.querySelector('.site-header nav ul');
+    const header        = document.querySelector('.site-header');
+    const subMenu       = document.querySelector('.sub-menu');
+    const subMenuToggle = document.querySelector('.sub-menu-toggle');
 
-    function getViewportHeight() {
-      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    // ——— Funciones para cálculo dinámico ———
+    function getVH() {
+      return window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
     }
-
     function ajustarAlturaItems() {
-      const vh        = getViewportHeight();
-      const headerH   = header ? header.offsetHeight : 0;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-      const available = vh - headerH - subMenuH;
-      const items     = Array.from(navUl.querySelectorAll('li'));
-      const itemH     = Math.floor(available / items.length);
-
+      const vh         = getVH();
+      const headerH    = header.offsetHeight;
+      const subMenuH   = subMenu.offsetHeight;
+      const disponible = vh - headerH - subMenuH;
+      const items      = Array.from(navUl.querySelectorAll('li'));
+      const hItem      = Math.floor(disponible / items.length);
       items.forEach(li => {
-        li.style.height     = itemH + 'px';
-        li.style.lineHeight = itemH + 'px';
+        li.style.height     = hItem + 'px';
+        li.style.lineHeight = hItem + 'px';
       });
-      navUl.style.maxHeight = available + 'px';
+      navUl.style.maxHeight = disponible + 'px';
       navUl.style.overflowY = 'auto';
     }
-
     function resetAlturaItems() {
       navUl.querySelectorAll('li').forEach(li => {
-        li.style.height     = '';
+        li.style.height = '';
         li.style.lineHeight = '';
       });
       navUl.style.maxHeight = '';
       navUl.style.overflowY = '';
     }
 
+    // ——— Manejador de clic en ☰ / ✕ ———
     if (menuToggle && navUl) {
       menuToggle.addEventListener('click', () => {
         navUl.classList.toggle('show');
         document.body.classList.toggle('menu-open');
         menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-
-        if (navUl.classList.contains('show')) {
-          ajustarAlturaItems();
-        } else {
-          resetAlturaItems();
-        }
+        if (navUl.classList.contains('show')) ajustarAlturaItems();
+        else resetAlturaItems();
       });
-
-      ['resize', 'scroll', 'orientationchange'].forEach(evt => {
+      ['resize','scroll','orientationchange'].forEach(evt => {
         window.addEventListener(evt, () => {
           if (navUl.classList.contains('show')) ajustarAlturaItems();
         });
       });
     }
 
-    // ——— Toggle para sub-menú móvil (igual que antes) ———
-    const subMenuToggle = document.querySelector('.sub-menu-toggle');
-    const subMenuElem   = document.querySelector('.sub-menu');
-
-    subMenuToggle.addEventListener('click', () => {
-      const abierto = subMenuElem.classList.toggle('open');
-      subMenuToggle.textContent = abierto ? '×' : '+';
-    });
-    document.querySelectorAll('.sub-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        subMenuElem.classList.remove('open');
-        subMenuToggle.textContent = '+';
+    // ——— Toggle sub-menú móvil ———
+    if (subMenuToggle && subMenu) {
+      subMenuToggle.addEventListener('click', () => {
+        const abierto = subMenu.classList.toggle('open');
+        subMenuToggle.textContent = abierto ? '×' : '+';
       });
-    });
+    }
   });
 </script>
+
+
 
 
 </body>
