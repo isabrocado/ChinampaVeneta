@@ -17,7 +17,7 @@
     }
 
     html, body {
-      height: 100vh;
+      min-height: 100vh;
       overflow-y: auto; /* Permitimos scroll vertical si falta espacio */
       font-family: 'Hanken Grotesk', sans-serif;
       background: #ffffff;
@@ -349,9 +349,19 @@ body.menu-open .next-btn {
   
 @media (max-width: 900px) {
   main.contacto {
-  display: block;
-        height: auto;
-        overflow-y: hidden;
+    display: block;
+    height: auto;
+    overflow-y: auto; /* ← permitir scroll */
+        padding: 10px;
+
+  }
+
+  .texto-izquierda {
+    flex: 1 1 auto;
+    padding: 5px;
+    margin-top: 70vh;
+    overflow-y: auto;
+    height: calc(100vh - 55vh - 88px);
   }
    .site-footer {
     font-size: 0.7rem;
@@ -379,7 +389,7 @@ body.menu-open .next-btn {
 .texto-izquierda {
     flex: 1 1 auto;
     padding: 5px;
-    margin-top: 60vh; /* para que el texto inicie abajo del slider */
+    margin-top: 61vh; /* para que el texto inicie abajo del slider */
     overflow-y: auto;
     height: calc(100vh - 55vh - 88px); /* viewport - slider - header+submenu */
   }
@@ -657,7 +667,7 @@ body.menu-open .next-btn {
     updateSlidePosition(false);
     startAutoSlide();
 
-    // ——— Menú móvil con altura dinámica que llega hasta el footer fijo ———
+    // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
@@ -673,18 +683,23 @@ body.menu-open .next-btn {
       const headerH   = header.offsetHeight;
       const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
 
-      // No restamos footer si está fixed para que el menú ocupe todo hasta el final visible
-      // Footer flotará encima sin dejar espacio visible
-      const availableH = vh - headerH - subMenuH;
+      // Detectar si el footer está fixed o no
+      const footerStyle = window.getComputedStyle(footer);
+      const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
+
+      // Altura disponible total
+      const availableH = vh - headerH - subMenuH - footerH;
 
       const items  = Array.from(navUl.querySelectorAll('li'));
       const itemH  = Math.floor(availableH / items.length);
 
+      // Asignar altura a cada item
       items.forEach(li => {
         li.style.height     = itemH + 'px';
         li.style.lineHeight = itemH + 'px';
       });
 
+      // Asignar altura al contenedor
       navUl.style.maxHeight = availableH + 'px';
       navUl.style.overflowY = 'auto';
     }
@@ -712,6 +727,7 @@ body.menu-open .next-btn {
 
     menuToggle.addEventListener('click', toggleMenu);
 
+    // Recalcular altura cuando cambie viewport o se gire pantalla
     ['resize', 'scroll', 'orientationchange'].forEach(evt => {
       window.addEventListener(evt, () => {
         if (navUl.classList.contains('show')) ajustarAlturaItems();
@@ -719,7 +735,6 @@ body.menu-open .next-btn {
     });
   });
 </script>
-
 
 
 
