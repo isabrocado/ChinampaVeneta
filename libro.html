@@ -351,32 +351,35 @@ body.menu-open .next-btn {
   main.contacto {
     display: block;
     height: auto;
-    overflow-y: auto;
-    padding: 10px;
+    overflow-y: auto; /* ← permitir scroll */
+        padding: 10px;
+
   }
 
   .texto-izquierda {
     flex: 1 1 auto;
     padding: 5px;
-    margin-top: 62vh;
+       margin-top: 62vh;
     overflow-y: auto;
-    height: calc(100vh - 55vh - 88px);
-  }
+    height: calc(100vh - 55vh - 88px - 44px);
+    /* además un pequeño padding para que el último párrafo no quede pegado */
+    padding-bottom: 12px;
 
-  .site-footer {
+  }
+   .site-footer {
     font-size: 0.7rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    background: #ffffff;
-    z-index: 1000;
-    font-weight: 400;
-  }
-
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
   .slider-container {
     position: fixed;
     top: 44px;
@@ -386,9 +389,17 @@ body.menu-open .next-btn {
     z-index: 10;
   }
 
-  .texto-izquierda a {
-    padding: 15px 0;
+.texto-izquierda {
+    flex: 1 1 auto;
+    padding: 5px;
+    margin-top: 62vh; /* para que el texto inicie abajo del slider */
+    overflow-y: auto;
+    height: calc(100vh - 55vh - 88px); /* viewport - slider - header+submenu */
   }
+  .texto-izquierda a {
+  padding: 15px 0;
+
+    }
 
   .sub-menu {
     position: fixed;
@@ -397,7 +408,10 @@ body.menu-open .next-btn {
     width: 100%;
     z-index: 999;
   }
+}
 
+
+    @media (max-width: 900px) {
   .site-header nav ul {
     display: none;
     flex-direction: column;
@@ -405,11 +419,10 @@ body.menu-open .next-btn {
     top: 43px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 88px); /* ← aquí ajustado */
+    height: calc(100vh - 87px);
     background: #ffffff;
     border-top: 1px solid #FF4026;
     z-index: 15;
-    overflow-y: auto;
   }
 
   .site-header nav ul.show {
@@ -449,8 +462,18 @@ body.menu-open .next-btn {
   .menu-toggle {
     display: flex;
   }
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 22px;
+  }
+}
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
+  }
 }
 
+}
 @supports (height: 100dvh) {
   .site-header nav ul {
     max-height: calc(100dvh - 87px);
