@@ -527,9 +527,9 @@ main.contacto {
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
-
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slider Pabellón ———
     const photographerNames = [
       'Foto por Matteo Losurdo',
       'Foto por Ricardo de la Concha',
@@ -539,16 +539,16 @@ main.contacto {
       'Foto por Ricardo de la Concha'
     ];
 
-    const slider = document.getElementById('slider-simple');
+    const slider        = document.getElementById('slider-simple');
     const slidesContainer = document.querySelector('.slides-simple');
-    const slides = document.querySelectorAll('.slide-simple');
-    const nextBtn = document.querySelector('.next-btn-simple');
-    const prevBtn = document.querySelector('.prev-btn-simple');
-    const dots = document.querySelectorAll('.dot-simple');
+    const slides        = document.querySelectorAll('.slide-simple');
+    const nextBtn       = document.querySelector('.next-btn-simple');
+    const prevBtn       = document.querySelector('.prev-btn-simple');
+    const dots          = document.querySelectorAll('.dot-simple');
     const dateParagraph = document.querySelector('.sub-menu p');
 
-    let currentIndex = 0;
-    const totalSlides = slides.length;
+    let currentIndex    = 0;
+    const totalSlides   = slides.length;
     let autoplayInterval = null;
     let autoplayDisabled = false;
 
@@ -557,6 +557,7 @@ main.contacto {
       dots.forEach(dot => dot.classList.remove('active'));
       const dotIndex = currentIndex % dots.length;
       dots[dotIndex].classList.add('active');
+
       if (!isPageBottom()) {
         dateParagraph.textContent = photographerNames[dotIndex] || '';
       }
@@ -581,20 +582,20 @@ main.contacto {
       autoplayDisabled = true;
     }
 
-    // Iniciar autoplay una sola vez al cargar
     startAutoplay();
 
-    // Navegación por clic
     nextBtn.addEventListener('click', () => {
       stopAutoplay();
       currentIndex = (currentIndex + 1) % totalSlides;
       updateSlider();
     });
+
     prevBtn.addEventListener('click', () => {
       stopAutoplay();
       currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
       updateSlider();
     });
+
     dots.forEach(dot => {
       dot.addEventListener('click', () => {
         stopAutoplay();
@@ -603,12 +604,10 @@ main.contacto {
       });
     });
 
-    // Pausar autoplay al pasar cursor sobre las flechas
-    [nextBtn, prevBtn].forEach(btn => {
+    [ nextBtn, prevBtn ].forEach(btn => {
       btn.addEventListener('mouseenter', stopAutoplay);
     });
 
-    // Scroll y resize
     window.addEventListener('scroll', () => {
       if (isPageBottom()) {
         dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
@@ -616,6 +615,7 @@ main.contacto {
         updateSlider();
       }
     });
+
     window.addEventListener('resize', () => {
       if (isPageBottom()) {
         dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
@@ -624,18 +624,23 @@ main.contacto {
       }
     });
 
-    // Inicialización visual
     updateSlider();
 
-    // Menú responsive
+    // ——— Menú responsive (igual que index.html) ———
     const menuToggle = document.querySelector('.menu-toggle');
-    const navUl = document.querySelector('.site-header nav ul');
-    menuToggle.addEventListener('click', () => {
-      navUl.classList.toggle('show');
-      document.body.classList.toggle('menu-open');
-    });
+    const navUl      = document.querySelector('.site-header nav ul');
+
+    if (menuToggle && navUl) {
+      menuToggle.addEventListener('click', () => {
+        navUl.classList.toggle('show');
+        document.body.classList.toggle('menu-open');
+        menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
+      });
+    }
   });
 </script>
+
+
 
 
 
