@@ -18,7 +18,6 @@
   }
 
   html, body {
-    /* cambiamos height por min-height y permitimos scroll */
     min-height: 100vh;
     overflow: auto;
     font-family: 'Hanken Grotesk', sans-serif;
@@ -29,14 +28,19 @@
     font-size: 0.9rem;
   }
 
+  /* Cabecera fija */
   .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     border-top: 1px solid #FF4026;
     border-bottom: 1px solid #FF4026;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #ffffff;
-    z-index: 1;
+    z-index: 1001; /* por encima de todo */
     height: 44px;
   }
 
@@ -76,20 +80,24 @@
     color: #FF4026;
     font-weight: 400;
   }
-
   .site-header nav ul li a.active,
   .site-header nav ul li a:hover {
     font-weight: 800;
   }
 
+  /* Sub-menú justo debajo de la cabecera, también fijo */
   .sub-menu {
+    position: fixed;
+    top: 44px; /* justo bajo el header */
+    left: 0;
+    width: 100%;
     display: flex;
     border-bottom: 1px solid #FF4026;
     background: #ffffff;
     padding: 10px 0;
     height: 40px;
+    z-index: 1000;
   }
-
   .sub-menu a {
     text-decoration: none;
     color: #FF4026;
@@ -98,13 +106,19 @@
     padding: 0 40px;
     white-space: nowrap;
   }
+  .sub-menu a.active,
+  .sub-menu a:hover {
+    font-weight: 800;
+  }
 
+  /* Contenedor de contenido con espacio superior e inferior */
   .contenido-archivo {
     flex: 1;
     overflow-y: auto;
     background: #ffffff;
-    padding: 0;
-    /* espacio inferior para que no tape el footer fijo */
+    /* padding-top = altura header (44) + sub-menu (40) */
+    padding-top: 84px;
+    /* padding-bottom para footer fijo (43) + margen extra */
     padding-bottom: 55px;
   }
   .contenido-archivo a {
@@ -113,6 +127,7 @@
     text-decoration: none;
     padding-top: 10px;
     flex-shrink: 0;
+    display: block;
   }
   .contenido-archivo a:hover {
     text-decoration: underline;
@@ -133,13 +148,19 @@
     border-bottom: none;
   }
 
+  /* Footer fijo */
   .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     border-top: 1px solid #FF4026;
     border-bottom: 1px solid #FF4026;
     display: flex;
     background: #ffffff;
-    z-index: 1;
+    z-index: 1001;
     height: 43px;
+    font-size: 0.7rem;
   }
   .site-footer div {
     flex: 1;
@@ -191,19 +212,19 @@
       display: none;
       flex-direction: column;
       position: fixed;
-      top: 43px;    /* justo bajo el header */
-      bottom: 43px; /* justo sobre el footer */
+      top: 84px;    /* bajo header+sub-menu */
+      bottom: 43px; /* sobre el footer */
       left: 0;
       width: 100%;
       background: #ffffff;
       border-top: 1px solid #FF4026;
-      z-index: 20;
+      z-index: 1002;
     }
     .site-header nav ul.show {
       display: flex;
     }
     .site-header nav ul li {
-      flex: 1;      /* ahora cada botón ocupa igual espacio */
+      flex: 1;
       border: none;
       border-bottom: 1px solid #FF4026;
       display: flex;
@@ -226,22 +247,6 @@
     }
   }
 
-  /* Footer fijo y espacio en contenido */
-  @media (max-width: 900px) {
-    .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 0.7rem;
-      z-index: 1000;
-    }
-    .contenido-archivo {
-      /* ajusta al alto exacto de tu footer si cambias su altura */
-      padding-bottom: 43px;
-    }
-  }
-
   @media (max-width: 768px) {
     .site-header .logo img {
       height: 22px;
@@ -253,6 +258,7 @@
     }
   }
 </style>
+
 
 
 
