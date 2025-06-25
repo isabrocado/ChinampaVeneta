@@ -25,6 +25,7 @@
       display: flex;
       flex-direction: column;
       font-size: 0.9rem;
+overflow: auto;
     }
 
     .site-header {
@@ -271,19 +272,18 @@ body.menu-open .next-btn {
   align-items: center;
 }
 
-@media (max-width: 1024px) {
+ @media (max-width: 1024px) {
   .site-header nav ul {
     display: none;
     flex-direction: column;
     position: fixed;
-    top: 84px;
+    top: 43px;
     left: 0;
     width: 100%;
-    bottom: 44px; /* 👉 para que llegue justo antes del footer fijo */
+    height: calc(100vh - 85px);
     background: #ffffff;
     border-top: 1px solid #FF4026;
-    overflow-y: auto;
-    z-index: 1001;
+    z-index: 20;
   }
 
   .site-header nav ul.show {
@@ -300,64 +300,93 @@ body.menu-open .next-btn {
   }
 
   .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    height: 100%;
     padding: 25px;
-    font-size: 1.2rem;
+    text-decoration: none;
+    color: #FF4026;
     font-weight: 400;
+    font-size: 1.2rem;
   }
 
   .menu-toggle {
     display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 24px;
-    color: #FF4026;
     background: none;
     border: none;
+    font-size: 24px;
     padding: 0 16px;
+    cursor: pointer;
+    color: #FF4026;
+    align-items: center;
   }
-
   .site-header {
-    position: fixed;
+    position: fixed; /* ← fijamos todo el header */
     top: 0;
     left: 0;
     width: 100%;
-    height: 44px;
+    border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
     z-index: 1000;
+    height: 44px;
   }
+   /* 👇 Aquí la regla que necesitas */
+  .site-footer {
+    font-size: 0.7rem;
+  }
+  .dots-container {
+    bottom: 15px;
+  
+}
 }
 
+  
 @media (max-width: 900px) {
   main.contacto {
-    display: block;
-          padding: 0px;
-    padding-top: calc(44px + 40px + 20px);
-    padding-bottom: 64px;
-    height: auto;
-    overflow-y: visible;
+  display: block;
+        height: auto;
+        overflow-y: hidden;
   }
-
+   .site-footer {
+    font-size: 0.7rem;
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
   .slider-container {
     position: fixed;
-    top: 84px;
+    top: 44px;
     left: 0;
     width: 100vw;
     height: 55vh;
     z-index: 10;
   }
 
-     .texto-izquierda {
-        margin-top: 55vh;
-        height: auto;
-        overflow-y: visible;
-        padding: 0px 20px 0px;
-    }
-
-  .texto-izquierda > div {
-    overflow-y: visible;
-    max-height: none;
-    padding-right: 6px;
+.texto-izquierda {
+    flex: 1 1 auto;
+    padding: 5px;
+    margin-top: 60vh; /* para que el texto inicie abajo del slider */
+    overflow-y: auto;
+    height: calc(100vh - 55vh - 88px); /* viewport - slider - header+submenu */
   }
+  .texto-izquierda a {
+  padding: 15px 0;
+
+    }
 
   .sub-menu {
     position: fixed;
@@ -365,41 +394,76 @@ body.menu-open .next-btn {
     left: 0;
     width: 100%;
     z-index: 999;
-    padding-left: 16px;
-    height: 40px;
-  }
-
-  .site-footer {
-    font-size: 0.7rem;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 44px;
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    background: #ffffff;
-    z-index: 1000;
-    font-weight: 400;
   }
 }
 
+
+    @media (max-width: 900px) {
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 87px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 15;
+  }
+
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header nav ul li:first-child {
+    border-top: none;
+  }
+
+  .site-header nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
 @media (max-width: 768px) {
   .site-header .logo img {
     height: 22px;
   }
 }
-
 @media (max-width: 480px) {
   .site-header .logo img {
     height: 20px;
   }
 }
 
+}
 @supports (height: 100dvh) {
   .site-header nav ul {
-    max-height: calc(100dvh - 128px);
+    max-height: calc(100dvh - 87px);
   }
 }
   </style>
