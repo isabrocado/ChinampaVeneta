@@ -143,13 +143,19 @@
   }
 
   .site-footer {
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    background: #ffffff;
-    z-index: 1;
-    height: 43px;
-  }
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  height: 44px;
+  font-weight: 400;
+  
+}
   .site-footer div {
     flex: 1;
     text-align: center;
