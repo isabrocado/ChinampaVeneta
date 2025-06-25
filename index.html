@@ -331,9 +331,10 @@
     }
 
     function ajustarAlturaItems() {
-      const vh       = getViewportHeight();
-      const headerH  = header ? header.offsetHeight : 0;
-      const footerH  = footer ? footer.offsetHeight : 0;
+      const vh        = getViewportHeight();
+      // Usar clientHeight para excluir bordes dobles en header/footer
+      const headerH   = header ? header.clientHeight : 0;
+      const footerH   = footer ? footer.clientHeight : 0;
       const availableH = vh - headerH - footerH;
 
       const items = Array.from(navUl.querySelectorAll('li'));
@@ -378,6 +379,7 @@
     }
   });
 </script>
+
 
 
 
