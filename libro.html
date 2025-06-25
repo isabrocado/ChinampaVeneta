@@ -271,197 +271,34 @@ body.menu-open .next-btn {
   color: #FF4026;
   align-items: center;
 }
-
- @media (max-width: 1024px) {
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 85px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 20;
+  @media (max-width: 1024px) {
+    .site-header nav ul { display: none; flex-direction: column; position: fixed; top: 44px; bottom: 44px; left: 0; width: 100%; background: #fff; z-index: 1000; }
+    .site-header nav ul.show { display: flex; }
+    .site-header nav ul li { flex: 1; border: none; border-bottom: 1px solid #FF4026; justify-content: center; }
+    .site-header nav ul li a { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .menu-toggle { display: block; }
   }
 
-  .site-header nav ul.show {
-    display: flex;
+  /* Mobile adjustments */
+  @media (max-width: 900px) {
+    /* Fixed footer and content padding */
+    .site-footer { font-size: 0.7rem; }
+    .contenido-archivo { padding-bottom: 44px; }
+    /* Slider fixed above content */
+    .slider-container { position: fixed; top: 44px; left: 0; width: 100vw; height: 55vh; z-index: 10; }
+    main.contacto { display: block; margin-top: calc(44px + 39vh + 14px); padding: 10px; height: auto; }
+    .texto-izquierda { height: calc(100vh - 44px - 55vh - 44px); padding: 5px; }
+    .texto-izquierda a { padding: 15px 0; }
+    .dots-container { bottom: 15px; }
   }
 
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  @media (max-width: 768px) { .site-header .logo img { height: 22px; } }
+  @media (max-width: 480px) { .site-header .logo img { height: 20px; } }
 
-  .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
+  /* AU support for dynamic vh */
+  @supports (height: 100dvh) {
+    .site-header nav ul { max-height: calc(100dvh - 88px); }
   }
-
-  .menu-toggle {
-    display: flex;
-    background: none;
-    border: none;
-    font-size: 24px;
-    padding: 0 16px;
-    cursor: pointer;
-    color: #FF4026;
-    align-items: center;
-  }
-  .site-header {
-    position: fixed; /* ← fijamos todo el header */
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    background: #ffffff;
-    z-index: 1000;
-    height: 44px;
-  }
-   /* 👇 Aquí la regla que necesitas */
-  .site-footer {
-    font-size: 0.7rem;
-  }
-  .dots-container {
-    bottom: 15px;
-  
-}
-}
-
- @media (max-width: 900px) {
-    /* Header y sub-menú fijos */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-    .sub-menu {
-      position: fixed;
-      top: 44px;
-      left: 0;
-      width: 100%;
-    }
-    /* Footer fijo */
-    .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 0.7rem;
-    }
-
-    /* Slider en la parte superior (55vh) */
-    .slider-container {
-      position: fixed;
-      top: 44px;       /* debajo del header */
-      left: 0;
-      width: 100vw;
-      height: 55vh;
-      z-index: 10;
-    }
-
-    /* Texto debajo del slider, con scroll interno */
-    main.contacto {
-      display: block;
-      margin-top: calc(40px + 55vh );
-      padding: 10px;
-      height: auto;
-    }
-    .texto-izquierda {
-      margin-top: 0;
-      height: calc(100vh - 44px - 55vh - 40px);
-      padding: 5px;
-    }
-    .texto-izquierda a {
-      padding: 15px 0;
-    }
-
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 87px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 15;
-  }
-
-  .site-header nav ul.show {
-    display: flex;
-  }
-
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .site-header nav ul li:first-child {
-    border-top: none;
-  }
-
-  .site-header nav ul li:last-child {
-    border-bottom: none;
-  }
-
-  .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-@media (max-width: 768px) {
-  .site-header .logo img {
-    height: 22px;
-  }
-}
-@media (max-width: 480px) {
-  .site-header .logo img {
-    height: 20px;
-  }
-}
-
-}
-@supports (height: 100dvh) {
-  .site-header nav ul {
-    max-height: calc(100dvh - 87px);
-  }
-}
   </style>
 </head>
 
