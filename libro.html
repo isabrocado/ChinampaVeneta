@@ -9,261 +9,344 @@
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
 
-<style>
-  /* Reset y estilos base */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html, body {
-    height: 100vh;
-    overflow-y: auto;
-    font-family: 'Hanken Grotesk', sans-serif;
-    background: #ffffff;
-    color: #FF4026;
-    display: flex;
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow-y: auto; /* Permitimos scroll vertical si falta espacio */
+      font-family: 'Hanken Grotesk', sans-serif;
+      background: #ffffff;
+      color: #FF4026;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+overflow: auto;
+    }
+
+    .site-header {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      background: #ffffff;
+      z-index: 1;
+  height: 44px;
+
+    }
+
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+  .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+    }
+
+    .site-header nav ul li a.active {
+      font-weight: 800;
+    }
+    .site-header nav ul li a:hover {
+      font-weight: 800;
+    }
+
+    .sub-menu {
+      display: flex;
+      border-bottom: 1px solid #FF4026;
+      background: #ffffff;
+      padding: 10px 0;
+    }
+
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+
+    main.contacto {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+      height: 90vh; /* Para que no exceda la ventana, y el scroll funcione dentro de texto-izquierda */
+      align-items: center;
+      justify-content: flex-start;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .texto-izquierda {
+      flex: 0 0 40%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.83rem;
+      line-height: 1.6;
+      padding-right: 80px;
+    }
+
+    .texto-izquierda > div {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .texto-izquierda a {
+      font-weight: 800;
+      color: #FF4026;
+      text-decoration: none;
+      padding-top: 10px;
+      flex-shrink: 0;
+    }
+
+    .texto-izquierda a:hover {
+      text-decoration: underline;
+    }
+
+    .slider-container {
+      flex: 0 0 60%;
+      height: 90vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.4s ease;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      user-select: none;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .prev-btn,
+    .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #FF4026;
+      font-size: 2rem;
+      font-weight: 400;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+      user-select: none;
+      opacity: 50%;
+    }
+
+    .prev-btn:hover,
+    .next-btn:hover,
+    .prev-btn:active,
+    .next-btn:active {
+      opacity: 100%;
+    }
+
+    .prev-btn {
+      left: 16px;
+    }
+
+    .next-btn {
+      right: 16px;
+    }
+
+ body.menu-open .prev-btn,
+body.menu-open .next-btn {
+  display: none;
+}
+
+
+    .dots-container {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid #FF4026;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #FF4026;
+    }
+
+    .site-footer {
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      background: #ffffff;
+      z-index: 1;
+    }
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+
+    .site-footer div:last-child {
+      border-right: none;
+    }
+       .site-footer a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+  .site-footer a:hover {
+  font-weight: 800;}
+  .menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  padding: 0 16px;
+  cursor: pointer;
+  color: #FF4026;
+  align-items: center;
+}
+
+ @media (max-width: 1024px) {
+  .site-header nav ul {
+    display: none;
     flex-direction: column;
-    font-size: 0.9rem;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 85px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 20;
   }
 
-  /* Header */
-  .site-header {
-    border-top: 1px solid #FF4026;
+  .site-header nav ul.show {
+    display: flex;
+  }
+
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
     border-bottom: 1px solid #FF4026;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: #ffffff;
-    z-index: 1000;
-    height: 44px;
+    justify-content: center;
   }
-  .site-header .logo {
-    font-weight: 800;
-    white-space: nowrap;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-  }
-  .site-header .logo img {
-    height: 30px;
-  }
-  .site-header nav ul {
-    display: flex;
-    list-style: none;
-    height: 100%;
-  }
-  .site-header nav ul li {
-    border-left: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-  }
+
   .site-header nav ul li a {
-    display: block;
-    padding: 12px 40px;
-    color: #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
     text-decoration: none;
+    color: #FF4026;
     font-weight: 400;
+    font-size: 1.2rem;
   }
-  .site-header nav ul li a:hover,
-  .site-header nav ul li a.active {
-    font-weight: 800;
-  }
+
   .menu-toggle {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     font-size: 24px;
     padding: 0 16px;
-    color: #FF4026;
     cursor: pointer;
-  }
-
-  /* Sub-menú */
-  .sub-menu {
-    display: flex;
-    border-bottom: 1px solid #FF4026;
-    background: #fff;
-    padding: 10px 0;
-    z-index: 999;
-  }
-  .sub-menu a {
-    padding: 0 40px;
     color: #FF4026;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-  .sub-menu a:hover {
-    font-weight: 800;
-  }
-
-  /* Main escritorio */
-  main.contacto {
-    flex: 1;
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    height: 90vh;
-    overflow: hidden;
     align-items: center;
-    background: #fff;
   }
-  .texto-izquierda {
-    flex: 0 0 40%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    font-size: 0.83rem;
-    line-height: 1.6;
-    padding-right: 80px;
-    color: #FF4026;
-  }
-  .texto-izquierda > div {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    padding-right: 6px;
-  }
-  .texto-izquierda a {
-    display: block;
-    font-weight: 800;
-    margin-top: 10px;
-    color: #FF4026;
-    text-decoration: none;
-  }
-  .texto-izquierda a:hover {
-    text-decoration: underline;
-  }
-  .slider-container {
-    flex: 0 0 60%;
-    height: 90vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-  }
-  .slides {
-    display: flex;
-    transition: transform 0.4s ease;
+  .site-header {
+    position: fixed; /* ← fijamos todo el header */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-  }
-  .slide {
-    min-width: 100%;
-    height: 100%;
-    user-select: none;
-  }
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .prev-btn, .next-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    color: #FF4026;
-    font-size: 2rem;
-    cursor: pointer;
-    opacity: 0.5;
-    z-index: 2;
-  }
-  .prev-btn:hover, .next-btn:hover {
-    opacity: 1;
-  }
-  .prev-btn { left: 16px; }
-  .next-btn { right: 16px; }
-  body.menu-open .prev-btn,
-  body.menu-open .next-btn {
-    display: none;
-  }
-  .dots-container {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-  }
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    border: 1px solid #FF4026;
-    cursor: pointer;
-  }
-  .dot.active {
-    background: #FF4026;
-  }
-
-  /* Footer */
-  .site-footer {
     border-top: 1px solid #FF4026;
     border-bottom: 1px solid #FF4026;
     display: flex;
-    background: #fff;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
     z-index: 1000;
+    height: 44px;
   }
-  .site-footer div {
-    flex: 1;
-    text-align: center;
-    padding: 12px 0;
-    border-right: 1px solid #FF4026;
-    font-weight: 400;
-    font-size: 0.9rem;
+   /* 👇 Aquí la regla que necesitas */
+  .site-footer {
+    font-size: 0.7rem;
   }
-  .site-footer div:last-child {
-    border-right: none;
-  }
-  .site-footer a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .site-footer a:hover {
-    font-weight: 800;
-  }
+  .dots-container {
+    bottom: 15px;
+  
+}
+}
 
-  /* Responsive hasta 1024px */
-  @media (max-width: 1024px) {
-    .site-header nav ul {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 43px;
-      left: 0;
-      width: 100%;
-      height: calc(100vh - 85px);
-      background: #fff;
-      border-top: 1px solid #FF4026;
-      z-index: 20;
-    }
-    .site-header nav ul.show {
-      display: flex;
-    }
-    .site-header nav ul li {
-      flex: 1;
-      border: none;
-      border-bottom: 1px solid #FF4026;
-      justify-content: center;
-    }
-    .site-header nav ul li a {
-      width: 100%;
-      padding: 25px;
-      font-size: 1.2rem;
-    }
-    .menu-toggle {
-      display: flex;
-    }
-  }
-
-  /* Mobile (≤900px): mantener composición original */
-  @media (max-width: 900px) {
+ @media (max-width: 900px) {
     /* Header y sub-menú fijos */
     .site-header {
       position: fixed;
@@ -299,39 +382,87 @@
     /* Texto debajo del slider, con scroll interno */
     main.contacto {
       display: block;
-      margin-top: calc(44px + 55vh );
-      margin-bottom: 44px; /* para el footer */
+      margin-top: calc(40px + 55vh );
       padding: 10px;
       height: auto;
-      overflow: visible;
     }
     .texto-izquierda {
       margin-top: 0;
-      height: calc(100vh - 44px - 55vh - 40px - 44px);
-      overflow-y: auto;
+      height: calc(100vh - 44px - 55vh - 40px);
       padding: 5px;
     }
     .texto-izquierda a {
       padding: 15px 0;
     }
+
+  .site-header nav ul {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 43px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 87px);
+    background: #ffffff;
+    border-top: 1px solid #FF4026;
+    z-index: 15;
   }
 
-  /* Ajustes de logo en móviles más pequeños */
-  @media (max-width: 768px) {
-    .site-header .logo img { height: 22px; }
-  }
-  @media (max-width: 480px) {
-    .site-header .logo img { height: 20px; }
+  .site-header nav ul.show {
+    display: flex;
   }
 
-  /* Soporte para unidades dinámicas */
-  @supports (height: 100dvh) {
-    .site-header nav ul {
-      max-height: calc(100dvh - 87px);
-    }
+  .site-header nav ul li {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-</style>
 
+  .site-header nav ul li:first-child {
+    border-top: none;
+  }
+
+  .site-header nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  .site-header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 1.2rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+@media (max-width: 768px) {
+  .site-header .logo img {
+    height: 22px;
+  }
+}
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
+  }
+}
+
+}
+@supports (height: 100dvh) {
+  .site-header nav ul {
+    max-height: calc(100dvh - 87px);
+  }
+}
+  </style>
 </head>
 
 <body>
