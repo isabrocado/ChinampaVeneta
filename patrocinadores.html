@@ -9,8 +9,7 @@
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
 <style>
-
- * {
+  * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -21,8 +20,6 @@ html, body {
   font-family: 'Hanken Grotesk', sans-serif;
   background: #ffffff;
   color: #FF4026;
-  display: flex;
-  flex-direction: column;
   font-size: 0.9rem;
   overflow: hidden;
 }
@@ -110,11 +107,16 @@ html, body {
 }
 
 .patrocinadores {
-  flex: 1;
+  position: fixed;
+  top: 85px; /* header 44px + sub-menu 41px */
+  bottom: 44px; /* footer */
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px 16px;
+  overflow-y: auto;
+  padding: 20px;
 }
 
 .patrocinadores-grid {
@@ -123,6 +125,7 @@ html, body {
   gap: 10px;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
 }
 
 .patrocinadores-grid img {
@@ -236,53 +239,6 @@ html, body {
   .site-footer {
     font-size: 0.7rem;
   }
-
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 87px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 15;
-  }
-
-  .site-header nav ul.show {
-    display: flex;
-  }
-
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .site-header nav ul li:first-child {
-    border-top: none;
-  }
-
-  .site-header nav ul li:last-child {
-    border-bottom: none;
-  }
-
-  .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -302,6 +258,7 @@ html, body {
     height: 20px;
   }
 }
+
 </style>
 </head>
 
