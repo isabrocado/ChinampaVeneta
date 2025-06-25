@@ -390,79 +390,64 @@
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slideshow automático ———
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    }
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
+    setInterval(nextSlide, 3000);
+
+    // ——— Menú móvil dinámico sin cortar ítems ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
+    const subMenu    = document.querySelector('.sub-menu');
     const footer     = document.querySelector('.site-footer');
 
     function getViewportHeight() {
-      return window.visualViewport
-        ? window.visualViewport.height
-        : window.innerHeight;
+      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
     }
 
-    function ajustarAlturaItems() {
-      const vh       = getViewportHeight();
-      const headerH  = header ? header.clientHeight : 0;
-      const footerH  = footer ? footer.clientHeight : 0;
-      const availableH = vh - headerH - footerH;
+    function ajustarAlturaMenu() {
+      const vh        = getViewportHeight();
+      const headerH   = header ? header.offsetHeight : 0;
+      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+      const availableH = vh - headerH - subMenuH;
 
-      // Anclamos el UL entre header y footer
-      navUl.style.position = 'fixed';
-      navUl.style.top      = `${headerH}px`;
-      navUl.style.bottom   = `${footerH}px`;
-      navUl.style.left     = '0';
-      navUl.style.right    = '0';
+      navUl.style.maxHeight = availableH + 'px';
       navUl.style.overflowY = 'auto';
-
-      // Repartimos la altura entre los LI
-      const items = Array.from(navUl.querySelectorAll('li'));
-      const itemH = Math.floor(availableH / items.length);
-      items.forEach(li => {
-        li.style.height     = `${itemH}px`;
-        li.style.lineHeight = `${itemH}px`;
-      });
-    }
-
-    function resetAlturaItems() {
-      // Quitamos los estilos inline para volver al CSS original
-      navUl.style.position = '';
-      navUl.style.top      = '';
-      navUl.style.bottom   = '';
-      navUl.style.left     = '';
-      navUl.style.right    = '';
-      navUl.style.overflowY = '';
-      navUl.querySelectorAll('li').forEach(li => {
-        li.style.height     = '';
-        li.style.lineHeight = '';
-      });
     }
 
     function toggleMenu() {
-      const abierto = navUl.classList.toggle('show');
+      navUl.classList.toggle('show');
       document.body.classList.toggle('menu-open');
-      menuToggle.textContent = abierto ? '✕' : '☰';
+      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
 
-      if (abierto) {
-        ajustarAlturaItems();
+      if (navUl.classList.contains('show')) {
+        ajustarAlturaMenu();
       } else {
-        resetAlturaItems();
+        navUl.style.maxHeight = '';
+        navUl.style.overflowY = '';
       }
     }
 
     if (menuToggle && navUl) {
       menuToggle.addEventListener('click', toggleMenu);
-      // Reajusta al cambiar tamaño o rotar
-      ['resize', 'orientationchange'].forEach(evt => {
-        window.addEventListener(evt, () => {
-          if (navUl.classList.contains('show')) {
-            ajustarAlturaItems();
-          }
-        });
-      });
     }
+
+    ['resize', 'scroll', 'orientationchange'].forEach(evt => {
+      window.addEventListener(evt, () => {
+        if (navUl.classList.contains('show')) ajustarAlturaMenu();
+      });
+    });
   });
 </script>
 
