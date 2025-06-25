@@ -657,7 +657,7 @@ body.menu-open .next-btn {
     updateSlidePosition(false);
     startAutoSlide();
 
-    // ——— Menú móvil con altura máxima de 600px ———
+    // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
@@ -669,22 +669,28 @@ body.menu-open .next-btn {
     }
 
     function ajustarAlturaItems() {
-      const vh         = getViewportHeight();
-      const usedH      = header.offsetHeight
-                       + (footer ? footer.offsetHeight : 0)
-                       + (subMenu ? subMenu.offsetHeight : 0);
-      const availableH = vh - usedH;
-      const maxAvailable = Math.min(600, availableH); // ← límite a 600px
+      const vh        = getViewportHeight();
+      const headerH   = header.offsetHeight;
+      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
 
-      const items      = Array.from(navUl.querySelectorAll('li'));
-      const itemH      = Math.floor(maxAvailable / items.length);
+      // Detectar si el footer está fixed o no
+      const footerStyle = window.getComputedStyle(footer);
+      const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
 
+      // Altura disponible total
+      const availableH = vh - headerH - subMenuH - footerH;
+
+      const items  = Array.from(navUl.querySelectorAll('li'));
+      const itemH  = Math.floor(availableH / items.length);
+
+      // Asignar altura a cada item
       items.forEach(li => {
         li.style.height     = itemH + 'px';
         li.style.lineHeight = itemH + 'px';
       });
 
-      navUl.style.maxHeight = maxAvailable + 'px';
+      // Asignar altura al contenedor
+      navUl.style.maxHeight = availableH + 'px';
       navUl.style.overflowY = 'auto';
     }
 
@@ -711,6 +717,7 @@ body.menu-open .next-btn {
 
     menuToggle.addEventListener('click', toggleMenu);
 
+    // Recalcular altura cuando cambie viewport o se gire pantalla
     ['resize', 'scroll', 'orientationchange'].forEach(evt => {
       window.addEventListener(evt, () => {
         if (navUl.classList.contains('show')) ajustarAlturaItems();
@@ -718,6 +725,7 @@ body.menu-open .next-btn {
     });
   });
 </script>
+
 
 
 
