@@ -11,343 +11,139 @@
   <!-- Google Fonts Zita -->
   <link href="https://fonts.googleapis.com/css2?family=Zita:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100vh;
-      font-family: 'Hanken Grotesk', sans-serif;
-      background: #ffffff;
-      color: #FF4026;
-      display: flex;
-      flex-direction: column;
-      font-size: 0.9rem;
-      overflow: hidden;
-    }
-
-    .site-header {
-      border-top: 1px solid #FF4026;
-      border-bottom: 1px solid #FF4026;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffffff;
-      z-index: 1;
-      height: 44px;
-    }
-
-    .site-header .logo {
-      font-weight: 800;
-      white-space: nowrap;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-    }
- .site-header .logo img {
-      height: 30px;
-      display: block;
-    }
-    .site-header nav {
-      display: flex;
-      align-items: stretch;
-    }
-
-    .site-header nav ul {
-      display: flex;
-      list-style: none;
-      height: 100%;
-    }
-
-    .site-header nav ul li {
-      border-left: 1px solid #FF4026;
-      display: flex;
-      align-items: center;
-    }
-
-    .site-header nav ul li a {
-      display: block;
-      padding: 12px 40px;
-      text-decoration: none;
-      color: #FF4026;
-      font-weight: 400;
-    }
-
-    .site-header nav ul li a.active,
-    .site-header nav ul li a:hover {
-      font-weight: 800;
-    }
-
-    .sub-menu {
-      display: flex;
-      border-bottom: 1px solid #FF4026;
-      background: #ffffff;
-      padding: 10px 0;
-      height: 40px;
-    }
-
-    .sub-menu a {
-      text-decoration: none;
-      color: #FF4026;
-      font-weight: 400;
-      font-size: 0.9rem;
-      padding: 0 40px;
-      white-space: nowrap;
-    }
-
-    .sub-menu a.active,
-    .sub-menu a:hover {
-      font-weight: 400;
-    }
-
-    .contenido-archivo {
-      flex: 1;
-      overflow-y: auto;
-      background: #ffffff;
-      padding: 0;
-
-    }
-
-    table {
-      width: 100vw;
-      margin-left: calc((100% - 100vw) / 2 * -1);
-      border-collapse: collapse;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 12px 16px;
-      border-bottom: 1px solid #FF4026;
-      font: size 0.83rem;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 16px;
-      margin-top: 8px;
-      width: 100vw;
-      margin-left: calc((100% - 100vw) / 2 * -1);
-      padding: 0 16px;
-    }
-
-    .galeria-item {
-      background: none;
-      border: none;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      user-select: none;
-    }
-
-    .galeria-item img {
-      width: 100%;
-      height: 250px; /* imágenes más grandes */
-      object-fit: cover;
-      display: block;
-    }
-
-    .galeria-item .descripcion {
-      margin-top: 8px;
-      font-size: 0.83rem;
-      color: #FF4026;
-      font-family: 'Hanken Grotesk', sans-serif;
-      text-align: left;
-      width: 100%;
-    }
-
-    .site-footer {
-      border-top: 1px solid #FF4026;
-      border-bottom: 1px solid #FF4026;
-      display: flex;
-      z-index: 1;
-      height: 43px;
-    }
-
-    .site-footer div {
-      flex: 1;
-      text-align: center;
-      padding: 12px 0;
-      border-right: 1px solid #FF4026;
-      font-weight: 400;
-    }
-
-    .site-footer div:last-child {
-      border-right: none;
-    }
-
-       .site-footer a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 400;
-}
-   .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      padding: 0 16px;
-      cursor: pointer;
-      color: #FF4026;
-      align-items: center;
-    }
-  .contenido-archivo a {
-  font-weight: 400;
-  color: #FF4026;
-  text-decoration: none;
-  padding-top: 10px;
-  flex-shrink: 0;
-}
- .contenido-archivo a:hover {
-      text-decoration: underline;
-    }
-  .site-footer a:hover {
-  font-weight: 800;}
-    @media (max-width: 600px) {
-      .site-header nav ul li a {
-        padding: 12px 20px;
-      }
-      .sub-menu a {
-        padding: 0 20px;
-      }
-      th, td {
-        padding: 10px 8px;
-        font-size: 0.85rem;
-      }
-      .galeria {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 8px;
-      }
-      .galeria-item img {
-        height: 180px;
-      }
-      .galeria-item .descripcion {
-        font-size: 0.75rem;
-      }
-    }
-    @media (max-width: 1024px) {
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 85px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 20;
+ <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  .site-header nav ul.show {
+  html, body {
+    /* cambiamos height por min-height y permitimos scroll */
+    min-height: 100vh;
+    overflow: auto;
+    font-family: 'Hanken Grotesk', sans-serif;
+    background: #ffffff;
+    color: #FF4026;
     display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+
+  .site-header {
+    position: fixed; /* ← fijamos todo el header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: #ffffff;
+    z-index: 1000;
+    height: 44px;
+  }
+
+  .site-header .logo {
+    font-weight: 800;
+    white-space: nowrap;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+  }
+  .site-header .logo img {
+    height: 30px;
+    display: block;
+  }
+
+  .site-header nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .site-header nav ul {
+    display: flex;
+    list-style: none;
+    height: 100%;
   }
 
   .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
+    border-left: 1px solid #FF4026;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
+    display: block;
+    padding: 12px 40px;
     text-decoration: none;
     color: #FF4026;
     font-weight: 400;
-    font-size: 1.2rem;
   }
 
-  .menu-toggle {
+  .site-header nav ul li a.active,
+  .site-header nav ul li a:hover {
+    font-weight: 800;
+  }
+
+   .sub-menu {
+    position: fixed; /* ← fijamos el submenú */
+    top: 44px; /* debajo del header */
+    left: 0;
+    width: 100%;
     display: flex;
-    background: none;
-    border: none;
-    font-size: 24px;
-    padding: 0 16px;
-    cursor: pointer;
-    color: #FF4026;
-    align-items: center;
-  }
-}
-
-@media (max-width: 900px) {
-    .site-header nav ul {
-        display: none;
-        flex-direction: column;
-        position: fixed;
-        top: 43px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 87px);
-        background: #ffffff;
-        border-top: 1px solid #FF4026;
-        z-index: 1000;
-      }
-
-       .contenido-archivo {
-      flex: 1;
-      overflow-y: auto;
-      background: #ffffff;
-      padding: 0;
-         padding-bottom:  50px;;
-      
-    }
-
-  .site-header nav ul.show {
-    display: flex;
-  }
-
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
     border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #ffffff;
+    padding: 10px 0;
+    z-index: 999;
   }
 
-  .site-header nav ul li:first-child {
-    border-top: none;
+  .sub-menu a {
+    text-decoration: none;
+    color: #FF4026;
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 0 40px;
+    white-space: nowrap;
   }
 
-  .site-header nav ul li:last-child {
+  .contenido-archivo {
+    
+    flex: 1;
+    overflow-y: auto;
+    background: #ffffff;
+    padding: 0;
+    /* espacio inferior para que no tape el footer fijo */
+    padding-bottom: 55px;
+  }
+  .contenido-archivo a {
+    font-weight: 400;
+    color: #FF4026;
+    text-decoration: none;
+    padding-top: 10px;
+    flex-shrink: 0;
+  }
+  .contenido-archivo a:hover {
+    text-decoration: underline;
+  }
+
+  table {
+    width: 100vw;
+    margin-left: calc((100% - 100vw) / 2 * -1);
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #FF4026;
+    font-size: 0.83rem;
+  }
+  tr:last-child td {
     border-bottom: none;
   }
 
-  .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  /* 👇 Aquí la regla que necesitas */
   .site-footer {
-    font-size: 0.7rem;
   position: fixed;  /* lo fija al viewport */
   bottom: 0;        /* abajo */
   left: 0;          /* al inicio horizontal */
@@ -357,24 +153,123 @@
   display: flex;
   background: #ffffff;
   z-index: 1000;    /* por encima del resto */
+  height: 44px;
   font-weight: 400;
   
 }
-}
-
-@media (max-width: 768px) {
-  .site-header .logo img {
-    height: 22px;
+  .site-footer div {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    border-right: 1px solid #FF4026;
+    font-weight: 400;
   }
-}
-@media (max-width: 480px) {
-  .site-header .logo img {
-    height: 20px;
+  .site-footer div:last-child {
+    border-right: none;
   }
-}
+  .site-footer a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .site-footer a:hover {
+    font-weight: 800;
+  }
 
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    padding: 0 16px;
+    cursor: pointer;
+    color: #FF4026;
+    align-items: center;
+  }
 
-  </style>
+  /* Small screens */
+  @media (max-width: 600px) {
+    .site-header nav ul li a {
+      padding: 12px 20px;
+    }
+    .sub-menu a {
+      padding: 0 20px;
+    }
+    th, td {
+      padding: 10px 8px;
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Tablet up to small laptop */
+  @media (max-width: 1024px) {
+    .site-header nav ul {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 43px;    /* justo bajo el header */
+      bottom: 43px; /* justo sobre el footer */
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      border-top: 1px solid #FF4026;
+      z-index: 20;
+    }
+    .site-header nav ul.show {
+      display: flex;
+    }
+    .site-header nav ul li {
+      flex: 1;      /* ahora cada botón ocupa igual espacio */
+      border: none;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-header nav ul li a {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 1.2rem;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+  }
+
+  /* Footer fijo y espacio en contenido */
+  @media (max-width: 900px) {
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      font-size: 0.7rem;
+      z-index: 1000;
+    }
+    .contenido-archivo {
+      /* ajusta al alto exacto de tu footer si cambias su altura */
+      padding-bottom: 43px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-header .logo img {
+      height: 22px;
+    }
+  }
+  @media (max-width: 480px) {
+    .site-header .logo img {
+      height: 20px;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -536,6 +431,22 @@
         });
       });
     }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
+    const header     = document.querySelector('.site-header');
+    const subMenu    = document.querySelector('.sub-menu');
+    const contenido  = document.querySelector('.contenido-archivo');
+
+    function ajustarOffsetContenido() {
+      const totalOffset = 
+        (header?.offsetHeight  || 0) +
+        (subMenu?.offsetHeight || 0);
+      contenido.style.paddingTop = totalOffset + 'px';
+    }
+
+    // Al cargar y al cambiar tamaño
+    ajustarOffsetContenido();
+    window.addEventListener('resize', ajustarOffsetContenido);
   });
 </script>
 </body>
