@@ -350,21 +350,9 @@ body.menu-open .next-btn {
   main.contacto {
     display: block;
     height: auto;
+    overflow-y: visible;
   }
-   .site-footer {
-    font-size: 0.7rem;
-  position: fixed;  /* lo fija al viewport */
-  bottom: 0;        /* abajo */
-  left: 0;          /* al inicio horizontal */
-  width: 100%;      /* ancho total */
-  border-top: 1px solid #FF4026;
-  border-bottom: 1px solid #FF4026;
-  display: flex;
-  background: #ffffff;
-  z-index: 1000;    /* por encima del resto */
-  font-weight: 400;
-  
-}
+
   .slider-container {
     position: fixed;
     top: 44px;
@@ -374,17 +362,23 @@ body.menu-open .next-btn {
     z-index: 10;
   }
 
-.texto-izquierda {
+  .texto-izquierda {
     flex: 1 1 auto;
     padding: 5px;
     margin-top: 60vh; /* para que el texto inicie abajo del slider */
-    overflow-y: auto;
-    height: calc(100vh - 55vh - 88px); /* viewport - slider - header+submenu */
+    height: auto;
+    overflow-y: visible;
   }
-  .texto-izquierda a {
-  padding: 15px 0;
 
-    }
+  .texto-izquierda > div {
+    flex: unset;
+    overflow-y: visible;
+    padding-right: 6px;
+  }
+
+  .texto-izquierda a {
+    padding: 15px 0;
+  }
 
   .sub-menu {
     position: fixed;
@@ -393,7 +387,22 @@ body.menu-open .next-btn {
     width: 100%;
     z-index: 999;
   }
+
+  .site-footer {
+    font-size: 0.7rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #FF4026;
+    border-bottom: 1px solid #FF4026;
+    display: flex;
+    background: #ffffff;
+    z-index: 1000;
+    font-weight: 400;
+  }
 }
+
 
 
     @media (max-width: 900px) {
