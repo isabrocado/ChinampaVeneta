@@ -526,7 +526,6 @@ main.contacto {
     <div>Pabellón de México</div>
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
-  </footer>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // ——— Slider Pabellón ———
@@ -539,21 +538,20 @@ main.contacto {
       'Foto por Ricardo de la Concha'
     ];
 
-    const slider        = document.getElementById('slider-simple');
-    const slidesContainer = document.querySelector('.slides-simple');
-    const slides        = document.querySelectorAll('.slide-simple');
-    const nextBtn       = document.querySelector('.next-btn-simple');
-    const prevBtn       = document.querySelector('.prev-btn-simple');
-    const dots          = document.querySelectorAll('.dot-simple');
-    const dateParagraph = document.querySelector('.sub-menu p');
+    const sliderContainer = document.querySelector('.slides-simple');
+    const slides          = document.querySelectorAll('.slide-simple');
+    const nextBtn         = document.querySelector('.next-btn-simple');
+    const prevBtn         = document.querySelector('.prev-btn-simple');
+    const dots            = document.querySelectorAll('.dot-simple');
+    const dateParagraph   = document.querySelector('.sub-menu p');
 
-    let currentIndex    = 0;
-    const totalSlides   = slides.length;
-    let autoplayInterval = null;
-    let autoplayDisabled = false;
+    let currentIndex      = 0;
+    const totalSlides     = slides.length;
+    let autoplayInterval  = null;
+    let autoplayDisabled  = false;
 
     function updateSlider() {
-      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
       dots.forEach(dot => dot.classList.remove('active'));
       const dotIndex = currentIndex % dots.length;
       dots[dotIndex].classList.add('active');
@@ -626,25 +624,65 @@ main.contacto {
 
     updateSlider();
 
-    // ——— Menú responsive (igual que index.html) ———
+    // ——— Menú responsive con altura dinámica (igual que index.html) ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
+    const header     = document.querySelector('.site-header');
+    const footer     = document.querySelector('.site-footer');
+
+    function getViewportHeight() {
+      return window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
+    }
+
+    function ajustarAlturaItems() {
+      const vh       = getViewportHeight();
+      const headerH  = header ? header.clientHeight : 0;
+      const footerH  = footer ? footer.clientHeight : 0;
+      // restamos header + footer y compensamos 1px de borde
+      const availableH = vh - headerH - footerH + 1;
+
+      const items = Array.from(navUl.querySelectorAll('li'));
+      const itemH  = Math.floor(availableH / items.length);
+
+      items.forEach(li => {
+        li.style.height     = itemH + 'px';
+        li.style.lineHeight = itemH + 'px';
+      });
+
+      navUl.style.maxHeight = availableH + 'px';
+      navUl.style.overflowY = 'auto';
+    }
+
+    function resetAlturaItems() {
+      navUl.querySelectorAll('li').forEach(li => {
+        li.style.height     = '';
+        li.style.lineHeight = '';
+      });
+      navUl.style.maxHeight = '';
+      navUl.style.overflowY = '';
+    }
 
     if (menuToggle && navUl) {
       menuToggle.addEventListener('click', () => {
-        navUl.classList.toggle('show');
+        const opened = navUl.classList.toggle('show');
         document.body.classList.toggle('menu-open');
-        menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
+        menuToggle.textContent = opened ? '✕' : '☰';
+        if (opened) ajustarAlturaItems();
+        else resetAlturaItems();
+      });
+
+      ['resize', 'orientationchange', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, () => {
+          if (navUl.classList.contains('show')) {
+            ajustarAlturaItems();
+          }
+        });
       });
     }
   });
 </script>
-
-
-
-
-
-
 
 </body>
 </html>
