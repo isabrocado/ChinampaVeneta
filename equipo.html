@@ -17,19 +17,17 @@
     box-sizing: border-box;
   }
 
-   html, body {
-    /* cambiamos height por min-height y permitimos scroll */
+  html, body {
+    /* cambiamos height por min-height y permitimos scroll solo en body */
     height: 100vh;
-    overflow: auto;
+    overflow: hidden; /* ocultamos scroll global; el scroll vendrá solo del texto */
     font-family: 'Hanken Grotesk', sans-serif;
     background: #ffffff;
     color: #FF4026;
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
-
   }
-
 
   .site-header {
     border-top: 1px solid #FF4026;
@@ -119,33 +117,35 @@
     font-weight: 800;
   }
 
+  /* ===== Ajustes para .equipo ===== */
   .equipo {
-  flex: 1;
-  padding-bottom: 40px; /* espacio para footer */
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-
-}
-
+    display: flex;
+    /* Ocupa toda la altura visible menos header (44px) y footer (44px) */
+    height: calc(100vh - 88px);
+    padding-bottom: 0; /* el footer ya queda fuera */
+  }
 
   .equipo img {
-    width: 100%;
-    height: auto;
+    flex: 0 0 auto;
+    width: 100%;          /* default móvil/desktop en layouts simples */
+    max-height: none;
     object-fit: cover;
     display: block;
-    max-height: 70vh;
+    position: sticky;
+    top: 44px;            /* queda justo debajo del header */
+    height: calc(100vh - 88px);
   }
 
   .equipo-texto {
+    flex: 1 1 auto;
     padding: 10px 24px;
     color: #FF4026;
     font-size: 0.8rem;
     font-weight: 400;
     line-height: 1.4;
     padding-right: 100px;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100vh - 88px);
   }
 
   .equipo.split {
@@ -154,7 +154,8 @@
 
   .equipo.split img {
     width: 65%;
-    max-height: none;
+    object-fit: cover;
+    /* conserva sticky */
   }
 
   .equipo.split .equipo-texto {
@@ -168,6 +169,7 @@
     display: flex;
     background: #ffffff;
     z-index: 1;
+    height: 44px;
   }
 
   .site-footer div {
@@ -234,16 +236,21 @@
       border-top: 1px solid #FF4026;
       z-index: 20;
     }
+    .equipo {
+      flex-direction: column;
+      height: auto;
+    }
     .equipo img {
       margin-top: 39px;
       width: 100%;
-      object-fit: cover;
-      display: block;
       height: 55%;
-      position: fixed;
-
+      position: relative;
+      top: 0;
     }
-  
+    .equipo-texto {
+      max-height: none;
+      height: auto;
+    }
     .site-header nav ul.show {
       display: flex;
     }
@@ -269,17 +276,13 @@
     }
     .menu-toggle {
       display: flex;
-      background: none;
-      border: none;
-      font-size: 24px;
-      padding: 0 16px;
-      cursor: pointer;
-      color: #FF4026;
-      align-items: center;
     }
   }
 
   @media (max-width: 900px) {
+    html, body {
+      overflow: auto; /* permitimos scroll en móvil */
+    }
     .site-header {
       position: fixed;
       top: 0;
@@ -294,10 +297,6 @@
       z-index: 1000;
       height: 44px;
     }
-    .datos-contacto {
-      margin-top: 20px;
-      font-size: 0.83rem;
-    }
     .equipo.split {
       flex-direction: column !important;
     }
@@ -310,6 +309,10 @@
     .equipo.split .equipo-texto {
       width: 100% !important;
       padding-right: 10px !important;
+      max-height: none;
+    }
+    .equipo img {
+      margin-top: 85px;
     }
     .site-header nav ul {
       display: none;
@@ -367,39 +370,8 @@
       background: #ffffff;
       z-index: 1000;
       font-weight: 400;
+      height: 44px;
     }
-    .sub-menu {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 0;
-    }
-    .sub-menu a {
-      width: 100%;
-      padding: 12px 16px;
-      border-bottom: 1px solid #FF4026;
-    }
-    .sub-menu a:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .sub-menu-toggle {
-    display: none;
-    width: 100%;
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    border-right: none;
-    border-left: none;
-    padding: 7px 0;
-    font-size: 24px;
-    color: #FF4026;
-    cursor: pointer;
-    position: fixed;
-    top: 43px;
-  }
-
-  @media (max-width: 900px) {
     .sub-menu {
       display: none;
       position: fixed;
@@ -440,6 +412,7 @@
     }
   }
 </style>
+
 
 </head>
 
