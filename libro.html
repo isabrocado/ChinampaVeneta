@@ -557,172 +557,100 @@ body.menu-open .next-btn {
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // ——— Slider ———
-    const slidesContainer = document.querySelector('.slides');
-    const slides          = document.querySelectorAll('.slide');
-    const prevBtn         = document.querySelector('.prev-btn');
-    const nextBtn         = document.querySelector('.next-btn');
-    const dotsContainer   = document.querySelector('.dots-container');
-    const sliderContainer = document.querySelector('.slider-container');
 
-    let currentIndex      = 1;
-    let isAnimating       = false;
-    let autoSlideInterval = null;
-    const autoSlideDelay  = 4000;
-
-    function updateSlidePosition(withTransition = true) {
-      const slideWidth = slides[0].clientWidth;
-      slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
-      slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
+  <script>
+    // --- Dynamic vh unit ---
+    function setVh() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
+    window.addEventListener('load', setVh);
+    window.addEventListener('resize', setVh);
 
-    function createDots() {
-      for (let i = 0; i < slides.length - 2; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          if (isAnimating) return;
-          currentIndex = i + 1;
-          updateSlidePosition();
-          updateDots();
-          resetAutoSlide();
-        });
-        dotsContainer.appendChild(dot);
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Slider functionality ---
+      const slidesContainer = document.querySelector('.slides');
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      const dotsContainer = document.querySelector('.dots-container');
+      let currentIndex = 1;
+      let isAnimating = false;
+      const autoSlideDelay = 4000;
+      let autoSlideInterval;
+
+      function updateSlidePosition(trans=true) {
+        const width = slides[0].clientWidth;
+        slidesContainer.style.transition = trans ? 'transform 0.4s ease' : 'none';
+        slidesContainer.style.transform = `translateX(${-width * currentIndex}px)`;
       }
-    }
-
-    function updateDots() {
-      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-      document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
-    }
-
-    function nextSlide() {
-      if (isAnimating) return;
-      isAnimating = true;
-      currentIndex++;
-      updateSlidePosition();
-      setTimeout(() => {
-        if (currentIndex >= slides.length - 1) {
-          currentIndex = 1;
-          updateSlidePosition(false);
+      function createDots() {
+        for (let i = 0; i < slides.length - 2; i++) {
+          const dot = document.createElement('div'); dot.className = 'dot';
+          if (i === 0) dot.classList.add('active');
+          dot.addEventListener('click', () => {
+            if (isAnimating) return;
+            currentIndex = i + 1; updateSlidePosition(); updateDots(); resetAuto();
+          });
+          dotsContainer.appendChild(dot);
         }
-        updateDots();
-        isAnimating = false;
-      }, 400);
-    }
-
-    function prevSlide() {
-      if (isAnimating) return;
-      isAnimating = true;
-      currentIndex--;
-      updateSlidePosition();
-      setTimeout(() => {
-        if (currentIndex <= 0) {
-          currentIndex = slides.length - 2;
-          updateSlidePosition(false);
-        }
-        updateDots();
-        isAnimating = false;
-      }, 400);
-    }
-
-    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-
-    function startAutoSlide() {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
-    }
-
-    function resetAutoSlide() {
-      clearInterval(autoSlideInterval);
-      startAutoSlide();
-    }
-
-    [prevBtn, nextBtn, sliderContainer].forEach(el => {
-      el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-      el.addEventListener('mouseleave', () => startAutoSlide());
-    });
-
-    window.addEventListener('resize', () => updateSlidePosition(false));
-
-    createDots();
-    updateSlidePosition(false);
-    startAutoSlide();
-
-    // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navUl      = document.querySelector('.site-header nav ul');
-    const header     = document.querySelector('.site-header');
-    const subMenu    = document.querySelector('.sub-menu');
-    const footer     = document.querySelector('.site-footer');
-
-    function getViewportHeight() {
-      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    }
-
-    function ajustarAlturaItems() {
-      const vh        = getViewportHeight();
-      const headerH   = header.offsetHeight;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-
-      // Detectar si el footer está fixed o no
-      const footerStyle = window.getComputedStyle(footer);
-      const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
-
-      // Altura disponible total
-      const availableH = vh - headerH - subMenuH - footerH;
-
-      const items  = Array.from(navUl.querySelectorAll('li'));
-      const itemH  = Math.floor(availableH / items.length);
-
-      // Asignar altura a cada item
-      items.forEach(li => {
-        li.style.height     = itemH + 'px';
-        li.style.lineHeight = itemH + 'px';
-      });
-
-      // Asignar altura al contenedor
-      navUl.style.maxHeight = availableH + 'px';
-      navUl.style.overflowY = 'auto';
-    }
-
-    function resetAlturaItems() {
-      navUl.querySelectorAll('li').forEach(li => {
-        li.style.height     = '';
-        li.style.lineHeight = '';
-      });
-      navUl.style.maxHeight = '';
-      navUl.style.overflowY = '';
-    }
-
-    function toggleMenu() {
-      navUl.classList.toggle('show');
-      document.body.classList.toggle('menu-open');
-      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-
-      if (navUl.classList.contains('show')) {
-        ajustarAlturaItems();
-      } else {
-        resetAlturaItems();
       }
-    }
-
-    menuToggle.addEventListener('click', toggleMenu);
-
-    // Recalcular altura cuando cambie viewport o se gire pantalla
-    ['resize', 'scroll', 'orientationchange'].forEach(evt => {
-      window.addEventListener(evt, () => {
-        if (navUl.classList.contains('show')) ajustarAlturaItems();
+      function updateDots() {
+        document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+        document.querySelectorAll('.dot')[currentIndex-1].classList.add('active');
+      }
+      function nextSlide() {
+        if (isAnimating) return; isAnimating = true; currentIndex++;
+        updateSlidePosition(); setTimeout(() => {
+          if (currentIndex >= slides.length-1) { currentIndex = 1; updateSlidePosition(false); }
+          updateDots(); isAnimating = false;
+        }, 400);
+      }
+      function prevSlide() {
+        if (isAnimating) return; isAnimating = true; currentIndex--;
+        updateSlidePosition(); setTimeout(() => {
+          if (currentIndex <= 0) { currentIndex = slides.length-2; updateSlidePosition(false); }
+          updateDots(); isAnimating = false;
+        }, 400);
+      }
+      function startAuto() { clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, autoSlideDelay); }
+      function resetAuto() { clearInterval(autoSlideInterval); startAuto(); }
+      [prevBtn, nextBtn, slidesContainer].forEach(el => {
+        el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        el.addEventListener('mouseleave', startAuto);
       });
+      prevBtn.addEventListener('click', () => { prevSlide(); resetAuto(); });
+      nextBtn.addEventListener('click', () => { nextSlide(); resetAuto(); });
+      window.addEventListener('resize', () => updateSlidePosition(false));
+      createDots(); updateSlidePosition(false); startAuto();
+
+      // --- Mobile menu dynamic height ---
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navUl = document.querySelector('.site-header nav ul');
+      const header = document.querySelector('.site-header');
+      const subMenu = document.querySelector('.sub-menu');
+      const footer = document.querySelector('.site-footer');
+      function adjustMenu() {
+        const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        const used = header.offsetHeight + (subMenu?.offsetHeight||0);
+        const available = vh - used;
+        const items = Array.from(navUl.children);
+        const itemH = Math.floor(available/items.length);
+        items.forEach(li => { li.style.height = itemH+'px'; li.style.lineHeight = itemH+'px'; });
+        navUl.style.maxHeight = available+'px'; navUl.style.overflowY = 'auto';
+      }
+      function resetMenu() {
+        navUl.querySelectorAll('li').forEach(li => { li.style.height=''; li.style.lineHeight=''; });
+        navUl.style.maxHeight = ''; navUl.style.overflowY = '';
+      }
+      menuToggle.addEventListener('click', () => {
+        navUl.classList.toggle('show');
+        menuToggle.textContent = navUl.classList.contains('show')?'✕':'☰';
+        if (navUl.classList.contains('show')) adjustMenu(); else resetMenu();
+      });
+      ['resize','scroll','orientationchange'].forEach(e => window.addEventListener(e, () => { if(navUl.classList.contains('show')) adjustMenu(); }));
     });
-  });
-</script>
-
-
+  </script>
 
 
 
