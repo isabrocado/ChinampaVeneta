@@ -96,7 +96,6 @@
     background: #ffffff;
     padding: 10px 0;
     height: 40px;
-    z-index: 1000;
   }
   .sub-menu a {
     text-decoration: none;
@@ -110,7 +109,9 @@
   .sub-menu a:hover {
     font-weight: 800;
   }
-
+body.menu-open .sub-menu {
+  display: none !important;
+}
   /* Contenedor de contenido con espacio superior e inferior */
   .contenido-archivo {
     flex: 1;
