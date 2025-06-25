@@ -346,55 +346,59 @@ body.menu-open .next-btn {
 }
 }
 
- @media (max-width: 900px) {
-    /* Header y sub-menú fijos */
-    .site-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-    .sub-menu {
-      position: fixed;
-      top: 44px;
-      left: 0;
-      width: 100%;
-    }
-    /* Footer fijo */
-    .site-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      font-size: 0.7rem;
+  
+@media (max-width: 900px) {
+  main.contacto {
+  display: block;
+        height: auto;
+        overflow-y: hidden;
+  }
+   .site-footer {
+    font-size: 0.7rem;
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
+  .slider-container {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    width: 100vw;
+    height: 55vh;
+    z-index: 10;
+  }
+
+.texto-izquierda {
+    flex: 1 1 auto;
+    padding: 5px;
+    margin-top: 60vh; /* para que el texto inicie abajo del slider */
+    overflow-y: auto;
+    height: calc(100vh - 55vh - 88px); /* viewport - slider - header+submenu */
+  }
+  .texto-izquierda a {
+  padding: 15px 0;
+
     }
 
-    /* Slider en la parte superior (55vh) */
-    .slider-container {
-      position: fixed;
-      top: 44px;       /* debajo del header */
-      left: 0;
-      width: 100vw;
-      height: 55vh;
-      z-index: 10;
-    }
+  .sub-menu {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+}
 
-    /* Texto debajo del slider, con scroll interno */
-    main.contacto {
-      display: block;
-      margin-top: calc(40px + 55vh );
-      padding: 10px;
-      height: auto;
-    }
-    .texto-izquierda {
-      margin-top: 0;
-      height: calc(100vh - 44px - 55vh - 40px);
-      padding: 5px;
-    }
-    .texto-izquierda a {
-      padding: 15px 0;
-    }
 
+    @media (max-width: 900px) {
   .site-header nav ul {
     display: none;
     flex-direction: column;
@@ -653,7 +657,7 @@ body.menu-open .next-btn {
     updateSlidePosition(false);
     startAutoSlide();
 
-    // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
+    // ——— Menú móvil con altura máxima de 600px ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
@@ -665,28 +669,22 @@ body.menu-open .next-btn {
     }
 
     function ajustarAlturaItems() {
-      const vh        = getViewportHeight();
-      const headerH   = header.offsetHeight;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+      const vh         = getViewportHeight();
+      const usedH      = header.offsetHeight
+                       + (footer ? footer.offsetHeight : 0)
+                       + (subMenu ? subMenu.offsetHeight : 0);
+      const availableH = vh - usedH;
+      const maxAvailable = Math.min(600, availableH); // ← límite a 600px
 
-      // Detectar si el footer está fixed o no
-      const footerStyle = window.getComputedStyle(footer);
-      const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
+      const items      = Array.from(navUl.querySelectorAll('li'));
+      const itemH      = Math.floor(maxAvailable / items.length);
 
-      // Altura disponible total
-      const availableH = vh - headerH - subMenuH - footerH;
-
-      const items  = Array.from(navUl.querySelectorAll('li'));
-      const itemH  = Math.floor(availableH / items.length);
-
-      // Asignar altura a cada item
       items.forEach(li => {
         li.style.height     = itemH + 'px';
         li.style.lineHeight = itemH + 'px';
       });
 
-      // Asignar altura al contenedor
-      navUl.style.maxHeight = availableH + 'px';
+      navUl.style.maxHeight = maxAvailable + 'px';
       navUl.style.overflowY = 'auto';
     }
 
@@ -713,7 +711,6 @@ body.menu-open .next-btn {
 
     menuToggle.addEventListener('click', toggleMenu);
 
-    // Recalcular altura cuando cambie viewport o se gire pantalla
     ['resize', 'scroll', 'orientationchange'].forEach(evt => {
       window.addEventListener(evt, () => {
         if (navUl.classList.contains('show')) ajustarAlturaItems();
@@ -721,7 +718,6 @@ body.menu-open .next-btn {
     });
   });
 </script>
-
 
 
 
