@@ -613,13 +613,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function ajustarAlturaItems() {
     const vh          = getViewportHeight();
-    const headerH     = header  ? header .offsetHeight : 0;
+    const headerH     = header  ? header.offsetHeight  : 0;
     const subMenuH    = subMenu ? subMenu.offsetHeight : 0;
     const footerStyle = window.getComputedStyle(footer);
     const footerH     = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
     const availableH  = vh - headerH - subMenuH - footerH;
     const items       = Array.from(navUl.querySelectorAll('li'));
     const itemH       = Math.floor(availableH / items.length);
+
     items.forEach(li => {
       li.style.height     = itemH + 'px';
       li.style.lineHeight = itemH + 'px';
@@ -660,27 +661,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('orientationchange', ajustarPaddingFooter);
   ajustarPaddingFooter();
 
-  // ——— **NUEVO**: Layout dinámico SOLO EN MÓVIL ———
+  // ——— **Layout dinámico SOLO en móvil** ———
   function ajustarLayoutContacto() {
     const isMobile = window.innerWidth <= 900;
     const mainC    = document.querySelector('main.contacto');
     if (!mainC) return;
 
     if (isMobile) {
-      const headerH  = header  ? header .offsetHeight : 0;
-      const subMenuH = subMenu ? subMenu.offsetHeight : 0;
-      const footerH  = footer  ? footer .offsetHeight : 0;
-      const availableH = window.innerHeight - headerH - subMenuH - footerH;
+      const headerH   = header  ? header.offsetHeight  : 0;
+      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+      const footerH   = footer  ? footer.offsetHeight  : 0;
+      const availH    = window.innerHeight - headerH - subMenuH - footerH;
 
-      mainC.style.paddingTop   = (headerH + subMenuH) + 'px';
-      mainC.style.height       = availableH + 'px';
-      mainC.style.overflowY    = 'auto';
-      mainC.style.boxSizing    = 'border-box';
+      // Empujar contenido bajo header+submenú
+      mainC.style.paddingTop = (headerH + subMenuH) + 'px';
+      // Altura y scroll interno
+      mainC.style.height     = availH + 'px';
+      mainC.style.overflowY  = 'auto';
+      mainC.style.boxSizing  = 'border-box';
 
-      // Quita cualquier margin-top extra en el slider
+      // Quitar margin-top en slider
       if (sliderContainer) sliderContainer.style.marginTop = '0';
     } else {
-      // Restaurar comportamiento desktop
+      // Restaurar desktop
       mainC.style.paddingTop = '';
       mainC.style.height     = '';
       mainC.style.overflowY  = '';
