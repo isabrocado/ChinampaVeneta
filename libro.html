@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Chinampa Veneta</title>
 <link rel="icon" href="favicon.png" type="image/png" />
 
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
 <style>
-
   * {
   margin: 0;
   padding: 0;
@@ -17,24 +16,26 @@
 }
 
 html, body {
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   font-family: 'Hanken Grotesk', sans-serif;
   background: #ffffff;
   color: #FF4026;
-  display: flex;
-  flex-direction: column;
   font-size: 0.9rem;
+  overflow: hidden;
 }
 
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   border-top: 1px solid #FF4026;
   border-bottom: 1px solid #FF4026;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   background: #ffffff;
-  z-index: 1;
+  z-index: 1000;
   height: 44px;
 }
 
@@ -45,6 +46,7 @@ html, body {
   display: flex;
   align-items: center;
 }
+
 .site-header .logo img {
   height: 30px;
   display: block;
@@ -54,16 +56,19 @@ html, body {
   display: flex;
   align-items: stretch;
 }
+
 .site-header nav ul {
   display: flex;
   list-style: none;
   height: 100%;
 }
+
 .site-header nav ul li {
   border-left: 1px solid #FF4026;
   display: flex;
   align-items: center;
 }
+
 .site-header nav ul li a {
   display: block;
   padding: 12px 40px;
@@ -71,19 +76,27 @@ html, body {
   color: #FF4026;
   font-weight: 400;
 }
+
 .site-header nav ul li a.active {
   font-weight: 800;
 }
+
 .site-header nav ul li a:hover {
   font-weight: 800;
 }
 
 .sub-menu {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  width: 100%;
   display: flex;
   border-bottom: 1px solid #FF4026;
   background: #ffffff;
   padding: 10px 0;
+  z-index: 999;
 }
+
 .sub-menu a {
   text-decoration: none;
   color: #FF4026;
@@ -93,124 +106,50 @@ html, body {
   white-space: nowrap;
 }
 
-main.contacto {
-  flex: 1;
+.patrocinadores {
+  position: fixed;
+  top: 55px; /* header 44px + sub-menu 41px */
+  bottom: 44px; /* footer */
+  left: 0;
+  right: 0;
   display: flex;
-  flex-direction: row;
-  gap: 20px;
-  padding: 20px;
-  height: 90vh;
-  align-items: center;
-  justify-content: flex-start;
-  background: #fff;
-  overflow: hidden;
-}
-
-.texto-izquierda {
-  flex: 0 0 40%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  color: #FF4026;
-  font-weight: 400;
-  font-size: 0.83rem;
-  line-height: 1.6;
-  padding-right: 80px;
-}
-.texto-izquierda > div {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-.texto-izquierda a {
-  font-weight: 800;
-  color: #FF4026;
-  text-decoration: none;
-  padding-top: 10px;
-  flex-shrink: 0;
-}
-.texto-izquierda a:hover {
-  text-decoration: underline;
-}
-
-.slider-container {
-  flex: 0 0 60%;
-  height: 90vh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background: #fff;
+  align-items: center;
+  padding: 20px;
 }
-.slides {
-  display: flex;
-  transition: transform 0.4s ease;
+
+.patrocinadores-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  align-items: center;
   width: 100%;
-  height: 100%;
+  max-width: 1200px;
 }
-.slide {
-  min-width: 100%;
-  height: 100%;
-  user-select: none;
-}
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+.patrocinadores-grid img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
   display: block;
-}
-.prev-btn, .next-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #FF4026;
-  font-size: 2rem;
-  font-weight: 400;
-  padding: 0;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 2;
-  user-select: none;
-  opacity: 50%;
-}
-.prev-btn:hover, .next-btn:hover, .prev-btn:active, .next-btn:active {
-  opacity: 100%;
-}
-.prev-btn { left: 16px; }
-.next-btn { right: 16px; }
-body.menu-open .prev-btn, body.menu-open .next-btn {
-  display: none;
-}
-.dots-container {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  border: 1px solid #FF4026;
-  background: transparent;
-  cursor: pointer;
-}
-.dot.active {
-  background: #FF4026;
+  padding: 10px;
+  margin: 0 auto;
 }
 
 .site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   border-top: 1px solid #FF4026;
   border-bottom: 1px solid #FF4026;
   display: flex;
   background: #ffffff;
-  z-index: 1;
+  z-index: 1000;
+  height: 44px;
+  font-weight: 400;
 }
+
 .site-footer div {
   flex: 1;
   text-align: center;
@@ -218,14 +157,17 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
   border-right: 1px solid #FF4026;
   font-weight: 400;
 }
+
 .site-footer div:last-child {
   border-right: none;
 }
+
 .site-footer a {
   color: inherit;
   text-decoration: none;
   font-weight: 400;
 }
+
 .site-footer a:hover {
   font-weight: 800;
 }
@@ -241,30 +183,26 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
   align-items: center;
 }
 
-/* === Responsive 1024px ↓ === */
+/* Responsive */
+
 @media (max-width: 1024px) {
-  html, body {
-    scroll-behavior: smooth;
-    min-height: 100vh;
-    overflow-y: auto;
-  }
- .site-header nav ul {
+  .site-header nav ul {
     display: none;
     flex-direction: column;
     position: fixed;
-    top: 44px;         /* justo debajo del header */
-    bottom: 44px;      /* justo encima del footer */
+    top: 43px;
     left: 0;
     width: 100%;
-    background: #fff;
+    height: calc(100vh - 85px);
+    background: #ffffff;
     border-top: 1px solid #FF4026;
-    overflow-y: auto;  /* permite scroll interno */
-    z-index: 9999;     /* por encima del footer */
+    z-index: 20;
   }
 
   .site-header nav ul.show {
     display: flex;
   }
+
   .site-header nav ul li {
     flex: 1;
     border: none;
@@ -273,6 +211,7 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     align-items: center;
     justify-content: center;
   }
+
   .site-header nav ul li a {
     display: flex;
     align-items: center;
@@ -285,426 +224,153 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     font-weight: 400;
     font-size: 1.2rem;
   }
+
   .menu-toggle {
     display: flex;
   }
-  .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid #FF4026;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    background: #ffffff;
-    z-index: 1000;
-    height: 44px;
-  }
-  .site-footer {
-    font-size: 0.7rem;
-  }
-  .dots-container {
-    bottom: 15px;
-  }
 }
 
-/* === Mobile 900px ↓ === */
 @media (max-width: 900px) {
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    bottom: 44px;
-    left: 0;
-    width: 100%;
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 9999;
+  .patrocinadores-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  .site-header nav ul.show {
-    display: flex;
-  }
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .site-header nav ul li a {
-    width: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  .menu-toggle {
-    display: flex;
-  }
+
   .site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     font-size: 0.7rem;
   }
-
-  main.contacto {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    padding-bottom: 60px;
-    flex: 1 0 auto;
-    height: calc(100vh - 44px - 44px);
-    overflow-y: auto;
-    position: relative;
-  }
-
-  .slider-container {
-    margin-top: 80px;
-    order: 0;
-    position: relative;
-    width: 100vw;
-    height: 20vh !important;
-    max-height: none !important;
-    z-index: 10;
-  }
-  .texto-izquierda {
-    order: 1;
-    padding: 15px;
-    overflow: visible;
-    height: auto;
-  }
-  .texto-izquierda > div {
-    overflow: visible;
-    padding-bottom: 100px;
-  }
-  .sub-menu {
-    position: fixed;
-    top: 44px;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-  }
-  .dots-container {
-    bottom: 15px;
-  }
 }
 
-/* Logo ajustes */
 @media (max-width: 768px) {
-  .site-header .logo img { height: 22px; }
-}
-@media (max-width: 480px) {
-  .site-header .logo img { height: 20px; }
-}
-
-@supports (height: 100dvh) {
-  .site-header nav ul {
-    max-height: calc(100dvh - 87px);
+  .site-header .logo img {
+    height: 22px;
   }
 }
+
+@media (max-width: 600px) {
+  .patrocinadores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .logo img {
+    height: 20px;
+  }
+}
+
 </style>
 </head>
 
 <body>
-  
 
   <header class="site-header">
- <div class="logo">
+    <div class="logo">
       <a href="index.html">
         <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
       </a>
     </div>
     <nav>
-   
-        <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+              <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
 
       <ul>
         <li><a href="pabellon.html">El pabellón</a></li>
-        <li><a href="equipo.html">Equipo</a></li>
+                <li><a href="equipo.html">Equipo</a></li>
 
-        <li><a href="libro.html" class="active">Libro</a></li>
+        <li><a href="libro.html">Libro</a></li>
         <li><a href="archivo.html">Archivo</a></li>
         <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="patrocinadores.html">Patrocinadores</a></li>
+        <li><a href="patrocinadores.html" class="active">Patrocinadores</a></li>
                 <li><a href="prensa.html">Prensa</a></li>
-
 
       </ul>
     </nav>
   </header>
-  
 
   <div class="sub-menu">
-    <a href="#">Libro</a>
+    <a href="#">Gracias a nuestros patrocinadores</a>
   </div>
 
-  <main class="contacto">
-    <div class="texto-izquierda">
-      <div>
-        Este catálogo es una puesta en escena
-        más de Chinampa Veneta, el pabellón de México en la 19ª Exposición Internacional de Arquitectura – La Biennale di Venezia.<br><br>
-        Como colectivo de diseñadores, arquitectos, paisajistas y agricultores de la Ciudad de México, consideramos que el sistema de chinampas es un ejemplo de diseño que abarca todos los elementos del camino hacia la regeneración. Este proyecto busca construir un puente entre culturas y pasados, entre la milpa mexicana y la vite maritata italiana, entre Xochimilco y Venecia, dialogando con las ciudades y las últimas trincheras de cosecha, sus historias y sus fragilidades.<br><br>
-        Este catálogo es un pasaje en cinco actos que presenta, sin filtros, nuestro proceso creativo conformado por ires y venires, inspiraciones, viajes a Xochimilco, pláticas con expertos y la formación de chapines. Son nuestras manos en el lodo, apilando capa tras capa, que al igual que las de la chinampa, se nutren de los sedimentos que se han añejado con el paso de los años en los canales de Xochimilco.<br><br>
-      <a href="" target="_blank" rel="noopener noreferrer">
-        Cómpralo en Arquine
-      </a>
-      </div>
-      
-    </div>
-
-    <div class="slider-container">
-      <button class="prev-btn" aria-label="Anterior">⭠</button>
-      <button class="next-btn" aria-label="Siguiente">⭢</button>
-
-      <div class="slides">
-        <!-- Clon de la última slide al principio -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697076/MMB_Web_Chive_20_u4klcx.jpg" alt="Foto 6 de Chinampa Veneta" />
-        </div>
-
-        <!-- Slides reales -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697020/MMB_Web_Chive_01_lspjir.jpg" alt="Foto 1 de Chinampa Veneta" />
-        </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697134/MMB_Web_Chive_04_mopv0w.jpg" alt="Foto 2 de Chinampa Veneta" />
-        </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697156/MMB_Web_Chive_08_b32eva.jpg" alt="Foto 3 de Chinampa Veneta" />
-        </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697212/MMB_Web_Chive_11_y4zm7d.jpg" alt="Foto 4 de Chinampa Veneta" />
-        </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697226/MMB_Web_Chive_15_gxkfae.jpg" alt="Foto 5 de Chinampa Veneta" />
-        </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697076/MMB_Web_Chive_20_u4klcx.jpg" alt="Foto 6 de Chinampa Veneta" />
-        </div>
-
-        <!-- Clon de la primera slide al final -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697020/MMB_Web_Chive_01_lspjir.jpg" alt="Foto 1 de Chinampa Veneta" />
-        </div>
-      </div>
-
-      <div class="dots-container"></div>
+  <main class="patrocinadores">
+  <div class="patrocinadores-grid">
+  <a href="https://www.aeromexico.com/es-mx"><img src="Logo para Digital AZUL SINTAGLINE AM_RGB (3).svg" alt="Logo 1"></a> 
+  <a href="https://ago-projects.com/artists/"><img src="ago-logos-agoprojectsfulllogo-black-cmyk.svg" alt="Logo 2"></a> 
+  <a href="https://cm2.mx"> <img src="logo_cm2.svg" alt="Logo 3"></a>  
+  <a href="https://www.landrover.com/defender/defender-trophy/index.html?fbclid=PAZXh0bgNhZW0CMTEAAacZmQKQAzmWNY8hRhFUZvjD-R-_Jh2ZS6ftbGCIfExuWQtevlkxpU40HJKKsg_aem_u1Qi8wiL5jaHL7WI65w8sw"><img src="DEFENDER_White.svg" alt="Logo 4"></a>
+  <a href="https://www.designhotels.com/hotels/?gad_source=1&gad_campaignid=19812220698&gbraid=0AAAAAD5m-AQACGOIzejLTksEeZYVsOhdT&gclid=CjwKCAjw9uPCBhATEiwABHN9K3TB9VIBrsYLVCSM75YKBZ57D0G5Z9TY7eoHDjeWHViH8Er9ZAyAJxoCrVAQAvD_BwE"><img src="Design_Hotels.svg" alt="Logo 5"></a>
+  <a href="https://www.grupohabita.mx">  <img src="GrupoHabita.svg" alt="Logo 6"></a> 
+  <a href="https://www.signl.mx/?fbclid=PAZXh0bgNhZW0CMTEAAaec6fNcYKPDgxq7N9eHxT5mpZA_dK2Nic1O15IiSc7FZ8xMn62Bn7WxRVt-LQ_aem_xOEF9_754byEtQQ8_yyCtw">  <img src="Signl Logo.svg" alt="Logo 7"></a>
     </div>
   </main>
 
- 
+
   <footer class="site-footer">
     <div>Pabellón de México</div>
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
+
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // ——— Slider ———
-  const slidesContainer = document.querySelector('.slides');
-  const slides          = document.querySelectorAll('.slide');
-  const prevBtn         = document.querySelector('.prev-btn');
-  const nextBtn         = document.querySelector('.next-btn');
-  const dotsContainer   = document.querySelector('.dots-container');
-  const sliderContainer = document.querySelector('.slider-container');
+  document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slideshow automático ———
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    }
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
+    setInterval(nextSlide, 3000);
 
-  let currentIndex      = 1;
-  let isAnimating       = false;
-  let autoSlideInterval = null;
-  const autoSlideDelay  = 4000;
+    // ——— Menú móvil dinámico sin cortar ítems ———
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl      = document.querySelector('.site-header nav ul');
+    const header     = document.querySelector('.site-header');
+    const subMenu    = document.querySelector('.sub-menu');
+    const footer     = document.querySelector('.site-footer');
 
-  function updateSlidePosition(withTransition = true) {
-    const slideWidth = slides[0].clientWidth;
-    slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
-    slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
-  }
+    function getViewportHeight() {
+      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    }
 
-  function createDots() {
-    for (let i = 0; i < slides.length - 2; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        if (isAnimating) return;
-        currentIndex = i + 1;
-        updateSlidePosition();
-        updateDots();
-        resetAutoSlide();
+    function ajustarAlturaMenu() {
+      const vh        = getViewportHeight();
+      const headerH   = header    ? header.offsetHeight   : 0;
+      const subMenuH  = subMenu   ? subMenu.offsetHeight  : 0;
+      const footerH   = footer    ? footer.offsetHeight   : 0;
+      // restamos header, sub-menu y footer para que el último ítem toque el footer
+      const availableH = vh - headerH - subMenuH - footerH;
+
+      navUl.style.maxHeight = availableH + 'px';
+      navUl.style.overflowY = 'auto';
+    }
+
+    function toggleMenu() {
+      navUl.classList.toggle('show');
+      document.body.classList.toggle('menu-open');
+      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
+
+      if (navUl.classList.contains('show')) {
+        ajustarAlturaMenu();
+      } else {
+        navUl.style.maxHeight = '';
+        navUl.style.overflowY = '';
+      }
+    }
+
+    if (menuToggle && navUl) {
+      menuToggle.addEventListener('click', toggleMenu);
+    }
+
+    ['resize', 'scroll', 'orientationchange'].forEach(evt => {
+      window.addEventListener(evt, () => {
+        if (navUl.classList.contains('show')) ajustarAlturaMenu();
       });
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function updateDots() {
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
-  }
-
-  function nextSlide() {
-    if (isAnimating) return;
-    isAnimating = true;
-    currentIndex++;
-    updateSlidePosition();
-    setTimeout(() => {
-      if (currentIndex >= slides.length - 1) {
-        currentIndex = 1;
-        updateSlidePosition(false);
-      }
-      updateDots();
-      isAnimating = false;
-    }, 400);
-  }
-
-  function prevSlide() {
-    if (isAnimating) return;
-    isAnimating = true;
-    currentIndex--;
-    updateSlidePosition();
-    setTimeout(() => {
-      if (currentIndex <= 0) {
-        currentIndex = slides.length - 2;
-        updateSlidePosition(false);
-      }
-      updateDots();
-      isAnimating = false;
-    }, 400);
-  }
-
-  prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-  nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-
-  function startAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
-  }
-
-  function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
-  }
-
-  [prevBtn, nextBtn, sliderContainer].forEach(el => {
-    el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    el.addEventListener('mouseleave', () => startAutoSlide());
+    });
   });
-
-  window.addEventListener('resize', () => updateSlidePosition(false));
-
-  createDots();
-  updateSlidePosition(false);
-  startAutoSlide();
-
-  // ——— Menú móvil con altura dinámica ———
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navUl      = document.querySelector('.site-header nav ul');
-  const header     = document.querySelector('.site-header');
-  const subMenu    = document.querySelector('.sub-menu');
-  const footer     = document.querySelector('.site-footer');
-
-  function getViewportHeight() {
-    return window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  }
-
-  function ajustarAlturaItems() {
-    const vh          = getViewportHeight();
-    const headerH     = header  ? header.offsetHeight  : 0;
-    const subMenuH    = subMenu ? subMenu.offsetHeight : 0;
-    const footerStyle = window.getComputedStyle(footer);
-    const footerH     = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
-    const availableH  = vh - headerH - subMenuH - footerH;
-    const items       = Array.from(navUl.querySelectorAll('li'));
-    const itemH       = Math.floor(availableH / items.length);
-
-    items.forEach(li => {
-      li.style.height     = itemH + 'px';
-      li.style.lineHeight = itemH + 'px';
-    });
-    navUl.style.maxHeight = availableH + 'px';
-    navUl.style.overflowY = 'auto';
-  }
-
-  function resetAlturaItems() {
-    navUl.querySelectorAll('li').forEach(li => {
-      li.style.height     = '';
-      li.style.lineHeight = '';
-    });
-    navUl.style.maxHeight = '';
-    navUl.style.overflowY = '';
-  }
-
-  function toggleMenu() {
-    navUl.classList.toggle('show');
-    document.body.classList.toggle('menu-open');
-    menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-    if (navUl.classList.contains('show')) ajustarAlturaItems();
-    else resetAlturaItems();
-  }
-
-  menuToggle.addEventListener('click', toggleMenu);
-  ['resize','scroll','orientationchange'].forEach(evt =>
-    window.addEventListener(evt, () => navUl.classList.contains('show') && ajustarAlturaItems())
-  );
-
-  // ——— Ajustar padding-bottom para footer fijo ———
-  function ajustarPaddingFooter() {
-    const mainC = document.querySelector('main.contacto');
-    if (!footer || !mainC) return;
-    mainC.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
-  }
-  window.addEventListener('resize', ajustarPaddingFooter);
-  window.addEventListener('orientationchange', ajustarPaddingFooter);
-  ajustarPaddingFooter();
-
-  // ——— **Layout dinámico SOLO en móvil** ———
-  function ajustarLayoutContacto() {
-    const isMobile = window.innerWidth <= 900;
-    const mainC    = document.querySelector('main.contacto');
-    if (!mainC) return;
-
-    if (isMobile) {
-      const headerH   = header  ? header.offsetHeight  : 0;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-      const footerH   = footer  ? footer.offsetHeight  : 0;
-      const availH    = window.innerHeight - headerH - subMenuH - footerH;
-
-      // Empujar contenido bajo header+submenú
-      mainC.style.paddingTop = (headerH + subMenuH) + 'px';
-      // Altura y scroll interno
-      mainC.style.height     = availH + 'px';
-      mainC.style.overflowY  = 'auto';
-      mainC.style.boxSizing  = 'border-box';
-
-      // Quitar margin-top en slider
-      if (sliderContainer) sliderContainer.style.marginTop = '0';
-    } else {
-      // Restaurar desktop
-      mainC.style.paddingTop = '';
-      mainC.style.height     = '';
-      mainC.style.overflowY  = '';
-      mainC.style.boxSizing  = '';
-    }
-  }
-
-  ajustarLayoutContacto();
-  window.addEventListener('resize', ajustarLayoutContacto);
-  window.addEventListener('orientationchange', ajustarLayoutContacto);
-});
 </script>
-
-
-
-
-
 
 
 </body>
 </html>
-
