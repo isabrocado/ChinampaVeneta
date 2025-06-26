@@ -248,18 +248,20 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     min-height: 100vh;
     overflow-y: auto;
   }
-  .site-header nav ul {
+ .site-header nav ul {
     display: none;
     flex-direction: column;
     position: fixed;
-    top: 43px;
+    top: 44px;         /* justo debajo del header */
+    bottom: 44px;      /* justo encima del footer */
     left: 0;
     width: 100%;
-    height: calc(100vh - 85px);
-    background: #ffffff;
+    background: #fff;
     border-top: 1px solid #FF4026;
-    z-index: 20;
+    overflow-y: auto;  /* permite scroll interno */
+    z-index: 9999;     /* por encima del footer */
   }
+
   .site-header nav ul.show {
     display: flex;
   }
