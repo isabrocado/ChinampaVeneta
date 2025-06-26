@@ -640,29 +640,32 @@ function ajustarAlturaSlider() {
   const header = document.querySelector('.site-header');
   const footer = document.querySelector('.site-footer');
 
-  if (!slider || !header || !footer) return;
-
-  // Solo en móvil (o según quieras, aquí 1024px)
-  if (window.innerWidth <= 1024) {
-    // Usamos visualViewport para altura real visible en iOS Safari
+  if (slider && header && footer) {
+    // Altura visible del viewport, preferimos visualViewport para Safari iOS
     const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
+    // Altura del header (normalmente fija)
     const headerHeight = header.getBoundingClientRect().height;
+
+    // Altura del footer (normalmente fija)
     const footerHeight = footer.getBoundingClientRect().height;
 
-    // Altura que queda para el slider
-    const alturaDisponible = viewportHeight - headerHeight - footerHeight;
+    // Calculamos la altura disponible entre header y footer
+    // viewportHeight - headerHeight - footerHeight es el espacio que debe ocupar el slider
+    const alturaDisponible = viewportHeight - headerHeight ;
 
-    // Aplicamos altura en px
-    slider.style.height = `${alturaDisponible}px`;
-  } else {
-    // En desktop, reset para que el CSS controle la altura normalmente
-    slider.style.height = '';
+    // Aplicamos la altura exacta (sin sumar/restar px, para evitar gaps)
+    slider.style.height = alturaDisponible + 'px';
   }
 }
+
+
+// Llama la función al cargar y en eventos que pueden cambiar la altura
+window.addEventListener('load', ajustarAlturaSlider);
 window.addEventListener('resize', ajustarAlturaSlider);
 window.addEventListener('orientationchange', ajustarAlturaSlider);
-window.addEventListener('load', ajustarAlturaSlider);
+window.addEventListener('scroll', ajustarAlturaSlider);
+
 
 
     function ajustarAlturaItems() {
