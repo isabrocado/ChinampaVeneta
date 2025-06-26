@@ -503,9 +503,8 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
-<script>
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // ——— Slider ———
   const slidesContainer = document.querySelector('.slides');
   const slides          = document.querySelectorAll('.slide');
   const prevBtn         = document.querySelector('.prev-btn');
@@ -599,7 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSlidePosition(false);
   startAutoSlide();
 
-  // ——— Menú móvil con altura dinámica ———
+  // Menú móvil
   const menuToggle = document.querySelector('.menu-toggle');
   const navUl      = document.querySelector('.site-header nav ul');
   const header     = document.querySelector('.site-header');
@@ -611,17 +610,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function ajustarAlturaItems() {
-    const vh          = getViewportHeight();
-    const headerH     = header  ? header.offsetHeight  : 0;
-    const subMenuH    = subMenu ? subMenu.offsetHeight : 0;
+    const vh       = getViewportHeight();
+    const headerH  = header ? header.offsetHeight : 0;
+    const subMenuH = subMenu ? subMenu.offsetHeight : 0;
     const footerStyle = window.getComputedStyle(footer);
-    const footerH     = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
-    const availableH  = vh - headerH - subMenuH - footerH;
-    const items       = Array.from(navUl.querySelectorAll('li'));
-    const itemH       = Math.floor(availableH / items.length);
+    const footerH  = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
+    const availableH = vh - headerH - subMenuH - footerH;
+    const items = Array.from(navUl.querySelectorAll('li'));
+    const itemCount = items.length;
+    if (itemCount === 0) return;
+    const itemH = Math.floor(availableH / itemCount);
 
     items.forEach(li => {
-      li.style.height     = itemH + 'px';
+      li.style.height = itemH + 'px';
       li.style.lineHeight = itemH + 'px';
     });
     navUl.style.maxHeight = availableH + 'px';
@@ -630,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetAlturaItems() {
     navUl.querySelectorAll('li').forEach(li => {
-      li.style.height     = '';
+      li.style.height = '';
       li.style.lineHeight = '';
     });
     navUl.style.maxHeight = '';
@@ -650,56 +651,53 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener(evt, () => navUl.classList.contains('show') && ajustarAlturaItems())
   );
 
-  // ——— Ajustar padding-bottom para footer fijo ———
+  // Padding-bottom dinámico
   function ajustarPaddingFooter() {
     const mainC = document.querySelector('main.contacto');
     if (!footer || !mainC) return;
-    mainC.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
+    if (window.innerWidth <= 900)
+      mainC.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
+    else
+      mainC.style.paddingBottom = '';
   }
   window.addEventListener('resize', ajustarPaddingFooter);
   window.addEventListener('orientationchange', ajustarPaddingFooter);
   ajustarPaddingFooter();
 
-  // ——— **Layout dinámico SOLO en móvil** ———
+  // Layout móvil dinámico
   function ajustarLayoutContacto() {
     const isMobile = window.innerWidth <= 900;
     const mainC    = document.querySelector('main.contacto');
     if (!mainC) return;
 
     if (isMobile) {
-      const headerH   = header  ? header.offsetHeight  : 0;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-      const footerH   = footer  ? footer.offsetHeight  : 0;
-      const availH    = window.innerHeight - headerH - subMenuH - footerH;
+      const headerH  = header ? header.offsetHeight : 0;
+      const subMenuH = subMenu ? subMenu.offsetHeight : 0;
+      const footerH  = footer ? footer.offsetHeight : 0;
+      const availH   = window.innerHeight - headerH - subMenuH - footerH;
 
-      // Empujar contenido bajo header+submenú
       mainC.style.paddingTop = (headerH + subMenuH) + 'px';
-      // Altura y scroll interno
       mainC.style.height     = availH + 'px';
       mainC.style.overflowY  = 'auto';
       mainC.style.boxSizing  = 'border-box';
-
-      // Quitar margin-top en slider
       if (sliderContainer) sliderContainer.style.marginTop = '0';
     } else {
-      // Restaurar desktop
       mainC.style.paddingTop = '';
       mainC.style.height     = '';
       mainC.style.overflowY  = '';
       mainC.style.boxSizing  = '';
     }
   }
-
   ajustarLayoutContacto();
   window.addEventListener('resize', ajustarLayoutContacto);
   window.addEventListener('orientationchange', ajustarLayoutContacto);
 });
+
+
+
+
+
 </script>
-
-
-
-
-
 
 
 </body>
