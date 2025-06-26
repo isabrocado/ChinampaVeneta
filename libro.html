@@ -18,7 +18,7 @@
 
 html, body {
     scroll-behavior: smooth;
-  height: 100vh;
+  min-height: 100%;
   overflow-y: auto;
   font-family: 'Hanken Grotesk', sans-serif;
   background: #ffffff;
@@ -357,14 +357,14 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
   }
   /* 👇 Orden móvil slider arriba */
   main.contacto {
-    gap: 0px;
+    gap: 0;
     display: flex;
     flex-direction: column;
     padding: 0;
-    overflow: auto;
-    height: auto; /* CAMBIO: quitar height fijo */
     flex: 1 0 auto;
-    padding-bottom: 60px; /* para que no tape footer */
+    padding-bottom: 60px;
+    overflow: visible;
+    height: auto;
     
   }
   .slider-container {
