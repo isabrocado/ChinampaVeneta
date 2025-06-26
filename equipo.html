@@ -582,10 +582,10 @@ body.section-active .equipo {
         texto: `
           <div>
             <p>María Marín de Buen<br><br>
-            Estudio María Marín de Buen se especializa en el diseño de libros, impresos, sitios web, señalización y gráfica expositiva para el medio cultural y arquitectónico. <br><br>
-            María es diseñadora gráfica por la Universidad Iberoamericana de la Ciudad de México y maestra en diseño gráfico por The Basel School of Design y The University of Illinois de Chicago.  <br><br>
-            Inició su actividad profesional en el Museo del Palacio de Bellas Artes de la Ciudad de México. Amplió su práctica internacionalmente trabajando en el despacho CoDe Communication and Design en Zurich y Nueva York. <br><br>
-            Entre sus logros más destacados se encuentran: la beca Jóvenes Creadores del FONCA (2017 y 2019); la nominación de su tesis de maestría al premio Designpreis Halle en Alemania (2017); y un recorrido por su trabajo editorial en la exposición Diseño en femenino en el Museo Franz Mayer (Ciudad en México, 2023) y en la Casa de México en España (Madrid, 2024).</p>
+            Estudio María Marín de Buen se especializa en el diseño de libros, impresos, sitios web, señalización y gráfica expositiva para el medio cultural y arquitectónico.<br><br>
+            María es diseñadora gráfica por la Universidad Iberoamericana de la Ciudad de México y maestra en diseño gráfico por The Basel School of Design y The University of Illinois de Chicago.<br><br>
+            Inició su actividad profesional en el Museo del Palacio de Bellas Artes de la Ciudad de México. Amplió su práctica internacionalmente trabajando en el despacho CoDe Communication and Design en Zurich y Nueva York.<br><br>
+            Entre sus logros más destacados se encuentran: la beca Jóvenes Creadores del FONCA (2017 y 2019); la nominación de su tesis de maestría al premio Designpreis Halle en Alemania (2017); y un recorrido por su trabajo editorial en la exposición Diseño en femenino en el Museo Franz Mayer (Ciudad de México, 2023) y en la Casa de México en España (Madrid, 2024).</p>
           </div>
           <div class="datos-contacto">
             <p><strong>Instagram</strong><br>
@@ -656,14 +656,14 @@ body.section-active .equipo {
         `
       },
       pedroJuana: {
-        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291486/_R9A2532b_qqlrj8.jpg',
+        img: 'https://res.cloudinary.com/dgsxfzjja/image/upload/v1750291486/_R9A2532b_qqlr8.jpg',
         alt: 'Pedro&Juana',
         texto: `
           <div>
             <p>Ana Paula Ruiz Galindo<br>
             Mecky Reuss<br><br>
             Pedro&Juana no se trata de Juana&Pedro. Se trata de colaboración, de trabajar en varias cosas con diferentes personas. Se trata de escapar de las atribuciones y de combinar profesiones. Las situaciones que surgen de estas aproximaciones pueden darse en forma de una plaza pública interior doméstica, una mesa que se convierte en banca y vuelve a ser mesa, mejores conversaciones al cocinar un lechón y enseñarle a hablar a rocas volcánicas.<br><br>
-            Pedro&Juana es un estudio de la Ciudad de México que trabaja en una variedad de proyectos a través de diversas profesiones creativas, con obra expuesta en el MoMa PS1 de Nueva York (2019), el MCA de Chicago (2016), el Hammer Museum de Los Ángeles (2016), el Museo del Chopo en la Ciudad de México (2024) y la Bienal de Arquitectura de Chicago (2015). Han realizado y continúan desarrollando proyectos arquitectónicos en México, Italia y Estados Unidos, además de haber impartido clases y conferencias en diversas universidades de Estados Unidos y México.</p>
+            Pedro&Juana es un estudio de la Ciudad de México que trabaja en una variedad de proyectos a través de diversas profesiones creativas, con obra expuesta en el MoMA PS1 de Nueva York (2019), el MCA de Chicago (2016), el Hammer Museum de Los Ángeles (2016), el Museo del Chopo en la Ciudad de México (2024) y la Bienal de Arquitectura de Chicago (2015). Han realizado y continúan desarrollando proyectos arquitectónicos en México, Italia y Estados Unidos, además de haber impartido clases y conferencias en diversas universidades de Estados Unidos y México.</p>
           </div>
           <div class="datos-contacto">
             <p><strong>Instagram</strong><br>
@@ -675,13 +675,14 @@ body.section-active .equipo {
       }
     };
 
-    // ——— Función de actualización de contenido ———
+    // ——— Función original de actualización de contenido ———
     function actualizarContenido(opcion) {
       const datos = contenidoPorOpcion[opcion];
       if (!datos) return;
+
       const contenedor = document.getElementById('contenedor-equipo');
       contenedor.classList.add('split');
-    document.body.classList.add('section-active');
+      document.body.classList.add('section-active');
 
       const imgElem = document.getElementById('equipo-img');
       imgElem.src = datos.img;
@@ -697,8 +698,16 @@ body.section-active .equipo {
       if (topCenterImgs.includes(datos.img)) {
         imgElem.style.objectPosition = 'top center';
       }
+
       document.getElementById('equipo-texto').innerHTML = datos.texto;
     }
+
+    // ——— Envolvemos para que reajuste el padding tras cambiar sección ———
+    const originalActualizar = actualizarContenido;
+    actualizarContenido = function(opcion) {
+      originalActualizar(opcion);
+      ajustarEspacioFooter();
+    };
 
     // ——— Eventos de sub-menú ———
     document.querySelectorAll('.sub-menu a').forEach(link => {
@@ -707,8 +716,6 @@ body.section-active .equipo {
         document.querySelectorAll('.sub-menu a').forEach(a => a.classList.remove('active'));
         link.classList.add('active');
         actualizarContenido(link.dataset.opcion);
-        document.body.classList.add('section-active');
-
       });
     });
 
@@ -742,10 +749,9 @@ body.section-active .equipo {
       const vh       = getViewportHeight();
       const headerH  = header ? header.clientHeight : 0;
       const footerH  = footer ? footer.clientHeight : 0;
-      // Restamos header + footer, sumamos 1px para compensar bordes
       const availableH = vh - headerH - footerH + 1;
-      const items = Array.from(navUl.querySelectorAll('li'));
-      const itemH  = Math.floor(availableH / items.length);
+      const items   = Array.from(navUl.querySelectorAll('li'));
+      const itemH   = Math.floor(availableH / items.length);
       items.forEach(li => {
         li.style.height     = itemH + 'px';
         li.style.lineHeight = itemH + 'px';
@@ -777,20 +783,28 @@ body.section-active .equipo {
       });
     }
   });
-   function ajustarEspacioFooter() {
+
+  // ——— Función para reservar espacio bajo el footer en body y contenedor ———
+  function ajustarEspacioFooter() {
     const footer = document.querySelector('.site-footer');
     if (!footer) return;
-    // obtenemos la altura real del footer
-    const altura = footer.getBoundingClientRect().height;
-    // aplicamos ese espacio como padding-bottom al body
-    document.body.style.paddingBottom = `${altura}px`;
+
+    const alturaFooter = footer.getBoundingClientRect().height + 'px';
+    // 1) padding-bottom en todo el body
+    document.body.style.paddingBottom = alturaFooter;
+    // 2) padding-bottom en el contenedor de equipo
+    const contenedor = document.getElementById('contenedor-equipo');
+    if (contenedor) {
+      contenedor.style.paddingBottom = alturaFooter;
+    }
   }
 
-  // Ejecutar al cargar la página y al redimensionar
+  // ——— Inicializa y reajusta en eventos ———
   window.addEventListener('DOMContentLoaded', ajustarEspacioFooter);
-  window.addEventListener('load', ajustarEspacioFooter);
-  window.addEventListener('resize', ajustarEspacioFooter);
+  window.addEventListener('load',           ajustarEspacioFooter);
+  window.addEventListener('resize',         ajustarEspacioFooter);
 </script>
+
 
 
 
