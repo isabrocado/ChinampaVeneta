@@ -8,17 +8,15 @@
 
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
-<style>
 
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-    scroll-behavior: smooth;
-  height: 100vh;
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  html, body {
+  min-height: 100vh;
   overflow-y: auto;
   font-family: 'Hanken Grotesk', sans-serif;
   background: #ffffff;
@@ -28,269 +26,8 @@ html, body {
   font-size: 0.9rem;
 }
 
-.site-header {
-  border-top: 1px solid #FF4026;
-  border-bottom: 1px solid #FF4026;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  background: #ffffff;
-  z-index: 1;
-  height: 44px;
-}
-
-.site-header .logo {
-  font-weight: 800;
-  white-space: nowrap;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-}
-.site-header .logo img {
-  height: 30px;
-  display: block;
-}
-
-.site-header nav {
-  display: flex;
-  align-items: stretch;
-}
-.site-header nav ul {
-  display: flex;
-  list-style: none;
-  height: 100%;
-}
-.site-header nav ul li {
-  border-left: 1px solid #FF4026;
-  display: flex;
-  align-items: center;
-}
-.site-header nav ul li a {
-  display: block;
-  padding: 12px 40px;
-  text-decoration: none;
-  color: #FF4026;
-  font-weight: 400;
-}
-.site-header nav ul li a.active {
-  font-weight: 800;
-}
-.site-header nav ul li a:hover {
-  font-weight: 800;
-}
-
-.sub-menu {
-  display: flex;
-  border-bottom: 1px solid #FF4026;
-  background: #ffffff;
-  padding: 10px 0;
-}
-.sub-menu a {
-  text-decoration: none;
-  color: #FF4026;
-  font-weight: 400;
-  font-size: 0.9rem;
-  padding: 0 40px;
-  white-space: nowrap;
-}
-
-main.contacto {
-  
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  padding: 20px;
-  height: 90vh;
-  align-items: center;
-  justify-content: flex-start;
-  background: #fff;
-  overflow: hidden;
-}
-
-.texto-izquierda {
-  flex: 0 0 40%;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  color: #FF4026;
-  font-weight: 400;
-  font-size: 0.83rem;
-  line-height: 1.6;
-  padding-right: 80px;
-}
-.texto-izquierda > div {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  padding-right: 6px;
-}
-.texto-izquierda a {
-  font-weight: 800;
-  color: #FF4026;
-  text-decoration: none;
-  padding-top: 10px;
-  flex-shrink: 0;
-}
-.texto-izquierda a:hover {
-  text-decoration: underline;
-}
-
-.slider-container {
-  flex: 0 0 60%;
-  height: 90vh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-}
-.slides {
-  display: flex;
-  transition: transform 0.4s ease;
-  width: 100%;
-  height: 100%;
-}
-.slide {
-  min-width: 100%;
-  height: 100%;
-  user-select: none;
-}
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.prev-btn, .next-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #FF4026;
-  font-size: 2rem;
-  font-weight: 400;
-  padding: 0;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 2;
-  user-select: none;
-  opacity: 50%;
-}
-.prev-btn:hover, .next-btn:hover, .prev-btn:active, .next-btn:active {
-  opacity: 100%;
-}
-.prev-btn { left: 16px; }
-.next-btn { right: 16px; }
-body.menu-open .prev-btn, body.menu-open .next-btn {
-  display: none;
-}
-.dots-container {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  border: 1px solid #FF4026;
-  background: transparent;
-  cursor: pointer;
-}
-.dot.active {
-  background: #FF4026;
-}
-
-.site-footer {
-  border-top: 1px solid #FF4026;
-  border-bottom: 1px solid #FF4026;
-  display: flex;
-  background: #ffffff;
-  z-index: 1;
-}
-.site-footer div {
-  flex: 1;
-  text-align: center;
-  padding: 12px 0;
-  border-right: 1px solid #FF4026;
-  font-weight: 400;
-}
-.site-footer div:last-child {
-  border-right: none;
-}
-.site-footer a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 400;
-}
-.site-footer a:hover {
-  font-weight: 800;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  padding: 0 16px;
-  cursor: pointer;
-  color: #FF4026;
-  align-items: center;
-}
-
-/* === Responsive 1024px ↓ === */
-@media (max-width: 1024px) {
-  html, body {
-  scroll-behavior: smooth;
-  min-height: 100vh;
-  overflow-y: auto;
-  
-}
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 85px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 20;
-  }
-  .site-header nav ul.show {
-    display: flex;
-  }
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
-    border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .site-header nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-  }
-  .menu-toggle {
-    display: flex;
-  }
   .site-header {
-    position: fixed;
+    position: fixed; /* ← fijamos todo el header */
     top: 0;
     left: 0;
     width: 100%;
@@ -303,406 +40,650 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     z-index: 1000;
     height: 44px;
   }
-  .site-footer {
-    font-size: 0.7rem;
-  }
-  .dots-container {
-    bottom: 15px;
-  }
-}
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+    .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      display: flex;               /* convertir en flex */
+  justify-content: center;     /* centrar horizontalmente */
+  align-items: center;         /* centrar verticalmente */
+  text-align: center;   
 
-/* === Mobile 900px ↓ === */
-@media (max-width: 900px) {
-  .site-header nav ul {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    top: 43px;
+    }
+    .site-header nav ul li a.active {
+      font-weight: 800;
+    }
+    .site-header nav ul li a:hover {
+      font-weight: 800;
+    }
+    .sub-menu {
+    position: fixed; /* ← fijamos el submenú */
+    top: 44px; /* debajo del header */
     left: 0;
     width: 100%;
-    height: calc(100vh - 87px);
-    background: #ffffff;
-    border-top: 1px solid #FF4026;
-    z-index: 9999;
-  }
-  .site-header nav ul.show {
     display: flex;
-  }
-  .site-header nav ul li {
-    flex: 1;
-    border: none;
     border-bottom: 1px solid #FF4026;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .site-header nav ul li a {
-    width: 100%;
-    padding: 25px;
-    text-decoration: none;
-    color: #FF4026;
-    font-weight: 400;
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  .menu-toggle {
-    display: flex;
-  }
-  .site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    font-size: 0.7rem;
-  }
-  /* 👇 Orden móvil slider arriba */
-  main.contacto {
-    gap: 0px;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    overflow: auto;
-    height: auto; /* CAMBIO: quitar height fijo */
-    flex: 1 0 auto;
-    padding-bottom: 60px; /* para que no tape footer */
-    
-  }
-  .slider-container {
-        margin-top: 80px;
-    order: 0;
-    position: relative;
-    width: 100vw;
-     height: 20vh !important;
-    max-height: none !important;
-    z-index: 10;
-  }
-  .texto-izquierda {
-    order: 1;
-    padding: 15px;
-    overflow: visible;
-    height: auto;
-  }
-  .texto-izquierda > div {
-    overflow: visible;
-  }
-  .sub-menu {
-    position: fixed; /* CAMBIO: fijo en móvil */
-    top: 44px;
-    left: 0;
-    width: 100%;
+    background: #ffffff;
+    padding: 10px 0;
     z-index: 999;
   }
-  .dots-container {
-    bottom: 15px;
-  }
+    .sub-menu a {
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+ 
+  
+    .sub-menu p {
+      margin-left: auto;
+      color: #FF4026;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+main.contacto {
+  flex: 1;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: visible;
+  position: relative;
 }
 
-/* Logo ajustes */
+.slider-simple {
+   height: calc(100vh - 44px);
+  overflow: hidden;
+  position: relative;
+}
+
+.slides-simple {
+  display: flex;
+  transition: transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-simple {
+  min-width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.slide-simple img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+    .prev-btn-simple,
+    .next-btn-simple {
+      position: absolute;
+      top: 55%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #FF4026;
+      font-size: 2rem;
+      font-weight: 400;
+      padding: 0;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1;
+      user-select: none;
+      opacity: 50%;
+    }
+    .prev-btn-simple:hover,
+    .next-btn-simple:hover,
+    .prev-btn-simple:active,
+    .next-btn-simple:active {
+      opacity: 100%;
+    }
+    .prev-btn-simple {
+      left: 16px;
+    }
+    .next-btn-simple {
+      right: 16px;
+    }
+    body.menu-open .prev-btn-simple,
+    body.menu-open .next-btn-simple {
+      display: none;
+    }
+    .dots-container-simple {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+    .dot-simple {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: 1px solid #FF4026;
+      background: transparent;
+      cursor: pointer;
+    }
+    .dot-simple.active {
+      background: #FF4026;
+    }
+  
+   .site-footer {
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  height: 44px;
+  font-weight: 400;
+  
+}
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+      font-weight: 400;
+    }
+    .site-footer div:last-child {
+      border-right: none;
+    }
+    .site-footer a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .site-footer a:hover {
+      font-weight: 800;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+
+      .site-header nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 85px);
+        background: #ffffff;
+        border-top: 1px solid #FF4026;
+        z-index: 20;
+      }
+      .site-header nav ul.show {
+        display: flex;
+      }
+      .site-header nav ul li {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #FF4026;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .site-header nav ul li a {
+        width: 100%;
+        height: 100%;
+        padding: 25px;
+        font-size: 1.2rem;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .dots-container-simple {
+        z-index: 0;
+      }
+      
+    
+    .contenedor-texto-creditos {
+        display: grid
+;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        font-size: 0.83rem;
+        line-height: 1.3;
+        margin: 4dvb 10px;
+        padding: 0 10px;
+        font-weight: 400;
+    }
+}
+    @media (max-width: 900px) {
+      .site-footer {
+        font-size: 0.7rem;
+      }
+      
+    }
+    @media (max-width: 768px) {
+      .site-header .logo img {
+        height: 22px;
+      }
+    }
+    @media (max-width: 480px) {
+      .site-header .logo img {
+        height: 20px;
+      }
+      .sub-menu a {
+        padding: 0 15px;
+      }
+      .sub-menu p {
+        padding: 0 10px;
+      }
+ 
+    }
+
+
+
+.contenedor-texto-creditos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+   font-size: 0.83rem;
+  line-height: 1.3;
+  margin: 4dvb 10px;
+    padding: 0 10px;
+      font-weight: 400;
+
+
+}
+
+
+.texto-izquierda {
+  flex: 2;
+  min-width: 300px;
+  color: #FF4026;
+    margin-bottom: 11vh;
+
+ 
+}
+
+@media (max-width: 1024px) {
+  .contenedor-texto-creditos {
+    grid-template-columns: 1fr;
+  }
+  .texto-izquierda {
+    flex: 2;
+    min-width: 300px;
+    color: #FF4026;
+    margin-bottom: 1vh;
+}
+}
+
 @media (max-width: 768px) {
-  .site-header .logo img { height: 22px; }
-}
-@media (max-width: 480px) {
-  .site-header .logo img { height: 20px; }
+
+
+.creditos-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  justify-items: start;
+  align-items: start;
 }
 
-@supports (height: 100dvh) {
-  .site-header nav ul {
-    max-height: calc(100dvh - 87px);
-  }
+.creditos-grid p {
+  margin-bottom: 12px;
+  line-height: 1.6;
 }
-</style>
+}
+.creditos-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  justify-items: start;
+  align-items: start;
+}
+
+.creditos-grid p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.texto-izquierda.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.logos-bienal {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: flex-start;
+  align-self: end;
+  margin-bottom: 40px; /* margen abajo */
+}
+
+.logos-bienal img {
+  width: 250px;
+  height: auto;
+}
+
+
+
+  </style>
 </head>
 
 <body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <header class="site-header">
- <div class="logo">
+    <div class="logo">
       <a href="index.html">
         <img src="ChinampaVeneta.svg" alt="Logo Chinampa Veneta" />
       </a>
     </div>
     <nav>
-   
-        <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
-
+      <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
       <ul>
-        <li><a href="pabellon.html">El pabellón</a></li>
+        <li><a href="pabellon.html" class="active">El pabellón</a></li>
         <li><a href="equipo.html">Equipo</a></li>
-
-        <li><a href="libro.html" class="active">Libro</a></li>
+        <li><a href="libro.html">Libro</a></li>
         <li><a href="archivo.html">Archivo</a></li>
         <li><a href="contacto.html">Contacto</a></li>
         <li><a href="patrocinadores.html">Patrocinadores</a></li>
-                <li><a href="prensa.html">Prensa</a></li>
-
-
+        <li><a href="prensa.html">Prensa</a></li>
       </ul>
     </nav>
   </header>
 
   <div class="sub-menu">
-    <a href="#">Libro</a>
+    <a href="#" id="pabellon-link">El pabellón</a>
+    <p>Fotografo</p>
   </div>
 
   <main class="contacto">
-    <div class="texto-izquierda">
-      <div>
-        Este catálogo es una puesta en escena
-        más de Chinampa Veneta, el pabellón de México en la 19ª Exposición Internacional de Arquitectura – La Biennale di Venezia.<br><br>
-        Como colectivo de diseñadores, arquitectos, paisajistas y agricultores de la Ciudad de México, consideramos que el sistema de chinampas es un ejemplo de diseño que abarca todos los elementos del camino hacia la regeneración. Este proyecto busca construir un puente entre culturas y pasados, entre la milpa mexicana y la vite maritata italiana, entre Xochimilco y Venecia, dialogando con las ciudades y las últimas trincheras de cosecha, sus historias y sus fragilidades.<br><br>
-        Este catálogo es un pasaje en cinco actos que presenta, sin filtros, nuestro proceso creativo conformado por ires y venires, inspiraciones, viajes a Xochimilco, pláticas con expertos y la formación de chapines. Son nuestras manos en el lodo, apilando capa tras capa, que al igual que las de la chinampa, se nutren de los sedimentos que se han añejado con el paso de los años en los canales de Xochimilco.<br><br>
-      <a href="" target="_blank" rel="noopener noreferrer">
-        Cómpralo en Arquine
-      </a>
-      </div>
-      
-    </div>
 
-    <div class="slider-container">
-      <button class="prev-btn" aria-label="Anterior">⭠</button>
-      <button class="next-btn" aria-label="Siguiente">⭢</button>
 
-      <div class="slides">
-        <!-- Clon de la última slide al principio -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697076/MMB_Web_Chive_20_u4klcx.jpg" alt="Foto 6 de Chinampa Veneta" />
+    <div class="slider-simple" id="slider-simple">
+      <button class="prev-btn-simple" aria-label="Anterior">⭠</button>
+      <button class="next-btn-simple" aria-label="Siguiente">⭢</button>
+      <div class="slides-simple">
+     
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
         </div>
-
-        <!-- Slides reales -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697020/MMB_Web_Chive_01_lspjir.jpg" alt="Foto 1 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651184/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-06_jrjngq.jpg" alt="Foto 2 de Chinampa Veneta" />
         </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697134/MMB_Web_Chive_04_mopv0w.jpg" alt="Foto 2 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453485/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8995_mbd4t0.jpg" alt="Foto 3 de Chinampa Veneta" />
         </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697156/MMB_Web_Chive_08_b32eva.jpg" alt="Foto 3 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453579/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9012_npiec1.jpg" alt="Foto 4 de Chinampa Veneta" />
         </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697212/MMB_Web_Chive_11_y4zm7d.jpg" alt="Foto 4 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651139/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8811_e2yl3u.jpg" alt="Foto 5 de Chinampa Veneta" />
         </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697226/MMB_Web_Chive_15_gxkfae.jpg" alt="Foto 5 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750292998/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-02_wwucbt.jpg" alt="Foto 6 de Chinampa Veneta" />
         </div>
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697076/MMB_Web_Chive_20_u4klcx.jpg" alt="Foto 6 de Chinampa Veneta" />
-        </div>
-
-        <!-- Clon de la primera slide al final -->
-        <div class="slide">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697020/MMB_Web_Chive_01_lspjir.jpg" alt="Foto 1 de Chinampa Veneta" />
+        <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
         </div>
       </div>
-
-      <div class="dots-container"></div>
+      <div class="dots-container-simple">
+        <div class="dot-simple active" data-index="0"></div>
+        <div class="dot-simple" data-index="1"></div>
+        <div class="dot-simple" data-index="2"></div>
+        <div class="dot-simple" data-index="3"></div>
+        <div class="dot-simple" data-index="4"></div>
+        <div class="dot-simple" data-index="5"></div>
+      </div>
     </div>
+    
+<div class="contenedor-texto-creditos">
+  <div class="texto-izquierda scroll-appear">
+   Las chinampas son un sistema agrícola ancestral de Mesoamérica con más de cuatro mil años de historia. Se ubican en lagos de poca profundidad y se construyen
+        en forma de bloques rectangulares, formados por capas de sedimentos, lodo y vegetación. En ellas se cultivan flores, hortalizas y otros alimentos. Sus hermosas disposiciones geométricas, además de conformar canales, multiplican las 
+        riberas del lago, creando nichos ecológicos para la alimentación, reproducción y refugio de diversas especies, detonando así una explosión de biodiversidad. Este sistema captura carbono, purifica el agua y produce alimentos y oxígeno. Cada uno de sus elementos es igualmente importante y genera relaciones simbióticas que promueven la vida. En un mundo vulnerable ante el cambio climático
+        y al borde del colapso ecológico, las chinampas nos enseñan un camino hacia el futuro. Es aquí donde surge Chinampa Veneta, compuesta por varias puestas en escena vivas, que durante los seis meses de La Biennale, estarán en constante transformación y crecimiento. <br><br>
+
+        En este espacio se exhibe una de estas puestas en escena: un sistema de chinampas que representa distintos momentos en su proceso de vida. La función comienza con la regeneración de una chinampa a partir del chapín, un pequeño cubo de lodo rico en nutrientes que resguarda una semilla en su interior. Las demás chinampas se disponen de forma paralela, evocando las riberas de los canales de Xochimilco
+        y permitiendo que la audiencia fluya a través del espacio, como el agua entre los canales. Al centro se encuentra la protagonista: una chinampa viva, distinta a sus precursoras en México en la que conviven la milpa —sistema tradicional de policultivo ancestral— con la vite maritata —sistema agroforestal ancestral practicado en el Véneto y otras partes de Italia, en el que la vid crece entrelazada con los árboles—.<br><br>
+
+        Otra puesta en escena flota simbólicamente en la Laguna de Venecia como una analogía al Teatro del Mondo de Aldo Rossi, quien concebía el teatro como una bisagra
+        entre la arquitectura y lo imaginario, capaz de tender puentes entre mundos. En esta ocasión, ese teatro se transforma en la Chinampa del Mondo y se presenta de manera orgullosamente ancestral, natural y orgánica, frente al entorno construido de la ciudad de Venecia.<br><br>
+
+        Conjuntamente, estas puestas en escena buscan crear puentes entre culturas y tiempos, entre Xochimilco y Venecia, abriendo un diálogo entre las últimas trincheras de cosecha, sus historias compartidas y sus fragilidades.<br><br>
+
+        Este proyecto ha sido desarrollado por un colectivo de personas dedicadas al diseño, la arquitectura, el paisaje, la agricultura, el cine y la animación, con el apoyo
+        de un universo aún más amplio de voces de la academia, las chinampas, y la cocina, entre muchas otras, que a través de sus textos y conversaciones, nos han guiado a lo largo de este viaje. Agradecemos profundamente a todas y todos por compartir su tiempo y conocimiento, desde Xochimilco hasta Venecia.
+  </div>
+
+  <div class="creditos-grid">
+    <div>
+        <p><strong>Instituto Nacional de Bellas Artes y Literatura (INBAL)</strong><br /><i>Comité organizador</i></p>
+        <p>Alejandra de la Paz Nájera<br /><i>Directora General</i></p>
+        <p>Dolores Martínez Orralde<br /><i>Subdirectora General de Patrimonio Artístico Inmueble</i></p>
+        <p>José María Bilbao Rodríguez<br /><i>Comisario</i></p>
+        <p><strong>Corrección de estilo y traducción</strong><br />
+        Aida Cantú Artigas, Santiago Marín de Buen</p>
+        <p><strong>Producción audiovisual</strong><br />
+        Toto Martínez, Álvaro de la Lama, Juan Manuel Arias</p>
+        <p><strong>Sistema de iluminación</strong><br />
+        Signl: Omar Reul</p>
+        <p><strong>Fotografías</strong><br />
+        Uta Gleiser, Yvonne Venegas, Matteo Losurdo, Ricardo de la Concha</p>
+    
+        <p><strong>We Exhibit</strong><br />Davide De Carlo, Cristina Brena, Laura Valentino, Tommaso Sartori, Giulia Albarello, Diletta Tubini, Davide Giacometti & Giovanni Dantomio<br /><i>Logística, montaje y producción</i></p></div>
+     <div class="logos-bienal">
+  <img src="SC-INBAL logos.svg" alt="Logo INBAL" />
+</div> <!-- y así los que quieras -->
+
+</div>
+
+
   </main>
 
- 
   <footer class="site-footer">
     <div>Pabellón de México</div>
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
-  </footer>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  // ——— Slider ———
-  const slidesContainer = document.querySelector('.slides');
-  const slides          = document.querySelectorAll('.slide');
-  const prevBtn         = document.querySelector('.prev-btn');
-  const nextBtn         = document.querySelector('.next-btn');
-  const dotsContainer   = document.querySelector('.dots-container');
-  const sliderContainer = document.querySelector('.slider-container');
+  document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slider Pabellón ———
+    const photographerNames = [
+      'Foto por Matteo Losurdo',
+      'Foto por Ricardo de la Concha',
+      'Foto por Matteo Losurdo',
+      'Foto por Matteo Losurdo',
+      'Foto por Matteo Losurdo',
+      'Foto por Ricardo de la Concha'
+    ];
 
-  let currentIndex      = 1;
-  let isAnimating       = false;
-  let autoSlideInterval = null;
-  const autoSlideDelay  = 4000;
+    const sliderContainer = document.querySelector('.slides-simple');
+    const slides          = document.querySelectorAll('.slide-simple');
+    const nextBtn         = document.querySelector('.next-btn-simple');
+    const prevBtn         = document.querySelector('.prev-btn-simple');
+    const dots            = document.querySelectorAll('.dot-simple');
+    const dateParagraph   = document.querySelector('.sub-menu p');
 
-  function updateSlidePosition(withTransition = true) {
-    const slideWidth = slides[0].clientWidth;
-    slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
-    slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
-  }
+    let currentIndex      = 0;
+    const totalSlides     = slides.length;
+    let autoplayInterval  = null;
+    let autoplayDisabled  = false;
 
-  function createDots() {
-    for (let i = 0; i < slides.length - 2; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === 0) dot.classList.add('active');
+    function updateSlider() {
+      sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      const dotIndex = currentIndex % dots.length;
+      dots[dotIndex].classList.add('active');
+
+      if (!isPageBottom()) {
+        dateParagraph.textContent = photographerNames[dotIndex] || '';
+      }
+    }
+
+    function isPageBottom() {
+      return (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 60);
+    }
+
+    function startAutoplay() {
+      if (autoplayInterval || autoplayDisabled) return;
+      autoplayInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlider();
+      }, 5000);
+    }
+
+    function stopAutoplay() {
+      if (!autoplayInterval) return;
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+      autoplayDisabled = true;
+    }
+
+    startAutoplay();
+
+    nextBtn.addEventListener('click', () => {
+      stopAutoplay();
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      stopAutoplay();
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    });
+
+    dots.forEach(dot => {
       dot.addEventListener('click', () => {
-        if (isAnimating) return;
-        currentIndex = i + 1;
-        updateSlidePosition();
-        updateDots();
-        resetAutoSlide();
+        stopAutoplay();
+        currentIndex = parseInt(dot.dataset.index, 10);
+        updateSlider();
       });
-      dotsContainer.appendChild(dot);
+    });
+
+    [ nextBtn, prevBtn ].forEach(btn => {
+      btn.addEventListener('mouseenter', stopAutoplay);
+    });
+
+    window.addEventListener('scroll', () => {
+      if (isPageBottom()) {
+        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
+      } else {
+        updateSlider();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (isPageBottom()) {
+        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
+      } else {
+        updateSlider();
+      }
+    });
+
+    updateSlider();
+
+    // ——— Menú responsive con altura dinámica (igual que index.html) ———
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl      = document.querySelector('.site-header nav ul');
+    const header     = document.querySelector('.site-header');
+    const footer     = document.querySelector('.site-footer');
+
+    function getViewportHeight() {
+      return window.visualViewport
+        ? window.visualViewport.height
+        : window.innerHeight;
     }
-  }
 
-  function updateDots() {
-    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
-  }
+    function ajustarAlturaItems() {
+      const vh       = getViewportHeight();
+      const headerH  = header ? header.clientHeight : 0;
+      const footerH  = footer ? footer.clientHeight : 0;
+      // restamos header + footer y compensamos 1px de borde
+      const availableH = vh - headerH - footerH + 1;
 
-  function nextSlide() {
-    if (isAnimating) return;
-    isAnimating = true;
-    currentIndex++;
-    updateSlidePosition();
-    setTimeout(() => {
-      if (currentIndex >= slides.length - 1) {
-        currentIndex = 1;
-        updateSlidePosition(false);
-      }
-      updateDots();
-      isAnimating = false;
-    }, 400);
-  }
+      const items = Array.from(navUl.querySelectorAll('li'));
+      const itemH  = Math.floor(availableH / items.length);
 
-  function prevSlide() {
-    if (isAnimating) return;
-    isAnimating = true;
-    currentIndex--;
-    updateSlidePosition();
-    setTimeout(() => {
-      if (currentIndex <= 0) {
-        currentIndex = slides.length - 2;
-        updateSlidePosition(false);
-      }
-      updateDots();
-      isAnimating = false;
-    }, 400);
-  }
+      items.forEach(li => {
+        li.style.height     = itemH + 'px';
+        li.style.lineHeight = itemH + 'px';
+      });
 
-  prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-  nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+      navUl.style.maxHeight = availableH + 'px';
+      navUl.style.overflowY = 'auto';
+    }
 
-  function startAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
-  }
+    function resetAlturaItems() {
+      navUl.querySelectorAll('li').forEach(li => {
+        li.style.height     = '';
+        li.style.lineHeight = '';
+      });
+      navUl.style.maxHeight = '';
+      navUl.style.overflowY = '';
+    }
 
-  function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
-  }
+    if (menuToggle && navUl) {
+      menuToggle.addEventListener('click', () => {
+        const opened = navUl.classList.toggle('show');
+        document.body.classList.toggle('menu-open');
+        menuToggle.textContent = opened ? '✕' : '☰';
+        if (opened) ajustarAlturaItems();
+        else resetAlturaItems();
+      });
 
-  [prevBtn, nextBtn, sliderContainer].forEach(el => {
-    el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    el.addEventListener('mouseleave', () => startAutoSlide());
+      ['resize', 'orientationchange', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, () => {
+          if (navUl.classList.contains('show')) {
+            ajustarAlturaItems();
+          }
+        });
+      });
+    }
   });
-
-  window.addEventListener('resize', () => updateSlidePosition(false));
-
-  createDots();
-  updateSlidePosition(false);
-  startAutoSlide();
-
-  // ——— Menú móvil con altura dinámica ———
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navUl      = document.querySelector('.site-header nav ul');
-  const header     = document.querySelector('.site-header');
-  const subMenu    = document.querySelector('.sub-menu');
-  const footer     = document.querySelector('.site-footer');
-
-  function getViewportHeight() {
-    return window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  }
-
-  function ajustarAlturaItems() {
-    const vh          = getViewportHeight();
-    const headerH     = header  ? header.offsetHeight  : 0;
-    const subMenuH    = subMenu ? subMenu.offsetHeight : 0;
-    const footerStyle = window.getComputedStyle(footer);
-    const footerH     = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
-    const availableH  = vh - headerH - subMenuH - footerH;
-    const items       = Array.from(navUl.querySelectorAll('li'));
-    const itemH       = Math.floor(availableH / items.length);
-
-    items.forEach(li => {
-      li.style.height     = itemH + 'px';
-      li.style.lineHeight = itemH + 'px';
-    });
-    navUl.style.maxHeight = availableH + 'px';
-    navUl.style.overflowY = 'auto';
-  }
-
-  function resetAlturaItems() {
-    navUl.querySelectorAll('li').forEach(li => {
-      li.style.height     = '';
-      li.style.lineHeight = '';
-    });
-    navUl.style.maxHeight = '';
-    navUl.style.overflowY = '';
-  }
-
-  function toggleMenu() {
-    navUl.classList.toggle('show');
-    document.body.classList.toggle('menu-open');
-    menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-    if (navUl.classList.contains('show')) ajustarAlturaItems();
-    else resetAlturaItems();
-  }
-
-  menuToggle.addEventListener('click', toggleMenu);
-  ['resize','scroll','orientationchange'].forEach(evt =>
-    window.addEventListener(evt, () => navUl.classList.contains('show') && ajustarAlturaItems())
-  );
-
-  // ——— Ajustar padding-bottom para footer fijo ———
-  function ajustarPaddingFooter() {
-    const mainC = document.querySelector('main.contacto');
-    if (!footer || !mainC) return;
-    mainC.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
-  }
-  window.addEventListener('resize', ajustarPaddingFooter);
-  window.addEventListener('orientationchange', ajustarPaddingFooter);
-  ajustarPaddingFooter();
-
-  // ——— **Layout dinámico SOLO en móvil** ———
-  function ajustarLayoutContacto() {
-    const isMobile = window.innerWidth <= 900;
-    const mainC    = document.querySelector('main.contacto');
-    if (!mainC) return;
-
-    if (isMobile) {
-      const headerH   = header  ? header.offsetHeight  : 0;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-      const footerH   = footer  ? footer.offsetHeight  : 0;
-      const availH    = window.innerHeight - headerH - subMenuH - footerH;
-
-      // Empujar contenido bajo header+submenú
-      mainC.style.paddingTop = (headerH + subMenuH) + 'px';
-      // Altura y scroll interno
-      mainC.style.height     = availH + 'px';
-      mainC.style.overflowY  = 'auto';
-      mainC.style.boxSizing  = 'border-box';
-
-      // Quitar margin-top en slider
-      if (sliderContainer) sliderContainer.style.marginTop = '0';
-    } else {
-      // Restaurar desktop
-      mainC.style.paddingTop = '';
-      mainC.style.height     = '';
-      mainC.style.overflowY  = '';
-      mainC.style.boxSizing  = '';
-    }
-  }
-
-  ajustarLayoutContacto();
-  window.addEventListener('resize', ajustarLayoutContacto);
-  window.addEventListener('orientationchange', ajustarLayoutContacto);
-});
 </script>
-
-
-
-
-
-
 
 </body>
 </html>
-
