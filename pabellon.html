@@ -124,7 +124,7 @@ main.contacto {
 }
 
 .slider-simple {
-   height: calc(100vh - 44px);
+   height: calc(100vh - 40px);
   overflow: hidden;
   position: relative;
 }
@@ -634,6 +634,20 @@ main.contacto {
         ? window.visualViewport.height
         : window.innerHeight;
     }
+function ajustarAlturaSlider() {
+  const slider = document.querySelector('.slider-simple');
+  const header = document.querySelector('.site-header');
+  const footer = document.querySelector('.site-footer');
+
+  if (slider && header && footer) {
+    const viewportH = window.innerHeight;
+    const headerH   = header.getBoundingClientRect().height;
+    const footerH   = footer.getBoundingClientRect().height;
+
+    const alturaDisponible = viewportH - headerH - footerH;
+    slider.style.height = alturaDisponible + 'px';
+  }
+}
 
     function ajustarAlturaItems() {
       const vh       = getViewportHeight();
