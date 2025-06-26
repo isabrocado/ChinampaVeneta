@@ -212,7 +212,7 @@ main.contacto {
   display: flex;
   background: #ffffff;
   z-index: 1000;
-  height: 44px;
+  height: 40px;
   font-weight: 400;
 }
 
@@ -575,7 +575,7 @@ main.contacto {
 
     function stopAutoplay() {
       if (!autoplayInterval) return;
-      clearInterval(autoplayInterval);x
+      clearInterval(autoplayInterval);
       autoplayInterval = null;
       autoplayDisabled = true;
     }
@@ -652,20 +652,16 @@ function ajustarAlturaSlider() {
 
     // Calculamos la altura disponible entre header y footer
     // viewportHeight - headerHeight - footerHeight es el espacio que debe ocupar el slider
-    const alturaDisponible = viewportHeight - headerHeight ;
+    const alturaDisponible = viewportHeight - headerHeight+ 4 ;
 
     // Aplicamos la altura exacta (sin sumar/restar px, para evitar gaps)
     slider.style.height = alturaDisponible + 'px';
   }
 }
-
-
-// Llama la función al cargar y en eventos que pueden cambiar la altura
 window.addEventListener('load', ajustarAlturaSlider);
 window.addEventListener('resize', ajustarAlturaSlider);
 window.addEventListener('orientationchange', ajustarAlturaSlider);
 window.addEventListener('scroll', ajustarAlturaSlider);
-
 
 
     function ajustarAlturaItems() {
@@ -673,7 +669,7 @@ window.addEventListener('scroll', ajustarAlturaSlider);
       const headerH  = header ? header.clientHeight : 0;
       const footerH  = footer ? footer.clientHeight : 0;
       // restamos header + footer y compensamos 1px de borde
-      const availableH = vh - headerH - footerH + 1;
+      const availableH = vh - headerH - footerH ;
 
       const items = Array.from(navUl.querySelectorAll('li'));
       const itemH  = Math.floor(availableH / items.length);
