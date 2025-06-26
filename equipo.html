@@ -27,6 +27,8 @@
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
+      padding-bottom: 22px; /* altura de tu footer */
+
     /* padding para no ocultar contenido tras header/submenú/footer */
     padding-top: 41px;           /* altura del footer */
   }
@@ -182,7 +184,7 @@
   display: flex;
   background: #ffffff;
   z-index: 1000;    /* por encima del resto */
-  height: 40px;
+  height: 44px;
   font-weight: 400;
   
 }
@@ -773,26 +775,25 @@ body.section-active .equipo {
 
   // ——— Ajuste dinámico de la altura del contenedor con mínimo 631px ———
   function ajustarAlturaEquipo() {
-    const cont    = document.getElementById('contenedor-equipo');
-    const header  = document.querySelector('.site-header');
-    const submenu = document.querySelector('.sub-menu');
-    if (!cont || !header) return;
+  const cont    = document.getElementById('contenedor-equipo');
+  const header  = document.querySelector('.site-header');
+  const submenu = document.querySelector('.sub-menu');
+  const footer  = document.querySelector('.site-footer');
+  if (!cont || !header || !footer) return;
 
-    const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-    const hH = header.getBoundingClientRect().height;
-    const hS = submenu ? submenu.getBoundingClientRect().height : 0;
+  const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const hH = header.getBoundingClientRect().height;
+  const hS = submenu ? submenu.getBoundingClientRect().height : 0;
+  const fH = footer.getBoundingClientRect().height;
 
-    // Calcula espacio disponible (sin restar footer) y fuerza mínimo 631px
-    const disponible   = vh - hH - hS;
-    const alturaFinal  = Math.max(disponible, 541);
+  // restamos el footer
+  const disponible   = vh - hH - hS - fH;
+  const alturaFinal  = Math.max(disponible, 541);
 
-    cont.style.height    = alturaFinal + 'px';
-    cont.style.overflowY = 'auto';
-  }
+  cont.style.height    = alturaFinal + 'px';
+  cont.style.overflowY = 'auto';
+}
 
-  // ——— Ejecutar ajuste al cargar y al redimensionar ———
-  window.addEventListener('load',   ajustarAlturaEquipo);
-  window.addEventListener('resize', ajustarAlturaEquipo);
 </script>
 
 
