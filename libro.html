@@ -500,12 +500,11 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     <div>2025</div>
     <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
   </footer>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   // ——— Slider ———
   const slidesContainer = document.querySelector('.slides');
-  const slides          = document.querySelectorAll('.slide');
+  const slides          = document.querySelectorAll('.lide');
   const prevBtn         = document.querySelector('.prev-btn');
   const nextBtn         = document.querySelector('.next-btn');
   const dotsContainer   = document.querySelector('.dots-container');
@@ -597,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSlidePosition(false);
   startAutoSlide();
 
-  // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
+  // ——— Menú móvil con altura dinámica ———
   const menuToggle = document.querySelector('.menu-toggle');
   const navUl      = document.querySelector('.site-header nav ul');
   const header     = document.querySelector('.site-header');
@@ -612,26 +611,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const vh        = getViewportHeight();
     const headerH   = header.offsetHeight;
     const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-
-    // Detectar si el footer está fixed o no
     const footerStyle = window.getComputedStyle(footer);
-    const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
-
-    // Altura disponible total
+    const footerH   = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
     const availableH = vh - headerH - subMenuH - footerH;
-
-    const items  = Array.from(navUl.querySelectorAll('li'));
-    const itemH  = Math.floor(availableH / items.length);
-
-    // Asignar altura a cada item
+    const items     = Array.from(navUl.querySelectorAll('li'));
+    const itemH     = Math.floor(availableH / items.length);
     items.forEach(li => {
       li.style.height     = itemH + 'px';
       li.style.lineHeight = itemH + 'px';
     });
-
-    // Asignar altura al contenedor
-    navUl.style.maxHeight = availableH + 'px';
-    navUl.style.overflowY = 'auto';
+    navUl.style.maxHeight  = availableH + 'px';
+    navUl.style.overflowY  = 'auto';
   }
 
   function resetAlturaItems() {
@@ -647,59 +637,47 @@ document.addEventListener('DOMContentLoaded', () => {
     navUl.classList.toggle('show');
     document.body.classList.toggle('menu-open');
     menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-
-    if (navUl.classList.contains('show')) {
-      ajustarAlturaItems();
-    } else {
-      resetAlturaItems();
-    }
+    if (navUl.classList.contains('show')) ajustarAlturaItems();
+    else resetAlturaItems();
   }
 
   menuToggle.addEventListener('click', toggleMenu);
+  ['resize','scroll','orientationchange'].forEach(evt =>
+    window.addEventListener(evt, () => navUl.classList.contains('show') && ajustarAlturaItems())
+  );
 
-  // Recalcular altura cuando cambie viewport o se gire pantalla
-  ['resize', 'scroll', 'orientationchange'].forEach(evt => {
-    window.addEventListener(evt, () => {
-      if (navUl.classList.contains('show')) ajustarAlturaItems();
-    });
-  });
-
-
-  // ——— Ajustar padding-bottom del main.contacto para evitar que footer fijo tape contenido ———
+  // ——— Ajustar padding-bottom para footer fijo ———
   function ajustarPaddingFooter() {
-    const footer = document.querySelector('.site-footer');
     const mainContacto = document.querySelector('main.contacto');
     if (!footer || !mainContacto) return;
-
-    const footerHeight = footer.getBoundingClientRect().height;
-    mainContacto.style.paddingBottom = footerHeight + 'px';
+    mainContacto.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
   }
-
   window.addEventListener('resize', ajustarPaddingFooter);
   window.addEventListener('orientationchange', ajustarPaddingFooter);
   ajustarPaddingFooter();
 
-});
-function ajustarOffsetSlider() {
-  const subMenu = document.querySelector('.sub-menu');
-  const sliderContainer = document.querySelector('.slider-container');
-  if (!subMenu || !sliderContainer) return;
-
-  // Obtiene la altura real del sub-menú
-  const alturaSubMenu = subMenu.offsetHeight;
-  // Aplica un margin-top igual a esa altura
-  sliderContainer.style.marginTop = `${alturaSubMenu}px`;
-}
-
-// Al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-  ajustarOffsetSlider();
-
-  // Y también al redimensionar/orientar
+  // ——— Offset slider bajo sub-menú ———
+  function ajustarOffsetSlider() {
+    if (!subMenu || !sliderContainer) return;
+    sliderContainer.style.marginTop = `${subMenu.offsetHeight}px`;
+  }
   window.addEventListener('resize', ajustarOffsetSlider);
   window.addEventListener('orientationchange', ajustarOffsetSlider);
-});
+  ajustarOffsetSlider();
 
+  // ——— AJUSTAR OFFSET DE main.contacto BAJO HEADER+SUBMENÚ ———
+  function ajustarOffsetContenido() {
+    const headerH   = header ? header.offsetHeight : 0;
+    const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+    const mainC     = document.querySelector('main.contacto');
+    if (!mainC) return;
+    mainC.style.paddingTop = (headerH + subMenuH) + 'px';
+  }
+  window.addEventListener('resize', ajustarOffsetContenido);
+  window.addEventListener('orientationchange', ajustarOffsetContenido);
+  ajustarOffsetContenido();
+
+});
 </script>
 
 
