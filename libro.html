@@ -9,7 +9,8 @@
   <!-- Google Fonts Hanken Grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
 <style>
-* {
+
+  * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -94,6 +95,7 @@ html, body {
 }
 
 main.contacto {
+  
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -354,8 +356,12 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     flex-direction: column;
     padding: 0;
     overflow: auto;
+    height: auto; /* CAMBIO: quitar height fijo */
+    flex: 1 0 auto;
+    padding-bottom: 60px; /* para que no tape footer */
   }
   .slider-container {
+        margin-top: 80px;
     order: 0;
     position: relative;
     width: 100vw;
@@ -372,7 +378,11 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
     overflow: visible;
   }
   .sub-menu {
+    position: fixed; /* CAMBIO: fijo en móvil */
     top: 44px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
   }
   .dots-container {
     bottom: 15px;
@@ -393,7 +403,6 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
   }
 }
 </style>
-
 </head>
 
 <body>
@@ -489,168 +498,204 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
   </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // ——— Slider ———
-    const slidesContainer = document.querySelector('.slides');
-    const slides          = document.querySelectorAll('.slide');
-    const prevBtn         = document.querySelector('.prev-btn');
-    const nextBtn         = document.querySelector('.next-btn');
-    const dotsContainer   = document.querySelector('.dots-container');
-    const sliderContainer = document.querySelector('.slider-container');
+document.addEventListener('DOMContentLoaded', () => {
+  // ——— Slider ———
+  const slidesContainer = document.querySelector('.slides');
+  const slides          = document.querySelectorAll('.slide');
+  const prevBtn         = document.querySelector('.prev-btn');
+  const nextBtn         = document.querySelector('.next-btn');
+  const dotsContainer   = document.querySelector('.dots-container');
+  const sliderContainer = document.querySelector('.slider-container');
 
-    let currentIndex      = 1;
-    let isAnimating       = false;
-    let autoSlideInterval = null;
-    const autoSlideDelay  = 4000;
+  let currentIndex      = 1;
+  let isAnimating       = false;
+  let autoSlideInterval = null;
+  const autoSlideDelay  = 4000;
 
-    function updateSlidePosition(withTransition = true) {
-      const slideWidth = slides[0].clientWidth;
-      slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
-      slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
+  function updateSlidePosition(withTransition = true) {
+    const slideWidth = slides[0].clientWidth;
+    slidesContainer.style.transition = withTransition ? 'transform 0.4s ease' : 'none';
+    slidesContainer.style.transform  = `translateX(${-slideWidth * currentIndex}px)`;
+  }
+
+  function createDots() {
+    for (let i = 0; i < slides.length - 2; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        if (isAnimating) return;
+        currentIndex = i + 1;
+        updateSlidePosition();
+        updateDots();
+        resetAutoSlide();
+      });
+      dotsContainer.appendChild(dot);
     }
+  }
 
-    function createDots() {
-      for (let i = 0; i < slides.length - 2; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('dot');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          if (isAnimating) return;
-          currentIndex = i + 1;
-          updateSlidePosition();
-          updateDots();
-          resetAutoSlide();
-        });
-        dotsContainer.appendChild(dot);
+  function updateDots() {
+    document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
+  }
+
+  function nextSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex++;
+    updateSlidePosition();
+    setTimeout(() => {
+      if (currentIndex >= slides.length - 1) {
+        currentIndex = 1;
+        updateSlidePosition(false);
       }
-    }
+      updateDots();
+      isAnimating = false;
+    }, 400);
+  }
 
-    function updateDots() {
-      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-      document.querySelectorAll('.dot')[currentIndex - 1].classList.add('active');
-    }
+  function prevSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex--;
+    updateSlidePosition();
+    setTimeout(() => {
+      if (currentIndex <= 0) {
+        currentIndex = slides.length - 2;
+        updateSlidePosition(false);
+      }
+      updateDots();
+      isAnimating = false;
+    }, 400);
+  }
 
-    function nextSlide() {
-      if (isAnimating) return;
-      isAnimating = true;
-      currentIndex++;
-      updateSlidePosition();
-      setTimeout(() => {
-        if (currentIndex >= slides.length - 1) {
-          currentIndex = 1;
-          updateSlidePosition(false);
-        }
-        updateDots();
-        isAnimating = false;
-      }, 400);
-    }
+  prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+  nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
 
-    function prevSlide() {
-      if (isAnimating) return;
-      isAnimating = true;
-      currentIndex--;
-      updateSlidePosition();
-      setTimeout(() => {
-        if (currentIndex <= 0) {
-          currentIndex = slides.length - 2;
-          updateSlidePosition(false);
-        }
-        updateDots();
-        isAnimating = false;
-      }, 400);
-    }
+  function startAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+  }
 
-    prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
-    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
 
-    function startAutoSlide() {
-      clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
-    }
+  [prevBtn, nextBtn, sliderContainer].forEach(el => {
+    el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    el.addEventListener('mouseleave', () => startAutoSlide());
+  });
 
-    function resetAutoSlide() {
-      clearInterval(autoSlideInterval);
-      startAutoSlide();
-    }
+  window.addEventListener('resize', () => updateSlidePosition(false));
 
-    [prevBtn, nextBtn, sliderContainer].forEach(el => {
-      el.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-      el.addEventListener('mouseleave', () => startAutoSlide());
+  createDots();
+  updateSlidePosition(false);
+  startAutoSlide();
+
+  // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navUl      = document.querySelector('.site-header nav ul');
+  const header     = document.querySelector('.site-header');
+  const subMenu    = document.querySelector('.sub-menu');
+  const footer     = document.querySelector('.site-footer');
+
+  function getViewportHeight() {
+    return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  }
+
+  function ajustarAlturaItems() {
+    const vh        = getViewportHeight();
+    const headerH   = header.offsetHeight;
+    const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+
+    // Detectar si el footer está fixed o no
+    const footerStyle = window.getComputedStyle(footer);
+    const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
+
+    // Altura disponible total
+    const availableH = vh - headerH - subMenuH - footerH;
+
+    const items  = Array.from(navUl.querySelectorAll('li'));
+    const itemH  = Math.floor(availableH / items.length);
+
+    // Asignar altura a cada item
+    items.forEach(li => {
+      li.style.height     = itemH + 'px';
+      li.style.lineHeight = itemH + 'px';
     });
 
-    window.addEventListener('resize', () => updateSlidePosition(false));
+    // Asignar altura al contenedor
+    navUl.style.maxHeight = availableH + 'px';
+    navUl.style.overflowY = 'auto';
+  }
 
-    createDots();
-    updateSlidePosition(false);
-    startAutoSlide();
+  function resetAlturaItems() {
+    navUl.querySelectorAll('li').forEach(li => {
+      li.style.height     = '';
+      li.style.lineHeight = '';
+    });
+    navUl.style.maxHeight = '';
+    navUl.style.overflowY = '';
+  }
 
-    // ——— Menú móvil con altura dinámica que usa todo el espacio disponible ———
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navUl      = document.querySelector('.site-header nav ul');
-    const header     = document.querySelector('.site-header');
-    const subMenu    = document.querySelector('.sub-menu');
-    const footer     = document.querySelector('.site-footer');
+  function toggleMenu() {
+    navUl.classList.toggle('show');
+    document.body.classList.toggle('menu-open');
+    menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
 
-    function getViewportHeight() {
-      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    if (navUl.classList.contains('show')) {
+      ajustarAlturaItems();
+    } else {
+      resetAlturaItems();
     }
+  }
 
-    function ajustarAlturaItems() {
-      const vh        = getViewportHeight();
-      const headerH   = header.offsetHeight;
-      const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+  menuToggle.addEventListener('click', toggleMenu);
 
-      // Detectar si el footer está fixed o no
-      const footerStyle = window.getComputedStyle(footer);
-      const footerH = (footerStyle.position === 'fixed') ? 0 : footer.offsetHeight;
-
-      // Altura disponible total
-      const availableH = vh - headerH - subMenuH - footerH;
-
-      const items  = Array.from(navUl.querySelectorAll('li'));
-      const itemH  = Math.floor(availableH / items.length);
-
-      // Asignar altura a cada item
-      items.forEach(li => {
-        li.style.height     = itemH + 'px';
-        li.style.lineHeight = itemH + 'px';
-      });
-
-      // Asignar altura al contenedor
-      navUl.style.maxHeight = availableH + 'px';
-      navUl.style.overflowY = 'auto';
-    }
-
-    function resetAlturaItems() {
-      navUl.querySelectorAll('li').forEach(li => {
-        li.style.height     = '';
-        li.style.lineHeight = '';
-      });
-      navUl.style.maxHeight = '';
-      navUl.style.overflowY = '';
-    }
-
-    function toggleMenu() {
-      navUl.classList.toggle('show');
-      document.body.classList.toggle('menu-open');
-      menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
-
-      if (navUl.classList.contains('show')) {
-        ajustarAlturaItems();
-      } else {
-        resetAlturaItems();
-      }
-    }
-
-    menuToggle.addEventListener('click', toggleMenu);
-
-    // Recalcular altura cuando cambie viewport o se gire pantalla
-    ['resize', 'scroll', 'orientationchange'].forEach(evt => {
-      window.addEventListener(evt, () => {
-        if (navUl.classList.contains('show')) ajustarAlturaItems();
-      });
+  // Recalcular altura cuando cambie viewport o se gire pantalla
+  ['resize', 'scroll', 'orientationchange'].forEach(evt => {
+    window.addEventListener(evt, () => {
+      if (navUl.classList.contains('show')) ajustarAlturaItems();
     });
   });
+
+
+  // ——— Ajustar padding-bottom del main.contacto para evitar que footer fijo tape contenido ———
+  function ajustarPaddingFooter() {
+    const footer = document.querySelector('.site-footer');
+    const mainContacto = document.querySelector('main.contacto');
+    if (!footer || !mainContacto) return;
+
+    const footerHeight = footer.getBoundingClientRect().height;
+    mainContacto.style.paddingBottom = footerHeight + 'px';
+  }
+
+  window.addEventListener('resize', ajustarPaddingFooter);
+  window.addEventListener('orientationchange', ajustarPaddingFooter);
+  ajustarPaddingFooter();
+
+});
+function ajustarOffsetSlider() {
+  const subMenu = document.querySelector('.sub-menu');
+  const sliderContainer = document.querySelector('.slider-container');
+  if (!subMenu || !sliderContainer) return;
+
+  // Obtiene la altura real del sub-menú
+  const alturaSubMenu = subMenu.offsetHeight;
+  // Aplica un margin-top igual a esa altura
+  sliderContainer.style.marginTop = `${alturaSubMenu}px`;
+}
+
+// Al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  ajustarOffsetSlider();
+
+  // Y también al redimensionar/orientar
+  window.addEventListener('resize', ajustarOffsetSlider);
+  window.addEventListener('orientationchange', ajustarOffsetSlider);
+});
+
 </script>
 
 
