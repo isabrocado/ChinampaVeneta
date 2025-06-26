@@ -504,7 +504,7 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
 document.addEventListener('DOMContentLoaded', () => {
   // ——— Slider ———
   const slidesContainer = document.querySelector('.slides');
-  const slides          = document.querySelectorAll('.lide');
+  const slides          = document.querySelectorAll('.slide');
   const prevBtn         = document.querySelector('.prev-btn');
   const nextBtn         = document.querySelector('.next-btn');
   const dotsContainer   = document.querySelector('.dots-container');
@@ -608,20 +608,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function ajustarAlturaItems() {
-    const vh        = getViewportHeight();
-    const headerH   = header.offsetHeight;
-    const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
+    const vh          = getViewportHeight();
+    const headerH     = header  ? header .offsetHeight : 0;
+    const subMenuH    = subMenu ? subMenu.offsetHeight : 0;
     const footerStyle = window.getComputedStyle(footer);
-    const footerH   = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
-    const availableH = vh - headerH - subMenuH - footerH;
-    const items     = Array.from(navUl.querySelectorAll('li'));
-    const itemH     = Math.floor(availableH / items.length);
+    const footerH     = footerStyle.position === 'fixed' ? 0 : footer.offsetHeight;
+    const availableH  = vh - headerH - subMenuH - footerH;
+    const items       = Array.from(navUl.querySelectorAll('li'));
+    const itemH       = Math.floor(availableH / items.length);
     items.forEach(li => {
       li.style.height     = itemH + 'px';
       li.style.lineHeight = itemH + 'px';
     });
-    navUl.style.maxHeight  = availableH + 'px';
-    navUl.style.overflowY  = 'auto';
+    navUl.style.maxHeight = availableH + 'px';
+    navUl.style.overflowY = 'auto';
   }
 
   function resetAlturaItems() {
@@ -648,37 +648,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ——— Ajustar padding-bottom para footer fijo ———
   function ajustarPaddingFooter() {
-    const mainContacto = document.querySelector('main.contacto');
-    if (!footer || !mainContacto) return;
-    mainContacto.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
+    const mainC = document.querySelector('main.contacto');
+    if (!footer || !mainC) return;
+    mainC.style.paddingBottom = footer.getBoundingClientRect().height + 'px';
   }
   window.addEventListener('resize', ajustarPaddingFooter);
   window.addEventListener('orientationchange', ajustarPaddingFooter);
   ajustarPaddingFooter();
 
-  // ——— Offset slider bajo sub-menú ———
-  function ajustarOffsetSlider() {
-    if (!subMenu || !sliderContainer) return;
-    sliderContainer.style.marginTop = `${subMenu.offsetHeight}px`;
-  }
-  window.addEventListener('resize', ajustarOffsetSlider);
-  window.addEventListener('orientationchange', ajustarOffsetSlider);
-  ajustarOffsetSlider();
-
-  // ——— AJUSTAR OFFSET DE main.contacto BAJO HEADER+SUBMENÚ ———
-  function ajustarOffsetContenido() {
-    const headerH   = header ? header.offsetHeight : 0;
-    const subMenuH  = subMenu ? subMenu.offsetHeight : 0;
-    const mainC     = document.querySelector('main.contacto');
+  // ——— **NUEVO**: Layout dinámico SOLO EN MÓVIL ———
+  function ajustarLayoutContacto() {
+    const isMobile = window.innerWidth <= 900;
+    const mainC    = document.querySelector('main.contacto');
     if (!mainC) return;
-    mainC.style.paddingTop = (headerH + subMenuH) + 'px';
-  }
-  window.addEventListener('resize', ajustarOffsetContenido);
-  window.addEventListener('orientationchange', ajustarOffsetContenido);
-  ajustarOffsetContenido();
 
+    if (isMobile) {
+      const headerH  = header  ? header .offsetHeight : 0;
+      const subMenuH = subMenu ? subMenu.offsetHeight : 0;
+      const footerH  = footer  ? footer .offsetHeight : 0;
+      const availableH = window.innerHeight - headerH - subMenuH - footerH;
+
+      mainC.style.paddingTop   = (headerH + subMenuH) + 'px';
+      mainC.style.height       = availableH + 'px';
+      mainC.style.overflowY    = 'auto';
+      mainC.style.boxSizing    = 'border-box';
+
+      // Quita cualquier margin-top extra en el slider
+      if (sliderContainer) sliderContainer.style.marginTop = '0';
+    } else {
+      // Restaurar comportamiento desktop
+      mainC.style.paddingTop = '';
+      mainC.style.height     = '';
+      mainC.style.overflowY  = '';
+      mainC.style.boxSizing  = '';
+    }
+  }
+
+  ajustarLayoutContacto();
+  window.addEventListener('resize', ajustarLayoutContacto);
+  window.addEventListener('orientationchange', ajustarLayoutContacto);
 });
 </script>
+
+
 
 
 
