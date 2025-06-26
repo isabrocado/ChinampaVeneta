@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chinampa Veneta</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <!-- Google Fonts Hanken Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'Hanken Grotesk', sans-serif;
+      background: #ffffff;
+      color: #FF4026;
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+
+    /* Ajuste para que el contenido no quede bajo el header fijo */
+    body {
+      padding-top: 44px; /* Altura del header */
+    }
+
+    /* --- Header fijo como en patrocinadores --- */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      background: #ffffff;
+      z-index: 1000;
+      height: 44px;
+    }
+
+    .site-header .logo {
+      font-weight: 800;
+      white-space: nowrap;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header .logo img {
+      height: 30px;
+      display: block;
+    }
+
+    .site-header nav {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .site-header nav ul {
+      display: flex;
+      list-style: none;
+      height: 100%;
+    }
+
+    .site-header nav ul li {
+      border-left: 1px solid #FF4026;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-header nav ul li a {
+      display: block;
+      padding: 12px 40px;
+      text-decoration: none;
+      color: #FF4026;
+      font-weight: 400;
+    }
+
+    .site-header nav ul li a.active,
+    .site-header nav ul li a:hover {
+      font-weight: 800;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      padding: 0 16px;
+      cursor: pointer;
+      color: #FF4026;
+      align-items: center;
+    }
+
+    /* Slideshow principal */
+    main.slideshow-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      pointer-events: none;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .svg-container {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 70%;
+      height: 70%;
+      pointer-events: none;
+    }
+
+    .svg-container img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      display: block;
+    }
+
+    /* Footer fijo */
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-top: 1px solid #FF4026;
+      border-bottom: 1px solid #FF4026;
+      display: flex;
+      background: #ffffff;
+      z-index: 1000;
+      height: 40px;
+      font-weight: 400;
+    }
+
+    .site-footer div {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid #FF4026;
+    }
+
+    .site-footer div:last-child {
+      border-right: none;
+    }
+
+    .site-footer a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    .site-footer a:hover {
+      font-weight: 800;
+    }
+
+    /* Menú hamburguesa en móvil */
+    @media (max-width: 900px) {
+            .svg-container {
+    top: 50%;             /* baja el porcentaje hasta que te convenza */
+    /* opcional: ajusta también tamaño si fuera necesario */
+    width: 80%;
+    height: 60%;
+  }
+      .site-header nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 43px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 87px);
+        background: #ffffff;
+        border-top: 1px solid #FF4026;
+        z-index: 1000;
+      }
+  .site-footer {
+    font-size: 0.7rem;
+  position: fixed;  /* lo fija al viewport */
+  bottom: 0;        /* abajo */
+  left: 0;          /* al inicio horizontal */
+  width: 100%;      /* ancho total */
+  border-top: 1px solid #FF4026;
+  border-bottom: 1px solid #FF4026;
+  display: flex;
+  background: #ffffff;
+  z-index: 1000;    /* por encima del resto */
+  font-weight: 400;
+  
+}
+      .site-header nav ul.show {
+        display: flex;
+      }
+
+      .site-header nav ul li {
+        flex: 1;
+        border: none;
+        border-bottom: 1px solid #FF4026;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-header nav ul li:first-child {
+        border-top: none;
+      }
+
+      .site-header nav ul li:last-child {
+        border-bottom: none;
+      }
+
+      .site-header nav ul li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 25px;
+        text-decoration: none;
+        color: #FF4026;
+        font-weight: 400;
+        font-size: 1.2rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-header .logo img {
+        height: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header .logo img {
+        height: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="logo">
+      <a href="index.html">
+       
+      </a>
+    </div>
+    <nav>
+      <button class="menu-toggle" aria-label="Mostrar menú">☰</button>
+      <ul>
+        <li><a href="pabellon.html">El pabellón</a></li>
+        <li><a href="equipo.html">Equipo</a></li>
+        <li><a href="libro.html">Libro</a></li>
+        <li><a href="archivo.html">Archivo</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="patrocinadores.html">Patrocinadores</a></li>
+        <li><a href="prensa.html">Prensa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="slideshow-container">
+    <div class="slide active" style="background-image: url('');"></div>
+    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697354/CHINAMPA-VENETA_PRESS-KIT_01_2500x1710-PX_hekewa.jpg');"></div>
+    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697372/Arca-Tierra-Chinampas-Mexico-City-utagleiser-photography-9011_ekafiq.jpg');"></div>
+    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697397/_R9A2162_qdphxw.jpg');"></div>
+    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697463/_R9A3055_wwoqff.jpg');"></div>
+    <div class="slide" style="background-image: url('_R9A2250.jpg');"></div>
+
+    <div class="svg-container">
+      <img src="ChinampaVeneta_2.svg" alt="Chinampa Veneta" />
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>Pabellón de México</div>
+    <div>2025</div>
+    <div><a href="https://www.labiennale.org/en" target="_blank" rel="noopener noreferrer">La Biennale di Venezia</a></div>
+  </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ——— Slideshow automático ———
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    }
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
+    setInterval(nextSlide, 3000);
+
+    // ——— Menú móvil dinámico (igual que archivo.html pero con ajuste de altura) ———
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl      = document.querySelector('.site-header nav ul');
+    const header     = document.querySelector('.site-header');
+    const footer     = document.querySelector('.site-footer');
+
+    function getViewportHeight() {
+      return window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    }
+
+    function ajustarAlturaItems() {
+      const vh        = getViewportHeight();
+      // Usar clientHeight para excluir bordes dobles en header/footer
+      const headerH   = header ? header.clientHeight : 0;
+      const footerH   = footer ? footer.clientHeight : 0;
+      const availableH = vh - headerH - footerH;
+
+      const items = Array.from(navUl.querySelectorAll('li'));
+      const itemH = Math.floor(availableH / items.length);
+
+      items.forEach(li => {
+        li.style.height     = itemH + 'px';
+        li.style.lineHeight = itemH + 'px';
+      });
+
+      navUl.style.maxHeight = availableH + 'px';
+      navUl.style.overflowY = 'auto';
+    }
+
+    function resetAlturaItems() {
+      navUl.querySelectorAll('li').forEach(li => {
+        li.style.height     = '';
+        li.style.lineHeight = '';
+      });
+      navUl.style.maxHeight = '';
+      navUl.style.overflowY = '';
+    }
+
+    if (menuToggle && navUl) {
+      menuToggle.addEventListener('click', () => {
+        navUl.classList.toggle('show');
+        menuToggle.textContent = navUl.classList.contains('show') ? '✕' : '☰';
+
+        if (navUl.classList.contains('show')) {
+          ajustarAlturaItems();
+        } else {
+          resetAlturaItems();
+        }
+      });
+
+      // Reajustar altura en cambio de viewport
+      ['resize', 'orientationchange'].forEach(evt => {
+        window.addEventListener(evt, () => {
+          if (navUl.classList.contains('show')) ajustarAlturaItems();
+        });
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+</body>
+</html>
