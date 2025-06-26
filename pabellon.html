@@ -212,7 +212,7 @@ main.contacto {
   display: flex;
   background: #ffffff;
   z-index: 1000;
-  height: 40px;
+  height: 44px;
   font-weight: 400;
 }
 
@@ -575,7 +575,7 @@ main.contacto {
 
     function stopAutoplay() {
       if (!autoplayInterval) return;
-      clearInterval(autoplayInterval);
+      clearInterval(autoplayInterval);x
       autoplayInterval = null;
       autoplayDisabled = true;
     }
@@ -640,15 +640,19 @@ function ajustarAlturaSlider() {
   const header = document.querySelector('.site-header');
   const footer = document.querySelector('.site-footer');
 
-  if (slider && header && footer) {
-    const viewportH = window.innerHeight;
+  if (slider && header && footer && window.innerWidth <= 1024) {
+    const viewportH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
     const headerH   = header.getBoundingClientRect().height;
     const footerH   = footer.getBoundingClientRect().height;
 
     const alturaDisponible = viewportH - headerH - footerH;
     slider.style.height = alturaDisponible + 'px';
+  } else if (slider) {
+    // en desktop deja height automático (o el que tengas en CSS)
+    slider.style.height = '';
   }
 }
+
 
     function ajustarAlturaItems() {
       const vh       = getViewportHeight();
