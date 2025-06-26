@@ -247,6 +247,12 @@ body.menu-open .prev-btn, body.menu-open .next-btn {
 
 /* === Responsive 1024px ↓ === */
 @media (max-width: 1024px) {
+  html, body {
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  overflow-y: auto;
+  
+}
   .site-header nav ul {
     display: none;
     flex-direction: column;
