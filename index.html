@@ -294,11 +294,22 @@
   </header>
 
   <main class="slideshow-container">
-    <div class="slide active" style="background-image: url('');"></div>
-    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697354/CHINAMPA-VENETA_PRESS-KIT_01_2500x1710-PX_hekewa.jpg');"></div>
-    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697372/Arca-Tierra-Chinampas-Mexico-City-utagleiser-photography-9011_ekafiq.jpg');"></div>
-    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697397/_R9A2162_qdphxw.jpg');"></div>
-    <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697463/_R9A3055_wwoqff.jpg');"></div>
+    <div class="slide" style="background-image: url('');"></div>
+
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697354/CHINAMPA-VENETA_PRESS-KIT_01_2500x1710-PX_hekewa.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751659208/_R9A2109_zjbxzi.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697397/_R9A2162_qdphxw.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1750697463/_R9A3055_wwoqff.jpg');"></div> <div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751659260/_R9A2173_nzezup.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751659260/_R9A2173_nzezup.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751659300/_R9A3135_iil40h.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751659352/1_CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-06_jesjq6.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751662166/8_MEX25_Chinampa_Veneta_ph.VeniceDocumentationproject03144_n7nbxr.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751662407/DSCF8716_rk09xd.jpg');"></div>
+<div class="slide" style="background-image: url('https://res.cloudinary.com/dgsxfzjja/image/upload/v1751664786/DSCF8775_s7d0h8.jpg');"></div>
+
+
+
+
     <div class="slide" style="background-image: url('_R9A2250.jpg');"></div>
 
     <div class="svg-container">
@@ -314,19 +325,46 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // ——— Slideshow automático ———
-    const slides = document.querySelectorAll('.slide');
-    let currentIndex = 0;
+    // ——— Slideshow automático empezando en blanco y luego aleatorio sin repetir blanco ———
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const total = slides.length;
+
+    // Crear array con los índices de las slides excepto la 0
+    const indices = [];
+    for (let i = 1; i < total; i++) {
+      indices.push(i);
+    }
+
+    // Fisher-Yates shuffle para mezclar los índices del 1 al total-1
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    // Inicia mostrando siempre la slide 0
+    let orderPosition = -1; // Empieza en -1 para que la primera sea 0
     function showSlide(index) {
       slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
     }
+
     function nextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      showSlide(currentIndex);
+      orderPosition++;
+      if (orderPosition === 0) {
+        showSlide(0); // primera siempre blanca
+      } else {
+        const realIndex = indices[orderPosition - 1];
+        showSlide(realIndex);
+        if (orderPosition >= indices.length) orderPosition = -1; // reinicia al terminar las fotos
+      }
     }
+
+    // Mostrar primera slide en blanco
+    showSlide(0);
+
+    // Cambiar cada 3 segundos
     setInterval(nextSlide, 3000);
 
-    // ——— Menú móvil dinámico (igual que archivo.html pero con ajuste de altura) ———
+    // ——— Menú móvil dinámico ———
     const menuToggle = document.querySelector('.menu-toggle');
     const navUl      = document.querySelector('.site-header nav ul');
     const header     = document.querySelector('.site-header');
@@ -338,7 +376,6 @@
 
     function ajustarAlturaItems() {
       const vh        = getViewportHeight();
-      // Usar clientHeight para excluir bordes dobles en header/footer
       const headerH   = header ? header.clientHeight : 0;
       const footerH   = footer ? footer.clientHeight : 0;
       const availableH = vh - headerH - footerH;
@@ -376,7 +413,6 @@
         }
       });
 
-      // Reajustar altura en cambio de viewport
       ['resize', 'orientationchange'].forEach(evt => {
         window.addEventListener(evt, () => {
           if (navUl.classList.contains('show')) ajustarAlturaItems();
@@ -385,6 +421,8 @@
     }
   });
 </script>
+
+
 
 
 
