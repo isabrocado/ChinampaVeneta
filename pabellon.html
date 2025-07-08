@@ -323,8 +323,9 @@ main.contacto {
 
 
 .contenedor-texto-creditos {
-  display: grid;
-  grid-template-columns: 2.45fr 1fr;
+  position: relative;    /* ← añadido */
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   font-size: 0.83rem;
   line-height: 1.3;
@@ -332,13 +333,10 @@ main.contacto {
   padding: 0 10px;
   font-weight: 400;
 }
-
 .texto-izquierda {
-  flex: 2;
-  min-width: 300px;
+  max-width: 90%;
   color: #FF4026;
-  margin-bottom: 11vh;
-  font-size: 0.921rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
 
@@ -351,19 +349,27 @@ main.contacto {
     min-width: 300px;
     color: #FF4026;
     margin-bottom: 1vh;
+      font-size: 0.83rem;
+max-width: 100% !important;
+
+}
+.logos-bienal {
+  width: 165px !important;
+
 }
 }
 
 @media (max-width: 768px) {
 
-
 .creditos-grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 20px;
-  justify-items: start;
-  align-items: start;
+    flex: 1;
+    display: grid
+;
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 20px;
+    justify-items: start;
+    align-items: start;
+    margin-bottom: 55px!important;
 }
 
 .creditos-grid p {
@@ -374,15 +380,15 @@ main.contacto {
 .creditos-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   justify-items: start;
   align-items: start;
+  margin-bottom: 20px ;
 }
-
 .creditos-grid p {
-  margin-bottom: 12px;
-  line-height: 1.6;
+  margin-bottom: 6px; /* antes 12px */
+  line-height: 1.3;   /* antes 1.6 */
 }
 
 .texto-izquierda.visible {
@@ -390,18 +396,16 @@ main.contacto {
   transform: translateY(0);
 }
 .logos-bienal {
-  position: absolute;
-  bottom: 55px;
-  left: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  justify-content: flex-start;
-  align-self: end;
+  position: absolute;    /* ← cambió a absolute */
+  bottom: 0;             /* ← pegado al final */
+  left: 10px;            /* separación lateral */
+  width: 500px;          /* ajusta a tu gusto */
+  height: auto;
+  margin-bottom: 20px;
 }
-
+/* (Opcional) Ajustar el tamaño máximo del logo si hace falta */
 .logos-bienal img {
-  width: 250px;
+  max-width: 250px;
   height: auto;
 }
 
@@ -444,28 +448,42 @@ main.contacto {
       <button class="prev-btn-simple" aria-label="Anterior">⭠</button>
       <button class="next-btn-simple" aria-label="Siguiente">⭢</button>
       <div class="slides-simple">
-     
+
+       
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651139/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8811_e2yl3u.jpg" alt="Foto 1 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651184/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-06_jrjngq.jpg" alt="Foto 2 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751997369/2_CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-09_ygesoc.jpg" alt="Foto 2 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
           <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453485/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8995_mbd4t0.jpg" alt="Foto 3 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453579/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9012_npiec1.jpg" alt="Foto 4 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751997421/4_CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-10_wapwz5.jpg" alt="Foto 4 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750651139/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8811_e2yl3u.jpg" alt="Foto 5 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751997823/5_CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8869_copy_ug5asp.jpg" alt="Foto 5 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750292998/CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-02_wwucbt.jpg" alt="Foto 6 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751998287/6_CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS8921_ge09ge.jpg" alt="Foto 6 de Chinampa Veneta" />
         </div>
         <div class="slide-simple">
-          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750432254/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9024_hw1xuz.jpg" alt="Foto 1 de Chinampa Veneta" />
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751998566/7_MEX25_Chinampa_Veneta_ph.VeniceDocumentationproject_01779_mhcipm.jpg" alt="Foto 7 de Chinampa Veneta" />
         </div>
+         <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751999017/8_CHINAMPA_VENETA_FINALES_BIENNALE_2025_RDLC-05_uinear.jpg" alt="Foto 8 de Chinampa Veneta" />
+        </div>
+            <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1750453579/CHINAMPA_VENETA_FINALES_BIENNALE_2025_ML_LOS9012_npiec1.jpg" alt="Foto 9 de Chinampa Veneta" />
+
+        </div>
+  
+            <div class="slide-simple">
+          <img src="https://res.cloudinary.com/dgsxfzjja/image/upload/v1751999236/10_MEX25_Chinampa_Veneta_06816_ph.VeniceDocumentationProject_kwymq2.jpg" alt="Foto 10 de Chinampa Veneta" />
+          
+        </div>
+        
       </div>
       <div class="dots-container-simple">
         <div class="dot-simple active" data-index="0"></div>
@@ -474,6 +492,15 @@ main.contacto {
         <div class="dot-simple" data-index="3"></div>
         <div class="dot-simple" data-index="4"></div>
         <div class="dot-simple" data-index="5"></div>
+        <div class="dot-simple" data-index="6"></div>
+         <div class="dot-simple" data-index="7"></div>
+                  <div class="dot-simple" data-index="8"></div>
+                                    <div class="dot-simple" data-index="9"></div>
+
+
+
+
+
       </div>
     </div>
     
@@ -494,33 +521,61 @@ main.contacto {
 
         Este proyecto ha sido desarrollado por un colectivo de personas dedicadas al diseño, la arquitectura, el paisaje, la agricultura, el cine y la animación, con el apoyo
         de un universo aún más amplio de voces de la academia, las chinampas, y la cocina, entre muchas otras, que a través de sus textos y conversaciones, nos han guiado a lo largo de este viaje. Agradecemos profundamente a todas y todos por compartir su tiempo y conocimiento, desde Xochimilco hasta Venecia.
-     <div class="logos-bienal">
-  <img src="SC-INBAL logos.svg" alt="Logo INBAL" />
-</div> <!-- y así los que quieras -->
-
+   
       </div>
 
   <div class="creditos-grid">
-    <div>
-      <p><strong>Colectivo Chinampa Veneta</strong><br>
-        Estudio Ignacio Urquiza y Ana Paula de Alba, Estudio María Marín de Buen, Locus, Lucio Usobiaga Hegewisch & Nathalia Muguet, Pedro&Juana
-        <p><strong>Instituto Nacional de Bellas Artes y Literatura (INBAL)</strong><br /><i>Comité organizador</i></p>
-        <p>Alejandra de la Paz Nájera<br /><i>Directora General</i></p>
-        <p>Dolores Martínez Orralde<br /><i>Subdirectora General de Patrimonio Artístico Inmueble</i></p>
-        <p>José María Bilbao Rodríguez<br /><i>Comisario</i></p>
-        <p><strong>Corrección de estilo y traducción</strong><br />
-        Aida Cantú Artigas, Santiago Marín de Buen</p>
-        <p><strong>Producción audiovisual</strong><br />
-        Toto Martínez, Álvaro de la Lama, Juan Manuel Arias</p>
-        <p><strong>Sistema de iluminación</strong><br />
-        Signl: Omar Reul</p>
-        <p><strong>Fotografías</strong><br />
-        Uta Gleiser, Yvonne Venegas, Matteo Losurdo, Ricardo de la Concha</p>
-    
-        <p><strong>We Exhibit</strong><br />Davide De Carlo, Cristina Brena, Laura Valentino, Tommaso Sartori, Giulia Albarello, Diletta Tubini, Davide Giacometti & Giovanni Dantomio<br /><i>Logística, montaje y producción</i></p></div>
+  <p><strong>Colectivo Chinampa Veneta</strong><br>
+    Estudio Ignacio Urquiza y Ana Paula de Alba, Estudio María Marín de Buen, Locus, Lucio Usobiaga Hegewisch & Nathalia Muguet, Pedro&Juana
+  </br>
 
-   
+  <br><strong>Instituto Nacional de Bellas Artes y Literatura (INBAL)</strong><br>
+  <i>Comité organizador</i><br>
+  <br>Alejandra de la Paz Nájera<br><i>Directora General</i></br>
+  <br>Dolores Martínez Orralde<br><i>Subdirectora General de Patrimonio Artístico Inmueble</i></br>
+  <br>José María Bilbao Rodríguez<br><i>Comisario</i></br>
+  <br>Gerardo Cedillo Bolaños<br><i>Coordinador Nacional de Artes Visuales</i></br>
+  <br>Aaron Polo López<br><i>Director de Difusión y Relaciones Públicas</i></br>
+
+  <br><strong>We Exhibit</strong><br>
+  Davide De Carlo, Cristina Brena, Laura Valentino, Tommaso Sartori, Giulia Albarello, Diletta Tubini, Davide Giacometti & Giovanni Dantomio<br>
+  <i>Logística, montaje y producción</i></br>
+
+  <br><strong>Sistema de iluminación</strong><br>
+  Signl: Omar Reul</br>
+
+  <br><strong>Ambientación</strong><br>
+  Jerónimo Gorraez</br>
+
+  <br><strong>Corrección de estilo y traducción</strong><br>
+  Aida Cantú Artigas, Santiago Marín de Buen</br>
+
+  <p><strong>Video</strong><br>
+  Toto Martínez<br> <i>Dirección</i><br><br>
+  Álvaro de la Lama <br><i>Guión</i><br><br>
+  Juan Manuel Arias <br><i>Animación</i><br><br>
+  Sofía Sisniega <br><i>Narración</i><br><br>
+  Amalia Salas, Gianni de Luigi, Noé Coquis, Pedro Méndez, Sonia Tapia <br><i>Entrevistados</i></br>
+
+  <br><strong>Fotografías</strong><br>
+  Andrea Polidoro, Andrés Semo, Arca Tierra, Archivo Aldo Rossi, Artgrid, Carlos Villasana, Claudio Roberto Zavagno, Colectivo Chinampa Veneta, George Steinmetz, Illumina Film, INAH, iStock, Matteo Losurdo, Moritz Bernoully, Pexels, Santiago Arau, Thomas Kole, Unsplash, Uta Gleiser</br>
+
+  <br><strong>Fotografías en este sitio</strong><br>
+  Uta Gleiser, Yvonne Venegas, Matteo Losurdo, Ricardo de la Concha
+
+
+<br>
+<br><strong>Agradecimientos</strong><br>
+Arón Polo, Aída Cantú Artigas, Aidé Guzmán, Aldo Urban, Alejandra de la Paz, Alejandro Cruz Robles, Álvaro de la Lama, Amalia Salas Casales, Amairany Valverde, Ana Paula de Alba, Ana Paula Ruiz Galindo, Ana Paula Tovar, Andrea Griborio, Andrea Mejía, Andrea Polidoro, Andrea Villers, Andrés Castañeda, Andrés Semo, Arca Tierra, Arlette Plata, Arturo Arrieta, Blaine Wetzel, Brenda Soto, Carlos Couturier, Carlos Silva, Carlos Villasana, Caroline von Voss, Chiara Maria Emberson, Claudio Roberto Zavagno, Cocó Rincón, Cristina Brena, Daniela Goddard, Daniela Soto-Innes, Dariana Reyes, Davide De Carlo, Davide Giacometti, Diego Manzano, Diletta Tubini, Dirección de Asuntos Internacionales INBAL, Dolores Martínez Orralde, Eduardo Silva, Elena Tudela Rivadeneyra, Elizabeth Martínez, Emilio Guzman, Emilio M. Frausto, Estefanía Brito, Fátima Cabrera, Federico de Antuñano, Fernanda Ventura, Filippo Perón, Fionn Petch, Folef Hooft Graafland, Gerardo Cedillo, Gianni de Luigi, Giovanni Dantomio, Giulia Albarello, Guillermo Ruiz de Teresa, Gwyneth Corro, Ignacio Urquiza Seoane, Illumina Film, Inés Benítez, Issa Plancarte, Isabel Brocado, Israel Pérez, Jachen Schleich, Javiera Elicer, Jerónimo Gorraez, Jesús Alvarado, Joahna Hernández Villanueva, Jose María Bilbao Rodríguez, Juan Manuel Arias, Juan Ignacio del Cueto, Juan José Kochen, Julio Cesar Sánchez, Katie Sharples, Laura Valentino, Laurent Herbiet Santos, Leslie Sánchez, Leticia Serrano, Loreta Castro, Lucero Chaires, Lucio Usobiaga Hegewisch, Luis Cayuela, Luis Gonzáles, Mara Ortega, Margarita Segarra Lagunes, María Marín de Buen, María Pallarés, Mariana Aguilar, Mariana Fuentes Cuevas, Mariana López, Mark Möller, Mathia Milani, Martina Duque, Matteo Losurdo, Matteo Zevi, Mecky Reuss, Michela Lostia di Santa Sofia, Michele G. Biondi, Miguel Angel Vega, Miquel Adrià, Moisés Micha, Montserrat Martínez, Nathalia Muguet, Nina Zywietz, Nuria Benítez, Olimpia Possati, Omar Baqueiro, Omar Reul, Omar Urcid, Patricia Cruz, Paulina García Ortíz, Pedro Méndez, Pierpaolo Campostrini, Quentin Pope, Raphaël Fenoglio, Rodman Primack, Rodrigo Huesca, Rudy Weissenberg, Samuele Cherubini, Sana Frini, Santiago Arau, Santiago Marín de Buen, Santiago Sitten, Sarah Doyle, Secretaría de Relaciones Exteriores, Shantal Haddad, Sofia Canseco, Sofia Zevi, Stijn Oyen, Tatiana de León, Teresa Rojas Rabiela, Thomas Kole, Tierra de Monte, Tommaso Sartori, Toto Martínez, Uta Gleiser, Valentina Brito, Vania Angélica Anaya, Viktoria von Hof, Xavier Delgado, Yavanna Latapí, Yvonne Venegas</p>
+
+
+
+<div class="logos-bienal">
+  <img src="SC-INBAL logos.svg" alt="Logo INBAL" />
 </div>
+
+</div>
+
 <footer class="site-footer">
     <div>Pabellón de México</div>
     <div>2025</div>
@@ -536,9 +591,16 @@ main.contacto {
       'Foto por Matteo Losurdo',
       'Foto por Ricardo de la Concha',
       'Foto por Matteo Losurdo',
+      'Foto por Ricardo de la Concha',
       'Foto por Matteo Losurdo',
       'Foto por Matteo Losurdo',
-      'Foto por Ricardo de la Concha'
+      'Foto por Samuelle',
+      'Foto por Ricardo de la Concha',
+      'Foto por Matteo Losurdo'
+
+
+
+
     ];
 
     const sliderContainer = document.querySelector('.slides-simple');
@@ -609,21 +671,23 @@ main.contacto {
       btn.addEventListener('mouseenter', stopAutoplay);
     });
 
-    window.addEventListener('scroll', () => {
-      if (isPageBottom()) {
-        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
-      } else {
-        updateSlider();
-      }
-    });
-
-    window.addEventListener('resize', () => {
-      if (isPageBottom()) {
-        dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
-      } else {
-        updateSlider();
-      }
-    });
+  // ——— Observador para detectar visibilidad del slider ———
+const sliderEl = document.querySelector('#slider-simple');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) {
+      // Slider ya no está visible → mostramos la fecha
+      dateParagraph.textContent = 'Del 10 de mayo al 23 de noviembre, 2025';
+    } else {
+      // Slider vuelve a verse → retomamos el carousel
+      updateSlider();
+    }
+  });
+}, {
+  root: null,           // viewport
+  threshold: 0,         // dispara cuando cualquier parte deja de verse
+});
+observer.observe(sliderEl);
 
     updateSlider();
 
