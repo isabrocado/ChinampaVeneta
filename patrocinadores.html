@@ -120,7 +120,8 @@ html, body {
 
 .patrocinadores-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+   grid-template-columns: repeat(4, 1fr);     /* 4 columnas */
+  grid-template-rows: repeat(2, auto);
   gap: 10px;
   align-items: center;
   width: 100%;
@@ -128,7 +129,7 @@ html, body {
 }
 
 .patrocinadores-grid img {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   object-fit: contain;
   display: block;
@@ -235,6 +236,9 @@ html, body {
     grid-template-columns: repeat(3, 1fr);
   padding: 10px;
   }
+  .patrocinadores-grid img {
+  max-width: 100%;
+}
 
   .site-footer {
     font-size: 0.7rem;
